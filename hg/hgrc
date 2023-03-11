@@ -1,0 +1,16 @@
+[defaults]
+evolve = --no-update
+
+[extdiff]
+cmd.meld =
+
+[extensions]
+extdiff =
+purge =
+
+[merge-tools]
+meld.diffargs = --label=$plabel1 $parent --label=$clabel $child
+
+[ui]
+merge = meld
+origbackuppath = /tmp

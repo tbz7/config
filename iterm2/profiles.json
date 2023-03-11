@@ -1,0 +1,30 @@
+{
+  "Profiles": [
+    {
+      "Blink Allowed": true,
+      "Brighten Bold Text": false,
+      "Columns": 84,
+      "Custom Directory": "Recycle",
+      "Draw Powerline Glyphs": true,
+      "Guid": "A74C0A3F-72EE-4F98-8436-54ACF5867725",
+      "Initial Use Transparency": false,
+      "Jobs to Ignore": [
+        "rlogin",
+        "ssh",
+        "slogin",
+        "telnet",
+        "tmux"
+      ],
+      "Name": "Customized",
+      "Normal Font": "JetBrainsMonoNerdFontCompleteM-Regular 12",
+      "Option Key Sends": 2,
+      "Prompt Before Closing 2": 2,
+      "Rows": 24,
+      "Scrollback in Alternate Screen": false,
+      "Scrollback Lines": 0,
+      "Smart Cursor Color": true,
+      "Unlimited Scrollback": true,
+      "Use Bright Bold": false
+    }
+  ]
+}

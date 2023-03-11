@@ -1,0 +1,12 @@
+ZDOTDIR=${${(%):-%x}:A:h}
+ZDOTDIR_LOCAL=$ZDOTDIR:h/local/zsh
+
+typeset -U path fpath manpath
+
+export TERMINFO=~/.local/share/terminfo
+
+SHELL_SESSIONS_DISABLE=1
+
+if [[ -f $ZDOTDIR_LOCAL/zshenv ]]; then
+  source $ZDOTDIR_LOCAL/zshenv
+fi

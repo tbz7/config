@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+set -e
+
+cd $0:A:h
+targets=(
+  darwin arm64
+  linux amd64
+  linux arm
+)
+for os arch in $targets; do
+  export GOOS=$os GOARCH=$arch
+  go build -o prompt-vcs-cacher_${os}_${arch} prompt-vcs-cacher.go
+  if [[ $1 == -k ]] killall prompt-vcs-cacher_${os}_${arch} 2> /dev/null || :
+done

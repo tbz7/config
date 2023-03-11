@@ -1,0 +1,442 @@
+#!/usr/bin/env zsh
+
+zmodload zsh/mapfile
+zmodload zsh/zutil
+
+local CONFIG=~/.local/state/zsh/theme
+
+local THEMES=(gotham gruvbox iceberg nord tokyonight)
+local DEFAULT=iceberg
+
+case $FONT_MODE in
+  nerd|powerline) local -A sym=(    ✗ ✗ ↳ ↳ … …);;
+  unicode13)      local -A sym=( 🭮  🭬 ✗ ✗ ↳ ↳ … …);;
+  unicode)        local -A sym=( ''  '' ✗ ✗ ↳ ↳ … …);;
+  *)              local -A sym=( ''  '' ✗ x ↳ '>' … ...);;
+esac
+
+local theme=
+local -A palette=()
+
+function .theme-main {
+  local apps=(--term --zsh) flags=()
+  zparseopts -D -E -K -a flags -term=apps -tmux=apps -zsh=apps -apply s
+
+  local usage=false
+  case $1 in
+    apply)
+      if (( $#@ > 2 )); then
+        usage=true
+      elif ! .theme-init $2; then
+        return 1
+      else
+        if (( $flags[(I)-s] > 0 )); then
+          mapfile[$CONFIG]=$theme
+        fi
+
+        if (( $apps[(I)--term] > 0 )); then
+          .theme-apply-term
+        fi
+        if (( $apps[(I)--tmux] > 0 )); then
+          .theme-apply-tmux
+        fi
+        if (( $apps[(I)--zsh] > 0 )); then
+          .theme-apply-zsh
+        fi
+      fi;;
+    list)
+      if (( $#@ > 1 )); then
+        usage=true
+      else
+        print -l $THEMES
+      fi;;
+    capture)
+      if (( $#@ != 2 )); then
+        usage=true
+      else
+        local captured=$(.theme-capture $2)
+        if (( $flags[(I)--apply] > 0 )); then
+          theme=$2
+          palette=(${=captured:Q})
+          .theme-apply-term
+          .theme-apply-zsh
+        else
+          echo $captured
+        fi
+      fi
+      ;;
+    *)
+      usage=true;;
+  esac
+
+  if $usage; then
+    echo "Usage:"
+    echo "  theme apply [-s] [--tmux] [--term] [--zsh] [THEME]"
+    echo "  theme list"
+    echo "  theme capture [--apply] THEME"
+    return 1
+  fi >&2
+}
+
+function .theme-init {
+  theme=${1:-${THEME:-${mapfile[$CONFIG]:-$DEFAULT}}}
+  if ! (( $THEMES[(I)$theme] )); then
+    echo "Invalid theme: $theme" >&2
+    return 1
+  fi
+  palette=(${(Pkv)${:-palette_$theme}})
+}
+
+function .theme-apply-term {
+  local code name hex
+  for code name (
+      '4;0'   'black'
+      '4;1'   'red'
+      '4;2'   'green'
+      '4;3'   'yellow'
+      '4;4'   'blue'
+      '4;5'   'magenta'
+      '4;6'   'cyan'
+      '4;7'   'white'
+      '4;8'   'bright_black'
+      '4;9'   'bright_red'
+      '4;10'  'bright_green'
+      '4;11'  'bright_yellow'
+      '4;12'  'bright_blue'
+      '4;13'  'bright_magenta'
+      '4;14'  'bright_cyan'
+      '4;15'  'bright_white'
+       '10'   'fg'
+       '11'   'bg'
+       '17'   'visual_bg'
+       '19'   'visual_fg') {
+     hex=$palette[$name]
+     echo -n "\e]$code;rgb:${hex:1:2}/${hex:3:2}/${hex:5:2}\a"
+   }
+ }
+
+function .theme-apply-tmux {
+  tmux set -g @status-z '%a %-I:%M %p' \;\
+       set -g message-command-style "fg=$palette[bfg] bg=$palette[bbg]" \;\
+       set -g message-style "fg=$palette[bfg] bg=$palette[bbg]" \;\
+       set -g mode-style "fg=$palette[visual_fg] bg=$palette[visual_bg]" \;\
+       set -g pane-active-border-style "fg=$palette[bfg] bg=$palette[bg]" \;\
+       set -g pane-border-style "fg=$palette[bbg] bg=$palette[bg]" \;\
+       set -g status-left '' \;\
+       set -g status-right "#{T:@status-x} #{?@status-y,#[fg=$palette[bbg]]\
+$sym[]#[fg=$palette[bfg] bg=$palette[bbg]] #{T:@status-y} ,}#{?@status-z,\
+#[fg=$palette[abg]]$sym[]#[fg=$palette[afg] bg=$palette[abg]] #{T:@status-z} ,}" \;\
+       set -g status-right-length 100 \;\
+       set -g status-style "fg=$palette[cfg] bg=$palette[cbg]" \;\
+       set -g window-status-current-format "#[fg=$palette[cbg] bg=$palette[bbg]\
+]$sym[]#[fg=$palette[bfg]]  #W  #[fg=$palette[bbg] bg=$palette[cbg]]$sym[]" \;\
+       set -g window-status-format ' #I #W   ' \;\
+       set -g window-status-separator ''
+}
+
+function .theme-apply-zsh {
+  if [[ $COLORTERM != truecolor ]]; then
+    zmodload zsh/nearcolor
+  fi
+
+  export THEME=$theme
+  export NVIM_COLORSCHEME=${(P)${:-colorscheme_$theme}:-$theme}
+
+  local x
+  for x in afg abg bfg bbg cfg cbg; do
+    local $x="%(V.$palette[${x}i].%(2V.$palette[${x}2].$palette[$x]))"
+  done
+
+  local efg="%(V.$palette[cfgi].$palette[efg])"
+  local ebg="%(V.$palette[cbgi].$palette[ebg])"
+
+  PS1="%F{$afg}%K{$abg} %m %F{$abg}%K{$bbg}$sym[]"
+  PS1+="%F{$bfg} %33<$sym[…]<%~ %k%F{$bbg}$sym[]%f "
+  RPS1="%(?..%F{$ebg}$sym[]%F{$efg}%K{$ebg} $sym[✗] %(3V.%F{$cbg}$sym[].))"
+  RPS1+="%(3V.%(?.%F{$cbg}$sym[].)%F{$cfg}%K{$cbg} %3v .)%f%k"
+  PS2="%8F$sym[↳]  %f"
+  RPS2="%8F %1^%f"
+}
+
+function .theme-capture {
+  local scheme=$1
+  local mode1=${2-normal}
+  local mode2=${3-insert}
+  local err=${4-ErrorMsg}
+
+  () {
+    NVIM_COLORSCHEME=$scheme nvim --headless -c "luafile $1" 2>&1
+  } <(echo -E "
+    function hi(name, key)
+      if pcall(function() hl = vim.api.nvim_get_hl_by_name(name, true) end) then
+        return hl and hl[key] and string.format('#%06x', hl[key]) or '#'
+      end
+      return '#'
+    end
+
+    function ansi (i)
+      return vim.g['terminal_color_' .. i] or '#'
+    end
+
+    print(string.lower(
+      '    fg              \'' .. hi('Normal', 'foreground') .. '\'\\n' ..
+      '    bg              \'' .. hi('Normal', 'background') .. '\'\\n' ..
+      '    black           \'' .. ansi(0) .. '\'\\n' ..
+      '    red             \'' .. ansi(1) .. '\'\\n' ..
+      '    green           \'' .. ansi(2) .. '\'\\n' ..
+      '    yellow          \'' .. ansi(3) .. '\'\\n' ..
+      '    blue            \'' .. ansi(4) .. '\'\\n' ..
+      '    magenta         \'' .. ansi(5) .. '\'\\n' ..
+      '    cyan            \'' .. ansi(6) .. '\'\\n' ..
+      '    white           \'' .. ansi(7) .. '\'\\n' ..
+      '    bright_black    \'' .. ansi(8) .. '\'\\n' ..
+      '    bright_red      \'' .. ansi(9) .. '\'\\n' ..
+      '    bright_green    \'' .. ansi(10) .. '\'\\n' ..
+      '    bright_yellow   \'' .. ansi(11) .. '\'\\n' ..
+      '    bright_blue     \'' .. ansi(12) .. '\'\\n' ..
+      '    bright_magenta  \'' .. ansi(13) .. '\'\\n' ..
+      '    bright_cyan     \'' .. ansi(14) .. '\'\\n' ..
+      '    bright_white    \'' .. ansi(15) .. '\'\\n' ..
+      '    visual_fg       \'' .. hi('Visual', 'foreground') .. '\'\\n' ..
+      '    visual_bg       \'' .. hi('Visual', 'background') .. '\'\\n' ..
+      '    afg             \'' .. hi('lualine_a_$mode1', 'foreground') .. '\'\\n' ..
+      '    afg2            \'' .. hi('lualine_a_$mode2', 'foreground') .. '\'\\n' ..
+      '    afgi            \'' .. hi('lualine_a_inactive', 'foreground') .. '\'\\n' ..
+      '    abg             \'' .. hi('lualine_a_$mode1', 'background') .. '\'\\n' ..
+      '    abg2            \'' .. hi('lualine_a_$mode2', 'background') .. '\'\\n' ..
+      '    abgi            \'' .. hi('lualine_a_inactive', 'background') .. '\'\\n' ..
+      '    bfg             \'' .. hi('lualine_b_$mode1', 'foreground') .. '\'\\n' ..
+      '    bfg2            \'' .. hi('lualine_b_$mode2', 'foreground') .. '\'\\n' ..
+      '    bfgi            \'' .. hi('lualine_b_inactive', 'foreground') .. '\'\\n' ..
+      '    bbg             \'' .. hi('lualine_b_$mode1', 'background') .. '\'\\n' ..
+      '    bbg2            \'' .. hi('lualine_b_$mode2', 'background') .. '\'\\n' ..
+      '    bbgi            \'' .. hi('lualine_b_inactive', 'background') .. '\'\\n' ..
+      '    cfg             \'' .. hi('lualine_c_$mode1', 'foreground') .. '\'\\n' ..
+      '    cfg2            \'' .. hi('lualine_c_$mode2', 'foreground') .. '\'\\n' ..
+      '    cfgi            \'' .. hi('lualine_c_inactive', 'foreground') .. '\'\\n' ..
+      '    cbg             \'' .. hi('lualine_c_$mode1', 'background') .. '\'\\n' ..
+      '    cbg2            \'' .. hi('lualine_c_$mode2', 'background') .. '\'\\n' ..
+      '    cbgi            \'' .. hi('lualine_c_inactive', 'background') .. '\'\\n' ..
+      '    efg             \'' .. hi('$err', 'foreground') .. '\'\\n' ..
+      '    ebg             \'' .. hi('$err', 'background') .. '\'\\n'))
+
+    vim.cmd('quit')")
+}
+
+local -A palette_gotham=(
+    fg              '#99d1ce'
+    bg              '#0c1014'
+    black           '#0d1a25'
+    red             '#c23127'
+    green           '#2aa889'
+    yellow          '#edb443'
+    blue            '#195466'
+    magenta         '#4e5166'
+    cyan            '#33859e'
+    white           '#99d1ce'
+    bright_black    '#0a3749'
+    bright_red      '#c23127'
+    bright_green    '#2aa889'
+    bright_yellow   '#edb443'
+    bright_blue     '#195466'
+    bright_magenta  '#4e5166'
+    bright_cyan     '#33859e'
+    bright_white    '#d3ebe9'
+    visual_fg       '#99d1ce'
+    visual_bg       '#0a3749'
+    afg             '#99d1ce'
+    afg2            '#091f2e'
+    afgi            '#195466'
+    abg             '#195466'
+    abg2            '#d26937'
+    abgi            '#091f2e'
+    bfg             '#599cab'
+    bfg2            '#99d1ce'
+    bfgi            '#195466'
+    bbg             '#091f2e'
+    bbg2            '#0a3749'
+    bbgi            '#11151c'
+    cfg             '#195466'
+    cfg2            '#195466'
+    cfgi            '#195466'
+    cbg             '#11151c'
+    cbg2            '#11151c'
+    cbgi            '#0c1014'
+    efg             '#0c1014'
+    ebg             '#d26937'
+)
+
+local colorscheme_gruvbox=gruvbox8
+local -A palette_gruvbox=(
+    fg              '#ebdbb2'
+    bg              '#282828'
+    black           '#3c3836'
+    red             '#cc241d'
+    green           '#98971a'
+    yellow          '#d79921'
+    blue            '#458588'
+    magenta         '#b16286'
+    cyan            '#689d6a'
+    white           '#bdae93'
+    bright_black    '#504945'
+    bright_red      '#fb4934'
+    bright_green    '#b8bb26'
+    bright_yellow   '#fabd2f'
+    bright_blue     '#83a598'
+    bright_magenta  '#d3869b'
+    bright_cyan     '#8ec07c'
+    bright_white    '#ebdbb2'
+    visual_fg       '#ebdbb2'
+    visual_bg       '#665c54'
+    afg             '#282828'
+    afg2            '#282828'
+    afgi            '#7c6f64'
+    abg             '#a89984'
+    abg2            '#83a598'
+    abgi            '#3c3836'
+    bfg             '#a89984'
+    bfg2            '#a89984'
+    bfgi            '#7c6f64'
+    bbg             '#504945'
+    bbg2            '#504945'
+    bbgi            '#3c3836'
+    cfg             '#a89984'
+    cfg2            '#ebdbb2'
+    cfgi            '#7c6f64'
+    cbg             '#3c3836'
+    cbg2            '#504945'
+    cbgi            '#3c3836'
+    efg             '#282828'
+    ebg             '#fb4934'
+)
+
+local -A palette_iceberg=(
+    fg              '#c6c8d1'
+    bg              '#161821'
+    black           '#1e2132'
+    red             '#e27878'
+    green           '#b4be82'
+    yellow          '#e2a478'
+    blue            '#84a0c6'
+    magenta         '#a093c7'
+    cyan            '#89b8c2'
+    white           '#c6c8d1'
+    bright_black    '#6b7089'
+    bright_red      '#e98989'
+    bright_green    '#c0ca8e'
+    bright_yellow   '#e9b189'
+    bright_blue     '#91acd1'
+    bright_magenta  '#ada0d3'
+    bright_cyan     '#95c4ce'
+    bright_white    '#d2d4de'
+    visual_fg       '#c6c8d1'
+    visual_bg       '#272c42'
+    afg             '#17171b'
+    afg2            '#161821'
+    afgi            '#3e445e'
+    abg             '#818596'
+    abg2            '#84a0c6'
+    abgi            '#0f1117'
+    bfg             '#6b7089'
+    bfg2            '#6b7089'
+    bfgi            '#3e445e'
+    bbg             '#2e313f'
+    bbg2            '#2e313f'
+    bbgi            '#0f1117'
+    cfg             '#3e445e'
+    cfg2            '#3e445e'
+    cfgi            '#3e445e'
+    cbg             '#0f1117'
+    cbg2            '#0f1117'
+    cbgi            '#0f1117'
+    efg             '#161821'
+    ebg             '#e27878'
+)
+
+local -A palette_nord=(
+    fg              '#d8dee9'
+    bg              '#2e3440'
+    black           '#3b4252'
+    red             '#bf616a'
+    green           '#a3be8c'
+    yellow          '#ebcb8b'
+    blue            '#81a1c1'
+    magenta         '#b48ead'
+    cyan            '#88c0d0'
+    white           '#e5e9f0'
+    bright_black    '#4c566a'
+    bright_red      '#bf616a'
+    bright_green    '#a3be8c'
+    bright_yellow   '#ebcb8b'
+    bright_blue     '#81a1c1'
+    bright_magenta  '#b48ead'
+    bright_cyan     '#8fbcbb'
+    bright_white    '#eceff4'
+    visual_fg       '#d8dee9'
+    visual_bg       '#434c5e'
+    afg             '#3b4252'
+    afg2            '#3b4252'
+    afgi            '#e5e9f0'
+    abg             '#88c0d0'
+    abg2            '#a3be8c'
+    abgi            '#4c566a'
+    bfg             '#3b4252'
+    bfg2            '#3b4252'
+    bfgi            '#e5e9f0'
+    bbg             '#81a1c1'
+    bbg2            '#81a1c1'
+    bbgi            '#4c566a'
+    cfg             '#e5e9f0'
+    cfg2            '#e5e9f0'
+    cfgi            '#e5e9f0'
+    cbg             '#4c566a'
+    cbg2            '#4c566a'
+    cbgi            '#3b4252'
+    efg             '#d8dee9'
+    ebg             '#bf616a'
+)
+
+local -A palette_tokyonight=(
+    fg              '#c0caf5'
+    bg              '#24283b'
+    black           '#1d202f'
+    red             '#f7768e'
+    green           '#9ece6a'
+    yellow          '#e0af68'
+    blue            '#7aa2f7'
+    magenta         '#bb9af7'
+    cyan            '#7dcfff'
+    white           '#a9b1d6'
+    bright_black    '#414868'
+    bright_red      '#f7768e'
+    bright_green    '#9ece6a'
+    bright_yellow   '#e0af68'
+    bright_blue     '#7aa2f7'
+    bright_magenta  '#bb9af7'
+    bright_cyan     '#7dcfff'
+    bright_white    '#c0caf5'
+    visual_fg       '#c0caf5'
+    visual_bg       '#2e3c64'
+    afg             '#1d202f'
+    afg2            '#1d202f'
+    afgi            '#3b4261'
+    abg             '#7aa2f7'
+    abg2            '#9ece6a'
+    abgi            '#1f2335'
+    bfg             '#7aa2f7'
+    bfg2            '#9ece6a'
+    bfgi            '#3b4261'
+    bbg             '#3b4261'
+    bbg2            '#3b4261'
+    bbgi            '#1f2335'
+    cfg             '#a9b1d6'
+    cfg2            '#a9b1d6'
+    cfgi            '#3b4261'
+    cbg             '#1f2335'
+    cbg2            '#1f2335'
+    cbgi            '#1f2335'
+    efg             '#24283b'
+    ebg             '#db4b4b'
+)
+
+.theme-main $@

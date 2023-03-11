@@ -1,0 +1,45 @@
+autoload -U add-zle-hook-widget
+autoload -U add-zsh-hook
+autoload -U run-help && unalias -m run-help
+autoload -U theme
+autoload -U zargs
+autoload -U zmv
+zmodload zsh/datetime
+zmodload zsh/mapfile
+
+setopt extendedglob
+setopt globstarshort
+setopt interactivecomments
+
+path=({$ZDOTDIR_LOCAL:h,$ZDOTDIR:h}/bin(N) $path)
+fpath=({$ZDOTDIR_LOCAL,$ZDOTDIR}/{completion,functions}(N) $fpath)
+
+export XDG_CONFIG_HOME=$ZDOTDIR:h
+export XDG_CONFIG_DIRS=$ZDOTDIR_LOCAL:h
+
+if [[ -n $TMUX ]]; then
+  function .eval-tmux-env {
+    eval "$(tmux switchc -Z \; showenv -s)"
+  }
+  add-zsh-hook preexec .eval-tmux-env
+fi
+
+source $ZDOTDIR/includes/termdetect.zsh
+
+source $ZDOTDIR/includes/aliases.zsh
+source $ZDOTDIR/includes/command-opts.zsh
+source $ZDOTDIR/includes/cursor.zsh
+source $ZDOTDIR/includes/history.zsh
+source $ZDOTDIR/includes/keys.zsh
+source $ZDOTDIR/includes/nav.zsh
+source $ZDOTDIR/includes/psvar-focus.zsh 1
+source $ZDOTDIR/includes/psvar-vcs.zsh 3
+source $ZDOTDIR/includes/psvar-vicmd.zsh 2
+source $ZDOTDIR/includes/theme.zsh
+
+source $ZDOTDIR/includes/completion.zsh
+source $ZDOTDIR/includes/syntax-highlighting.zsh
+
+if [[ -f $ZDOTDIR_LOCAL/zshrc ]]; then
+  source $ZDOTDIR_LOCAL/zshrc
+fi

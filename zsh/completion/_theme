@@ -1,0 +1,14 @@
+#compdef theme
+
+_arguments -C '1: :->cmd' '*::arg:->arg'
+case $state in
+  cmd)
+    _values command apply capture list;;
+  arg)
+    case $line[1] in
+      apply)
+        _arguments --term --tmux --zsh -s "::theme:($(theme list))";;
+      capture)
+        _arguments --apply;;
+    esac;;
+esac

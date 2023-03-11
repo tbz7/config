@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+zopflipng --prefix=.zopfli_ $@
+for f; do
+  if [[ -f $f && -f $f:h/.zopfli_$f:t ]]; then
+    mv $f:h/.zopfli_$f:t $f
+  fi
+done

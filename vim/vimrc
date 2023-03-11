@@ -1,0 +1,33 @@
+unlet! skip_defaults_vim
+source $VIMRUNTIME/defaults.vim
+
+set autoread
+set colorcolumn=80
+set expandtab
+set hidden
+set hlsearch
+set ignorecase
+set smartcase
+set linebreak
+set noswapfile
+set nojoinspaces
+set number
+set scrolloff=2
+set shiftwidth=2
+set smartindent
+set softtabstop=2
+
+silent! colorscheme habamax
+
+inoremap fd <Esc>
+vnoremap fd <Esc>
+
+nnoremap <silent> <CR> :noh<CR><CR>
+
+nnoremap <silent> <Leader>l :set invnumber<CR>
+nnoremap <silent> <Leader>w :set invwrap<CR>
+
+cnoremap w!! w !sudo tee > /dev/null %
+
+let &t_SI = "\e[5 q"
+let &t_EI = "\e[2 q"

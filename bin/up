@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+if [[ -n $commands[apt-get] ]]; then
+  sudo apt update
+  sudo apt upgrade
+  sudo apt autoclean
+fi
+
+if [[ -n $commands[brew] ]]; then
+  brew update
+  brew upgrade
+  brew cleanup -s
+fi
+
+nvim -c 'autocmd User PackerComplete qa' -c 'PackerSync'
