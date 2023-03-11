@@ -1,15 +1,13 @@
-local augroup = vim.api.nvim_create_augroup('plugins.lua', {})
+local packer_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+if vim.fn.glob(packer_path) == '' then
+  vim.fn.system({
+    'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
+    packer_path,
+  })
+  vim.cmd.packadd('packer.nvim')
+end
 
-vim.api.nvim_create_autocmd('BufWritePost', {
-  group = augroup,
-  pattern = { vim.fs.dirname(vim.env.MYVIMRC) .. '/lua/plugins.lua' },
-  callback = function(e)
-    vim.cmd.source(e.file)
-    vim.cmd.PackerCompile()
-  end,
-})
-
-return require('packer').startup({{
+require('packer').startup({{
   'wbthomason/packer.nvim',
 
   'arcticicestudio/nord-vim',
@@ -62,11 +60,11 @@ return require('packer').startup({{
     end,
   },
 
-  --{
-  --  'nvim-telescope/telescope.nvim',
-  --  requires = { 'nvim-lua/plenary.nvim' },
-  --  config = function() require('telescope').setup() end
-  --},
+  {
+    'nvim-telescope/telescope.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function() require('telescope').setup() end
+  },
 
   {
     'nvim-tree/nvim-tree.lua',
@@ -121,3 +119,29 @@ config = {
     open_fn = require('packer.util').float,
   }
 }})
+
+
+local augroup = vim.api.nvim_create_augroup('plugins.lua', {})
+
+if vim.fn.glob(vim.fn.stdpath('config') .. '/plugin/packer_compiled.lua') == '' then
+  require('packer').sync()
+  vim.api.nvim_create_autocmd('User', {
+    group = augroup,
+    pattern = 'PackerComplete',
+    callback = function(e)
+      vim.cmd.quit()
+      vim.cmd.source(vim.env.MYVIMRC)
+    end,
+    once = true,
+    nested = true,
+  })
+end
+
+vim.api.nvim_create_autocmd('BufWritePost', {
+  group = augroup,
+  pattern = { vim.fn.stdpath('config') .. '/lua/plugins.lua' },
+  callback = function(e)
+    vim.cmd.source(e.file)
+    vim.cmd.PackerCompile()
+  end,
+})
