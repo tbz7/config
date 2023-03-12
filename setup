@@ -7,6 +7,7 @@ config_dirs=(
   hg
   nvim
   tmux
+  wezterm
 )
 
 dotfiles=(
@@ -41,7 +42,7 @@ if [[ -f $dir/local/setup.zsh ]]; then
 fi
 
 if [[ $1 == --clean-only ]]; then
-  rm -rfv $cleanups
+  rm -rfv $cleanups ~/.config/${^config_dirs}*(N) ~/.${^dotfiles:t}(N)
   return
 elif [[ $1 == --clean ]]; then
   rm -rfv $cleanups

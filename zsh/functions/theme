@@ -108,6 +108,7 @@ function .theme-apply-term {
       '4;15'  'bright_white'
        '10'   'fg'
        '11'   'bg'
+       '12'   'cursor_bg'
        '17'   'visual_bg'
        '19'   'visual_fg') {
      hex=$palette[$name]
@@ -199,6 +200,7 @@ function .theme-capture {
       '    bright_white    \'' .. ansi(15) .. '\'\\n' ..
       '    visual_fg       \'' .. hi('Visual', 'foreground') .. '\'\\n' ..
       '    visual_bg       \'' .. hi('Visual', 'background') .. '\'\\n' ..
+      '    cursor_bg       \'' .. hi('Cursor', 'background') .. '\'\\n' ..
       '    afg             \'' .. hi('lualine_a_$mode1', 'foreground') .. '\'\\n' ..
       '    afg2            \'' .. hi('lualine_a_$mode2', 'foreground') .. '\'\\n' ..
       '    afgi            \'' .. hi('lualine_a_inactive', 'foreground') .. '\'\\n' ..
@@ -244,6 +246,7 @@ local -A palette_gotham=(
     bright_white    '#d3ebe9'
     visual_fg       '#99d1ce'
     visual_bg       '#0a3749'
+    cursor_bg       '#99d1ce'
     afg             '#99d1ce'
     afg2            '#091f2e'
     afgi            '#195466'
@@ -287,6 +290,7 @@ local -A palette_gruvbox=(
     bright_white    '#ebdbb2'
     visual_fg       '#ebdbb2'
     visual_bg       '#665c54'
+    cursor_bg       '#ebdbb2'
     afg             '#282828'
     afg2            '#282828'
     afgi            '#7c6f64'
@@ -330,6 +334,7 @@ local -A palette_iceberg=(
     bright_white    '#d2d4de'
     visual_fg       '#c6c8d1'
     visual_bg       '#272c42'
+    cursor_bg       '#c6c8d1'
     afg             '#17171b'
     afg2            '#161821'
     afgi            '#3e445e'
@@ -373,6 +378,7 @@ local -A palette_nord=(
     bright_white    '#eceff4'
     visual_fg       '#d8dee9'
     visual_bg       '#434c5e'
+    cursor_bg       '#d8dee9'
     afg             '#3b4252'
     afg2            '#3b4252'
     afgi            '#e5e9f0'
@@ -416,6 +422,7 @@ local -A palette_tokyonight=(
     bright_white    '#c0caf5'
     visual_fg       '#c0caf5'
     visual_bg       '#2e3c64'
+    cursor_bg       '#c0caf5'
     afg             '#1d202f'
     afg2            '#1d202f'
     afgi            '#3b4261'

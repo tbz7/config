@@ -1,4 +1,5 @@
 #  iterm:  [term, font, color]  -- ssh -->  [term, font, color]
+#  wez:    [term, font, color]  -- ssh -->  [term, font, color]
 #  tmux:   [term,  *  , color]  -- ssh -->  [term,  *  , color]
 #  vte:    [term,  -  , color]  -- ssh -->  [term,  -  , color]
 #  apple:  [term,  -  , color]  -- ssh -->  [ -  ,  -  ,   -  ]
@@ -33,6 +34,15 @@ function .termdetect-query-vte {
   export TERM_PROGRAM=VTE
 }
 
+function .termdetect-query-wezterm {
+   echo -n '\e[>0q'
+  .termdetect-safe-read '\'
+  if [[ ${REPLY:4} != WezTerm* ]]; then
+    return 1
+  fi
+  export TERM_PROGRAM=WezTerm
+}
+
 function .termdetect-query-tmux-client-font {
   echo -n '\ePtmux;\e\e]1337;ReportVariable=cHJvZmlsZU5hbWU=\a\e\\'
   .termdetect-safe-read $'\a'
@@ -43,10 +53,16 @@ function .termdetect-query-tmux-client-font {
   else
     echo -n '\ePtmux;\e\e[=0c\e\\'
     .termdetect-safe-read '\'
-    if [[ ${REPLY:4:8} != '7E565445' ]]; then
-      return 1
+    if [[ ${REPLY:4:8} == '7E565445' ]]; then
+      export FONT_MODE=unicode13
+    else
+      echo -n '\ePtmux;\e\e[>0q\e\\'
+      .termdetect-safe-read '\'
+       if [[ ${REPLY:4} != WezTerm* ]]; then
+         return 1
+       fi
+       export TERM_PROGRAM=WezTerm
     fi
-    export FONT_MODE=unicode13
   fi
 }
 
@@ -55,7 +71,9 @@ if [[ -z $TERM_PROGRAM ]]; then
     export TERM_PROGRAM=VTE
   elif [[ -n $SSH_CONNECTION ]]; then
     if [[ $TERM == xterm-256color ]]; then
-      .termdetect-query-iterm || .termdetect-query-vte
+      .termdetect-query-iterm \
+          || .termdetect-query-vte \
+          || .termdetect-query-wezterm
     elif [[ $TERM == tmux-256color ]]; then
       export TERM_PROGRAM=tmux
     fi
@@ -79,4 +97,7 @@ case $TERM_PROGRAM in
   VTE)
     export COLORTERM=truecolor
     export FONT_MODE=unicode13;;
+  WezTerm)
+    export COLORTERM=truecolor
+    export FONT_MODE=nerd;;
 esac
