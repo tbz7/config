@@ -4,8 +4,6 @@ setopt histignorespace
 setopt histverify
 setopt sharehistory
 
-mkdir -p ~/.local/state/zsh
-HISTFILE=$_/history
-
+HISTFILE=~/.local/state/zsh/history
 HISTSIZE=10000
 SAVEHIST=10000

@@ -5,8 +5,8 @@ if [[ -n $terminfo[smkx] && -n $terminfo[rmkx] ]]; then
   function .keys-line-finish {
     echoti rmkx
   }
-  add-zle-hook-widget zle-line-init .keys-line-init
-  add-zle-hook-widget zle-line-finish .keys-line-finish
+  add-zle-hook-widget line-init .keys-line-init
+  add-zle-hook-widget line-finish .keys-line-finish
 fi
 
 bindkey -e

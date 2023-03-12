@@ -7,19 +7,28 @@ if vim.fn.glob(packer_path) == '' then
   vim.cmd.packadd('packer.nvim')
 end
 
-require('packer').startup({{
-  'wbthomason/packer.nvim',
+require('packer').startup({function()
+  use 'wbthomason/packer.nvim'
 
-  'arcticicestudio/nord-vim',
-  'cocopon/iceberg.vim',
-  'folke/tokyonight.nvim',
-  'lifepillar/vim-gruvbox8',
-  'whatyouhide/vim-gotham',
+  local local_config = vim.fn.resolve(
+      vim.fs.dirname(debug.getinfo(1, 'S').short_src) .. '/../../local/nvim')
+  if vim.fn.glob(local_config) ~= '' then
+    use {
+      local_config,
+      as = 'local',
+    }
+  end
 
-  'lambdalisue/suda.vim',
-  'udalov/kotlin-vim',
+  use 'arcticicestudio/nord-vim'
+  use 'cocopon/iceberg.vim'
+  use 'folke/tokyonight.nvim'
+  use 'lifepillar/vim-gruvbox8'
+  use 'whatyouhide/vim-gotham'
 
-  {
+  use 'lambdalisue/suda.vim'
+  use 'udalov/kotlin-vim'
+
+  use {
     'nvim-lualine/lualine.nvim',
     config = function()
       vim.opt.showmode = false
@@ -58,15 +67,15 @@ require('packer').startup({{
         callback = function(e) ForceLualineFocus = false end,
       })
     end,
-  },
+  }
 
-  {
+  use {
     'nvim-telescope/telescope.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
     config = function() require('telescope').setup() end
-  },
+  }
 
-  {
+  use {
     'nvim-tree/nvim-tree.lua',
     config = function()
       local nerdfont = vim.env.FONT_MODE == 'nerd'
@@ -93,9 +102,9 @@ require('packer').startup({{
         },
       })
     end
-  },
+  }
 
-  {
+  use {
     'williamboman/mason.nvim',
     requires = {
       'williamboman/mason-lspconfig.nvim',
@@ -110,9 +119,9 @@ require('packer').startup({{
         end,
       }
     end
-  },
+  }
 
-},
+end,
 
 config = {
   display = {

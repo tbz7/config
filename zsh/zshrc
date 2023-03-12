@@ -6,6 +6,8 @@ autoload -U zargs
 autoload -U zmv
 zmodload zsh/datetime
 zmodload zsh/mapfile
+zmodload zsh/terminfo
+zmodload zsh/zle
 
 setopt extendedglob
 setopt globstarshort
@@ -13,9 +15,6 @@ setopt interactivecomments
 
 path=({$ZDOTDIR_LOCAL:h,$ZDOTDIR:h}/bin(N) $path)
 fpath=({$ZDOTDIR_LOCAL,$ZDOTDIR}/{completion,functions}(N) $fpath)
-
-export XDG_CONFIG_HOME=$ZDOTDIR:h
-export XDG_CONFIG_DIRS=$ZDOTDIR_LOCAL:h
 
 if [[ -n $TMUX ]]; then
   function .eval-tmux-env {

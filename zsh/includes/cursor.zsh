@@ -15,7 +15,7 @@ function .cursor-keymap-select {
 }
 
 if [[ -n $terminfo[Ss] ]]; then
-  add-zle-hook-widget zle-line-init .cursor-bar
-  add-zle-hook-widget zle-line-finish .cursor-block
-  add-zle-hook-widget zle-keymap-select .cursor-keymap-select
+  add-zle-hook-widget line-init .cursor-bar
+  add-zle-hook-widget line-finish .cursor-block
+  add-zle-hook-widget keymap-select .cursor-keymap-select
 fi

@@ -1,8 +1,6 @@
 autoload -U compinit
 zmodload zsh/complist
 
-mkdir -p ~/.cache/zsh
-
 zstyle ':completion:*' cache-path ~/.cache/zsh/zcompcache
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}  # dep: commands.zsh
 zstyle ':completion:*' matcher-list 'm:{a-z-_}={A-Z_-}'

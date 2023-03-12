@@ -9,6 +9,7 @@ export FZF_DEFAULT_OPTS="-m --reverse --cycle --height=40% \
     --color=marker:2,spinner:8,header:-1"
 export GREP_COLORS='cx=90:mt=31:fn=32:ln=34:bn=33:se='
 export LESS='-iR --follow-name'
+export LESSHISTFILE=~/.local/state/less/history
 export LS_COLORS=${(j.:.)=:-'di=34' 'ow=34;40' 'ln=35' {or,mi}'=7;31'
     'ex=91' '*'{'~',.{bak,log,swp,tmp,class,o,pyc,DS_Store}}'=90'}
 if [[ -n $commands[nvim] ]]; then
@@ -18,8 +19,9 @@ export PAGER='less'
 
 alias grep="${commands[ggrep]+g}grep -E --color=auto"
 alias ls="${commands[gls]+g}ls --color=auto"
+alias rg='rg -S'
 if [[ $COLORTERM == truecolor ]]; then
   alias tmux='tmux -T RGB'
 fi
-alias vim="vim -u $XDG_CONFIG_HOME/vim/vimrc"
+alias vim="vim -u $ZDOTDIR:h/vim/vimrc"
 alias zmv='noglob zmv'
