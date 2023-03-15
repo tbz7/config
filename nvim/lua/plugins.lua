@@ -7,11 +7,11 @@ if vim.fn.glob(packer_path) == '' then
   vim.cmd.packadd('packer.nvim')
 end
 
-require('packer').startup({function()
+require('packer').startup({function(use)
   use 'wbthomason/packer.nvim'
 
-  local local_config = vim.fn.resolve(
-      vim.fs.dirname(debug.getinfo(1, 'S').short_src) .. '/../../local/nvim')
+  local local_config =
+      vim.fn.resolve(vim.fn.stdpath('config') .. '/../local/nvim')
   if vim.fn.glob(local_config) ~= '' then
     use {
       local_config,
@@ -60,11 +60,11 @@ require('packer').startup({function()
       local augroup = vim.api.nvim_create_augroup('plugins.lua-lualine', {})
       vim.api.nvim_create_autocmd('FocusGained', {
         group = augroup,
-        callback = function(e) ForceLualineFocus = nil end,
+        callback = function() ForceLualineFocus = nil end,
       })
       vim.api.nvim_create_autocmd('FocusLost', {
         group = augroup,
-        callback = function(e) ForceLualineFocus = false end,
+        callback = function() ForceLualineFocus = false end,
       })
     end,
   }
@@ -104,12 +104,11 @@ require('packer').startup({function()
     end
   }
 
+  use 'neovim/nvim-lspconfig'
+
   use {
     'williamboman/mason.nvim',
-    requires = {
-      'williamboman/mason-lspconfig.nvim',
-      'neovim/nvim-lspconfig',
-    },
+    requires = { 'williamboman/mason-lspconfig.nvim' },
     config = function()
       require('mason').setup()
       require('mason-lspconfig').setup()
@@ -121,6 +120,45 @@ require('packer').startup({function()
     end
   }
 
+  use {
+    'hrsh7th/nvim-cmp',
+    requires = {
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lua',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-vsnip',
+      'hrsh7th/vim-vsnip',
+    },
+    config = function()
+      local cmp = require('cmp')
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            vim.fn['vsnip#anonymous'](args.body)
+          end,
+        },
+        mapping = cmp.mapping.preset.insert({
+          ['<C-b>'] = cmp.mapping.scroll_docs(4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<CR>'] = cmp.mapping.confirm({ select = true }),
+          ['<Tab>'] = cmp.mapping.confirm({ select = true }),
+        }),
+        sources = cmp.config.sources({
+          { name = 'nvim_lsp' },
+          { name = 'path' },
+          { name = 'vsnip' },
+        }, {
+          { name = 'buffer' },
+        }),
+        experimental = {
+          ghost_text = true,
+        },
+      })
+    end
+  }
 end,
 
 config = {
@@ -129,28 +167,29 @@ config = {
   }
 }})
 
-
 local augroup = vim.api.nvim_create_augroup('plugins.lua', {})
 
 if vim.fn.glob(vim.fn.stdpath('config') .. '/plugin/packer_compiled.lua') == '' then
-  require('packer').sync()
   vim.api.nvim_create_autocmd('User', {
     group = augroup,
     pattern = 'PackerComplete',
-    callback = function(e)
+    callback = function()
       vim.cmd.quit()
       vim.cmd.source(vim.env.MYVIMRC)
     end,
     once = true,
     nested = true,
   })
+  require('packer').sync()
 end
 
 vim.api.nvim_create_autocmd('BufWritePost', {
   group = augroup,
-  pattern = { vim.fn.stdpath('config') .. '/lua/plugins.lua' },
+  pattern = { vim.fn.resolve(vim.fn.stdpath('config') .. '/lua/plugins.lua') },
   callback = function(e)
+    vim.cmd.redraw()
     vim.cmd.source(e.file)
     vim.cmd.PackerCompile()
+    print('Regenerated packer_compiled.lua!')
   end,
 })
