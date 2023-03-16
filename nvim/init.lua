@@ -18,7 +18,7 @@ vim.opt.textwidth = 80
 vim.api.nvim_create_autocmd('BufEnter', {
   group = vim.api.nvim_create_augroup('init.lua', {}),
   callback = function()
-    vim.opt_local.colorcolumn = { vim.opt.textwidth:get() }
+    vim.opt_local.colorcolumn = { vim.o.textwidth }
   end,
 })
 
@@ -27,4 +27,6 @@ if not vim.env.NVIM_COLORSCHEME or
   vim.cmd.colorscheme { 'habamax', mods = { emsg_silent = true } }
 end
 
+require('clipboard')
+require('keys')
 require('plugins')

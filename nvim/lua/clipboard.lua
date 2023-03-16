@@ -1,4 +1,4 @@
-vim.o.clipboard = 'unnamed,unnamedplus'
+vim.opt.clipboard = { 'unnamed', 'unnamedplus' }
 
 if vim.env.TMUX then
   vim.g.clipboard = {
