@@ -21,7 +21,6 @@ create_dirs=(
 )
 
 cleanups=(
-  $dir/nvim/plugin/packer_compiled.lua
   ~/.bash*(N)
   ~/.cache/{nvim,zsh}
   ~/.lesshst

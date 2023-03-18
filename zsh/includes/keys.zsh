@@ -14,7 +14,7 @@ bindkey $terminfo[kdch1] delete-char
 bindkey $terminfo[kend] end-of-line
 bindkey $terminfo[khome] beginning-of-line
 bindkey '^u' backward-kill-line
-bindkey 'fd' vi-cmd-mode
+bindkey '\e' vi-cmd-mode
 
 function .fg {
   zle push-line

@@ -12,4 +12,8 @@ if [[ -n $commands[brew] ]]; then
   brew cleanup -s
 fi
 
-nvim -c 'autocmd User PackerComplete qa' -c 'PackerSync'
+if [[ -n $commands[pacman] ]]; then
+  sudo pacman -Syu
+fi
+
+nvim --headless '+Lazy! sync' +qa

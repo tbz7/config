@@ -266,7 +266,6 @@ local -A palette_gotham=(
     ebg             '#d26937'
 )
 
-local colorscheme_gruvbox=gruvbox8
 local -A palette_gruvbox=(
     fg              '#ebdbb2'
     bg              '#282828'

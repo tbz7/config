@@ -20,9 +20,6 @@ set softtabstop=2
 
 silent! colorscheme habamax
 
-inoremap fd <Esc>
-vnoremap fd <Esc>
-
 nnoremap <silent> <CR> :noh<CR><CR>
 
 nnoremap <silent> <Leader>l :set invnumber<CR>
