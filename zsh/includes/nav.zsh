@@ -30,5 +30,5 @@ add-zsh-hook chpwd .nav-chpwd
 
 zle -N nav-back .nav-back
 zle -N nav-forward .nav-forward
-bindkey '\e[1;3D' nav-back    '\e[1;9D' nav-back
-bindkey '\e[1;3C' nav-forward '\e[1;9C' nav-forward
+bindkey '\e[1;2D' nav-back
+bindkey '\e[1;2C' nav-forward

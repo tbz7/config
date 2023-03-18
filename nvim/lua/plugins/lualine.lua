@@ -17,7 +17,7 @@ return {
         options = options,
         sections = {
           lualine_x = {
-            { 'encoding', cond = function() return vim.o.fileencoding ~= 'utf-8' end },
+            { 'encoding',   cond = function() return vim.o.fileencoding ~= 'utf-8' end },
             { 'fileformat', cond = function() return vim.o.fileformat ~= 'unix' end },
             { 'filetype' }
           },

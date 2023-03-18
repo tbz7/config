@@ -16,7 +16,7 @@ dotfiles=(
 create_dirs=(
   ~/.cache/zsh
   ~/.config
-  ~/.local/share/git
+  ~/.local/share/{git,zsh}
   ~/.local/state/{less,zsh}
 )
 
@@ -24,7 +24,7 @@ cleanups=(
   ~/.bash*(N)
   ~/.cache/{nvim,zsh}
   ~/.lesshst
-  ~/.local/share/{git,nvim,terminfo}
+  ~/.local/share/{git,nvim,terminfo,zsh}
   ~/.local/state/zsh/theme  # keep history
   ~/.local/state/{less,nvim}
   ~/.profile
@@ -60,6 +60,8 @@ git_identity=~/.local/share/git/identity
 mkdir -p $git_identity:h
 git config -f $git_identity user.name $USER
 git config -f $git_identity user.email '\<\>'
+
+zsh -ilc 'nvim +qa 2> /dev/null'
 
 if [[ $OSTYPE == darwin* ]]; then
   mkdir -p ~/.local/share/terminfo

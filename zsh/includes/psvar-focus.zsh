@@ -31,4 +31,4 @@ add-zle-hook-widget line-finish .psvar-focus-line-finish
 zle -N .psvar-focus-gained
 zle -N .psvar-focus-lost
 bindkey -a '\e[I' .psvar-focus-gained '\e[O' .psvar-focus-lost
-bindkey -e '\e[I' .psvar-focus-gained '\e[O' .psvar-focus-lost
+bindkey    '\e[I' .psvar-focus-gained '\e[O' .psvar-focus-lost

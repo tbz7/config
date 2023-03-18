@@ -9,25 +9,27 @@ if [[ -n $terminfo[smkx] && -n $terminfo[rmkx] ]]; then
   add-zle-hook-widget line-finish .keys-line-finish
 fi
 
-bindkey -e
-bindkey $terminfo[kdch1] delete-char
-bindkey $terminfo[kend] end-of-line
-bindkey $terminfo[khome] beginning-of-line
-bindkey '^u' backward-kill-line
-bindkey '\e' vi-cmd-mode
-
 function .fg {
   zle push-line
   BUFFER=fg
   zle accept-line
 }
-
 zle -N fg .fg
+
+bindkey -v
+bindkey $terminfo[kdch1] delete-char
+bindkey $terminfo[kend] end-of-line
+bindkey $terminfo[khome] beginning-of-line
+bindkey '\e' vi-cmd-mode
+bindkey '\eh' run-help
+bindkey '\et' transpose-words
+bindkey '^?' backward-delete-char
+bindkey '^k' vi-kill-eol
+bindkey '^n' down-line-or-search
+bindkey '^p' up-line-or-search
+bindkey '^r' history-incremental-search-backward
 bindkey '^z' fg
 
-
-if [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
-  source /usr/share/doc/fzf/examples/key-bindings.zsh
-elif [[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ]]; then
-  source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
+if [[ -f ~/.local/share/zsh/fzf/shell/key-bindings.zsh ]]; then
+  source ~/.local/share/zsh/fzf/shell/key-bindings.zsh
 fi

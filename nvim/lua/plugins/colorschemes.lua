@@ -2,7 +2,7 @@ local initial_specs = {
   gotham = { 'whatyouhide/vim-gotham' },
   gruvbox = { 'ellisonleao/gruvbox.nvim' },
   iceberg = { 'cocopon/iceberg.vim' },
-  nord = { 'arcticicestudio/nord-vim'},
+  nord = { 'arcticicestudio/nord-vim' },
   tokyonight = { 'folke/tokyonight.nvim' },
 }
 
