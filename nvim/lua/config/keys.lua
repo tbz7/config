@@ -48,3 +48,5 @@ vim.keymap.set('c', 'w!!', 'SudaWrite')
 vim.keymap.set('n', '<Leader>t', function() vim.cmd.NvimTreeFindFileToggle() end)
 vim.keymap.set('n', '<Leader>ff', function() vim.cmd.Telescope('find_files') end)
 vim.keymap.set('n', '<Leader>fg', function() vim.cmd.Telescope('live_grep') end)
+
+vim.keymap.set('n', 'F', function() vim.lsp.buf.format() end)
