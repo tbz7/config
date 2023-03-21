@@ -16,12 +16,19 @@ local function on_attach(client, bufnr)
     end,
   })
 
+  vim.api.nvim_create_autocmd({ 'CursorHold' }, {
+    group = augroup,
+    buffer = bufnr,
+    callback = function()
+      vim.diagnostic.open_float { border = 'single' }
+    end
+  })
+
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
       group = augroup,
       buffer = bufnr,
       callback = function()
-        vim.diagnostic.open_float { border = 'single' }
         vim.lsp.buf.document_highlight()
       end
     })

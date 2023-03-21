@@ -70,10 +70,10 @@ function .theme-main {
   esac
 
   if $usage; then
-    echo "Usage:"
-    echo "  theme apply [-s] [--tmux] [--term] [--zsh] [THEME]"
-    echo "  theme list"
-    echo "  theme capture [--apply] THEME"
+    echo 'Usage:'
+    echo '  theme apply [-s] [--tmux] [--term] [--zsh] [THEME]'
+    echo '  theme list'
+    echo '  theme capture [--apply] THEME'
     return 1
   fi >&2
 }

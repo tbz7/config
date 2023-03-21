@@ -1,17 +1,11 @@
 #!/usr/bin/env zsh
 
-function osc52 {
-  echo -n "\e]52;c;$(base64 | tr -d '\r\n')\e\\"
-}
-
 if [[ -n $TMUX ]]; then
   tmux load-buffer -w -
-elif [[ -n $SSH_CONNECTION && $TERM_PROGRAM != VTE ]]; then
-  osc52
-elif [[ $OSTYPE == darwin* ]]; then
+elif [[ -z $SSH_CONNECTION && $OSTYPE == darwin* ]]; then
   pbcopy
 elif [[ -n $DISPLAY && -n $commands[xclip] ]]; then
   xclip -sel c
 else
-  osc52
+  echo -n "\e]52;c;$(base64 | tr -d '\r\n')\e\\"
 fi

@@ -1,4 +1,4 @@
-[diff]
+[diff]                                                       # vim: ft=gitconfig
   guitool = meld
   tool = vimdiff
 

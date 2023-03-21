@@ -9,6 +9,13 @@ if [[ -n $terminfo[smkx] && -n $terminfo[rmkx] ]]; then
   add-zle-hook-widget line-finish .keys-line-finish
 fi
 
+function .clear-screen-and-history {
+  echoti clear
+  echoti E3
+  zle redisplay
+}
+zle -N clear-screen-and-history .clear-screen-and-history
+
 function .fg {
   zle push-line
   BUFFER=fg
@@ -28,6 +35,7 @@ bindkey '^k' vi-kill-eol
 bindkey '^n' down-line-or-search
 bindkey '^p' up-line-or-search
 bindkey '^r' history-incremental-search-backward
+bindkey '^xl' clear-screen-and-history
 bindkey '^z' fg
 
 if [[ -f ~/.local/share/zsh/fzf/shell/key-bindings.zsh ]]; then

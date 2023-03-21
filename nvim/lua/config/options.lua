@@ -3,7 +3,6 @@ vim.opt.ignorecase = true
 vim.opt.linebreak = true
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', extends = '❯', precedes = '❮' }
-vim.opt.modeline = false
 vim.opt.mouse = 'a'
 vim.opt.number = true
 vim.opt.scrolloff = 2

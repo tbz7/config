@@ -4,9 +4,9 @@ ZLE_RPROMPT_INDENT=0
 ZLE_SPACE_SUFFIX_CHARS='&|'
 
 function .theme-palette-preexec {
-  if [[ $2 == ssh\ * ]]; then
-    __palette_reset=1
-  fi
+  case $2 in
+    (nvim|ssh|tmux|\$EDITOR)*) __palette_reset=1;;
+  esac
 }
 
 function .theme-palette-precmd {
@@ -19,4 +19,6 @@ function .theme-palette-precmd {
 add-zsh-hook preexec .theme-palette-preexec
 add-zsh-hook precmd .theme-palette-precmd
 
-if [[ $TERM != linux* ]] theme apply
+if [[ $FONT_MODE != ascii ]]; then
+  theme apply
+fi
