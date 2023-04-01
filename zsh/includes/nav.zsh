@@ -30,5 +30,5 @@ add-zsh-hook chpwd .nav-chpwd
 
 zle -N nav-back .nav-back
 zle -N nav-forward .nav-forward
-bindkey '\e[1;2D' nav-back
-bindkey '\e[1;2C' nav-forward
+bindkey $terminfo[kLFT] nav-back
+bindkey $terminfo[kRIT] nav-forward

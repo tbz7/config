@@ -24,13 +24,15 @@ function .fg {
 zle -N fg .fg
 
 bindkey -v
+bindkey $terminfo[kbs] backward-delete-char
+bindkey $terminfo[kcud1] down-line-or-search
+bindkey $terminfo[kcuu1] up-line-or-search
 bindkey $terminfo[kdch1] delete-char
 bindkey $terminfo[kend] end-of-line
 bindkey $terminfo[khome] beginning-of-line
 bindkey '\e' vi-cmd-mode
 bindkey '\eh' run-help
 bindkey '\et' transpose-words
-bindkey '^?' backward-delete-char
 bindkey '^k' vi-kill-eol
 bindkey '^n' down-line-or-search
 bindkey '^p' up-line-or-search
