@@ -24,6 +24,20 @@ local function nav(motion)
   end
 end
 
+local augroup = vim.api.nvim_create_augroup('config-keys', {})
+vim.api.nvim_create_autocmd('UIEnter', {
+  group = augroup,
+  callback = function()
+    vim.loop.new_tty(1, false):write('\x1b]1337;SetUserVar=process-name=bnZpbQ==\a')
+  end,
+})
+vim.api.nvim_create_autocmd('UILeave', {
+  group = augroup,
+  callback = function()
+    vim.loop.new_tty(1, false):write('\x1b]1337;SetUserVar=process-name=\a')
+  end,
+})
+
 for _, motion in pairs { 'h', 'j', 'k', 'l' } do
   vim.keymap.set({ 'n', 'i', 'v' }, '<M-' .. motion .. '>', function()
     nav(motion)

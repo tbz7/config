@@ -1,3 +1,7 @@
+[alias]
+cm = commit --name $1 -m $1
+reword = commit --amend 're:^$'
+
 [defaults]
 evolve = --no-update
 

@@ -8,8 +8,16 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local nvim_local = vim.fn.resolve(vim.fn.stdpath('config') .. '/../local/nvim')
+
 require('lazy').setup({
-  spec = { import = 'plugins' },
+  spec = {
+    { import = 'plugins' },
+    {
+      import = 'local.plugins',
+      enabled = vim.fn.filereadable(nvim_local .. '/lua/local/plugins.lua') == 1,
+    },
+  },
   install = { colorscheme = { vim.env.NVIM_COLORSCHEME, 'habamax' } },
   ui = {
     icons = vim.env.FONT_MODE == 'nerd' and {} or {
@@ -29,7 +37,7 @@ require('lazy').setup({
   },
   performance = {
     rtp = {
-      paths = { vim.fn.resolve(vim.fn.stdpath('config') .. '/../local/nvim') },
+      paths = { nvim_local },
       disabled_plugins = {
         'gzip',
         'matchit',

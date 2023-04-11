@@ -53,7 +53,7 @@ case $TERM in
     if [[ -z $TERM_PROGRAM ]]; then
       if [[ -n $VTE_VERSION ]]; then
         export TERM_PROGRAM=VTE
-      elif [[ $TERM == xterm-256color && -n $SSH_CONNECTION ]]; then
+      elif [[ -n $SSH_CONNECTION ]]; then
         .termdetect-query-term-program
         export TERM_PROGRAM=$REPLY
       fi
