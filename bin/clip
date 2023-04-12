@@ -1,11 +1,7 @@
 #!/usr/bin/env zsh
 
-if [[ -n $TMUX ]]; then
-  tmux load-buffer -w -
-elif [[ -z $SSH_CONNECTION && $OSTYPE == darwin* ]]; then
+if [[ $OSTYPE == darwin* ]]; then
   pbcopy
-elif [[ -n $DISPLAY && -n $commands[xclip] ]]; then
-  xclip -sel c
 else
   echo -n "\e]52;c;$(base64 | tr -d '\r\n')\e\\"
 fi

@@ -22,7 +22,7 @@ alias gr='git rebase'
 alias h='hg status'
 alias har='hg addremove'
 alias hc='hg checkout'
-alias hcm 'hg cm'
+alias hcm='hg cm'
 alias hcma='hg amend'
 alias hd='hg vimdiff'
 alias hds='hg diff --stat'
@@ -33,6 +33,6 @@ alias mmv='zmv -W'
 
 alias rgc='() { rg -pC3 $@ | perl -pe "s/(\d+\e\[0m-)(.*)/\$1\e[90m\$2\e[0m/" }'
 
-alias tm="echo -n '\\e]1337;SetUserVar=process-name=dG11eA==\\a';
+alias tm="echo -n '\\e]1337;SetUserVar=process_name=dG11eA==\\a';
     tmux new-session -A -s main;
-    echo -n '\\e]1337;SetUserVar=process-name=\\a'"
+    echo -n '\\e]1337;SetUserVar=process_name=\\a'"

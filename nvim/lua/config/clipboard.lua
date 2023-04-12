@@ -1,27 +1,26 @@
 vim.opt.clipboard = { 'unnamed', 'unnamedplus' }
 
-if vim.env.TMUX then
+if vim.env.SSH_CONNECTION
+    or vim.endswith(vim.env.WEZTERM_EXECUTABLE or '', 'wezterm-mux-server') then
+  local function copy(str)
+    vim.cmd.wshada()
+    vim.fn.chansend(vim.v.stderr, vim.fn.system('clip', str))
+  end
+
+  local function paste()
+    vim.cmd.rshada()
+    return { vim.fn.getreg('', 1, true), 'V' }
+  end
+
   vim.g.clipboard = {
-    name = 'tmux',
+    name = 'osc52',
     copy = {
-      ['*'] = { 'tmux', 'load-buffer', '-w', '-' },
-      ['+'] = { 'tmux', 'load-buffer', '-w', '-' },
+      ['*'] = copy,
+      ['+'] = copy,
     },
     paste = {
-      ['*'] = { 'tmux', 'show-buffer' },
-      ['+'] = { 'tmux', 'show-buffer' },
-    },
-  }
-elseif vim.env.SSH_CONNECTION then
-  vim.g.clipboard = {
-    name = 'ssh',
-    copy = {
-      ['*'] = function(s) vim.fn.chansend(vim.v.stderr, vim.fn.system('clip', s)) end,
-      ['+'] = function(s) vim.fn.chansend(vim.v.stderr, vim.fn.system('clip', s)) end,
-    },
-    paste = {
-      ['*'] = function() return { vim.fn.getreg('', 1, true), 'V' } end,
-      ['+'] = function() return { vim.fn.getreg('', 1, true), 'V' } end,
-    },
+      ['*'] = paste,
+      ['+'] = paste,
+    }
   }
 end

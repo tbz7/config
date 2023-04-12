@@ -28,6 +28,7 @@ source $ZDOTDIR/includes/termdetect.zsh
 source $ZDOTDIR/includes/aliases.zsh
 source $ZDOTDIR/includes/command-opts.zsh
 source $ZDOTDIR/includes/cursor.zsh
+source $ZDOTDIR/includes/cwd.zsh
 source $ZDOTDIR/includes/history.zsh
 source $ZDOTDIR/includes/keys.zsh
 source $ZDOTDIR/includes/nav.zsh

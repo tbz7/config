@@ -6,7 +6,7 @@ if git_status=(${(f)"$(git -C $d --no-optional-locks status -b --porcelain=v2)"}
   echo -n "git"
   echo -n ":${${(@M)git_status:#\# branch.head *}#\# branch.head }"
   echo    ":${${(@)git_status:#\#*}:+1}"
-elif hg_names=($(chg --cwd=$d id -r . -T "${HG_NAMES:-{node|short}}")); then
+elif hg_names=($(chg --cwd=$d id -r . -T "${HG_NAMES:-{node|short\}}")); then
   echo -n "hg"
   echo -n ":$hg_names[1]"
   echo    ":${$(chg --cwd=$d id -T '{dirty}'):+1}"

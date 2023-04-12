@@ -88,7 +88,7 @@ function .theme-init {
 }
 
 function .theme-apply-term {
-  local code name hex
+  local code name hex overrides
   for code name (
       '4;0'   'black'
       '4;1'   'red'
@@ -111,9 +111,25 @@ function .theme-apply-term {
        '12'   'cursor_bg'
        '17'   'visual_bg'
        '19'   'visual_fg') {
-     hex=$palette[$name]
-     echo -n "\e]$code;rgb:${hex:1:2}/${hex:3:2}/${hex:5:2}\a"
-   }
+    hex=$palette[$name]
+    echo -n "\e]$code;rgb:${hex:1:2}/${hex:3:2}/${hex:5:2}\a"
+  }
+
+  printf '{
+    "colors": {
+      "tab_bar": {
+        "active_tab": { "fg_color": "%s", "bg_color": "%s" },
+        "inactive_tab": { "fg_color": "%s", "bg_color": "%s" }
+      }
+    },
+    "window_frame": {
+      "active_titlebar_fg": "%s", "active_titlebar_bg": "%s",
+      "inactive_titlebar_fg": "%s", "inactive_titlebar_bg": "%s"
+    }
+  }' $palette[bfg] $palette[bbg] $palette[bfgi] $palette[bbgi] \
+     $palette[cfg] $palette[cbg] $palette[cfgi] $palette[cbgi] \
+     | base64 | tr -d '\r\n' | read overrides
+  echo -n "\e]1337;SetUserVar=window_overrides=$overrides\a"
  }
 
 function .theme-apply-tmux {
@@ -143,7 +159,7 @@ function .theme-apply-zsh {
   export THEME=$theme
   export NVIM_COLORSCHEME=${(P)${:-colorscheme_$theme}:-$theme}
 
-  local x
+  local a=$'\a' e=$'\e' x
   for x in afg abg bfg bbg cfg cbg; do
     local $x="%(V.$palette[${x}i].%(2V.$palette[${x}2].$palette[$x]))"
   done
@@ -151,12 +167,18 @@ function .theme-apply-zsh {
   local efg="%(V.$palette[cfgi].$palette[efg])"
   local ebg="%(V.$palette[cbgi].$palette[ebg])"
 
-  PS1="%F{$afg}%K{$abg} %m %F{$abg}%K{$bbg}$sym[]"
-  PS1+="%F{$bfg} %33<$sym[…]<%~ %k%F{$bbg}$sym[]%f "
-  RPS1="%(?..%F{$ebg}$sym[]%F{$efg}%K{$ebg} $sym[✗] %(3V.%F{$cbg}$sym[].))"
-  RPS1+="%(3V.%(?.%F{$cbg}$sym[].)%F{$cfg}%K{$cbg} %3v .)%f%k"
-  PS2="%8F$sym[↳]  %f"
-  RPS2="%8F %1^%f"
+  PS1="%{$e]133;D;%?;aid=$$$a$e]133;A;cl=m;aid=$$$a%}%F{$afg}%K{$abg} %m %F"
+  PS1+="{$abg}%K{$bbg}$sym[]%F{$bfg} %33<$sym[…]<%~ %k%F{$bbg}$sym[] %f"
+  PS1+="%{$e]133;B$a%}"
+  RPS1="%{$e]133;P;k=r$a%}%(?..%F{$ebg}$sym[]%F{$efg}%K{$ebg} $sym[✗] %(3V.%F"
+  RPS1+="{$cbg}$sym[].))%(3V.%(?.%F{$cbg}$sym[].)%F{$cfg}%K{$cbg} %3v .)%f%k"
+  PS2="%{$e]133;P;k=s$a%}%8F$sym[↳]  %f%{$e]133;B$a%}"
+  RPS2="%{$e]133;P;k=r$a%}%8F %1^%f"
+
+  function .theme-preexec {
+    echo -n "\e]133;C\a"
+  }
+  add-zsh-hook preexec .theme-preexec
 }
 
 function .theme-capture {
