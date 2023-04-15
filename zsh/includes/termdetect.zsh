@@ -1,9 +1,7 @@
 function .termdetect-query-term-program {
   printf ${1:-%s} $'\e''[>0q'
   read -st 1 -d '\'
-  if [[ ${REPLY:4} == iTerm2* ]]; then
-    REPLY=iTerm.app
-  elif [[ ${REPLY:4} == WezTerm* ]]; then
+  if [[ ${REPLY:4} == WezTerm* ]]; then
     REPLY=WezTerm
   else
     printf ${1:-%s} $'\e''[=0c'
@@ -22,16 +20,6 @@ function .termdetect-query-term-program {
   fi
 }
 
-function .termdetect-infer-iterm-font {
-  printf ${1:-%s} $'\e'']1337;ReportVariable=cHJvZmlsZU5hbWU='$'\a'
-  read -st 1 -d $'\a'
-  if [[ ${REPLY:7} == 'ReportVariable=Q3VzdG9taXplZA=='* ]]; then
-    export FONT_MODE=nerd
-  else
-    export FONT_MODE=unicode
-  fi
-}
-
 case $TERM in
   linux*)
     export TERM=linux-16color
@@ -41,8 +29,6 @@ case $TERM in
     if [[ -z $FONT_MODE ]]; then
       .termdetect-query-term-program '\ePtmux;\e%s\e\\'
       case $REPLY in
-        iTerm.app)
-          .termdetect-infer-iterm-font '\ePtmux;\e%s\e\\';;
         WezTerm)
           export FONT_MODE=nerd;;
         VTE)
@@ -62,11 +48,6 @@ case $TERM in
       Apple_Terminal)
         export COLORTERM=256color
         export FONT_MODE=unicode;;
-      iTerm.app)
-        export COLORTERM=truecolor
-        if [[ -z $FONT_MODE ]]; then
-          .termdetect-infer-iterm-font
-        fi;;
       VTE)
         export COLORTERM=truecolor
         export FONT_MODE=unicode13;;
