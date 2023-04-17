@@ -5,19 +5,8 @@ local action = wezterm.action
 
 local M = {}
 
-local function maybe_split(key, direction)
-  return wezterm.action_callback(function(win, pane)
-    if pane:get_user_vars()['process_name'] == 'tmux' then
-      win:perform_action(action.SendKey { mods = 'ALT', key = key }, pane)
-    else
-      pane:split { direction = direction }
-    end
-  end)
-end
-
 local function nav(win, pane, motion, force)
-  if not force
-      and ({ nvim = 1, tmux = 1 })[pane:get_user_vars()['process_name']] then
+  if not force and pane:get_user_vars()['process_name'] == 'nvim' then
     win:perform_action(action.SendKey { mods = 'ALT', key = motion }, pane)
   else
     pane = win:active_tab():get_pane_direction(c.nav_motions[motion].dir)
@@ -53,17 +42,17 @@ function M.setup(config)
     { mods = 'ALT', key = 'j',  action = nav_action('j') },
     { mods = 'ALT', key = 'k',  action = nav_action('k') },
     { mods = 'ALT', key = 'l',  action = nav_action('l') },
-    { mods = 'ALT', key = '\\', action = maybe_split('\\', 'Right') },
-    { mods = 'ALT', key = '-',  action = maybe_split('-', 'Bottom') },
+    { mods = 'ALT', key = '\\', action = action.SplitHorizontal {} },
+    { mods = 'ALT', key = '-',  action = action.SplitVertical {} },
     {
       mods = 'SHIFT|ALT',
       key = '|',
-      action = action.SplitHorizontal { domain = 'CurrentPaneDomain' }
+      action = action.SplitPane { direction = 'Right', top_level = true },
     },
     {
       mods = 'SHIFT|ALT',
       key = '_',
-      action = action.SplitVertical { domain = 'CurrentPaneDomain' }
+      action = action.SplitPane { direction = 'Down', top_level = true },
     },
   }
 end

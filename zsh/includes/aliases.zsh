@@ -32,7 +32,3 @@ alias hm1='hg meld -r .~1'
 alias mmv='zmv -W'
 
 alias rgc='() { rg -pC3 $@ | perl -pe "s/(\d+\e\[0m-)(.*)/\$1\e[90m\$2\e[0m/" }'
-
-alias tm="echo -n '\\e]1337;SetUserVar=process_name=dG11eA==\\a';
-    tmux new-session -A -s main;
-    echo -n '\\e]1337;SetUserVar=process_name=\\a'"

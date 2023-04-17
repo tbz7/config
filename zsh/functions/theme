@@ -20,7 +20,7 @@ local -A palette=()
 
 function .theme-main {
   local apps=(--term --zsh) flags=()
-  zparseopts -D -E -K -a flags -term=apps -tmux=apps -zsh=apps -apply s
+  zparseopts -D -E -K -a flags -term=apps -zsh=apps -apply s
 
   local usage=false
   case $1 in
@@ -36,9 +36,6 @@ function .theme-main {
 
         if (( $apps[(I)--term] > 0 )); then
           .theme-apply-term
-        fi
-        if (( $apps[(I)--tmux] > 0 )); then
-          .theme-apply-tmux
         fi
         if (( $apps[(I)--zsh] > 0 )); then
           .theme-apply-zsh
@@ -71,7 +68,7 @@ function .theme-main {
 
   if $usage; then
     echo 'Usage:'
-    echo '  theme apply [-s] [--tmux] [--term] [--zsh] [THEME]'
+    echo '  theme apply [-s] [--term] [--zsh] [THEME]'
     echo '  theme list'
     echo '  theme capture [--apply] THEME'
     return 1
@@ -131,25 +128,6 @@ function .theme-apply-term {
      | base64 | tr -d '\r\n' | read overrides
   echo -n "\e]1337;SetUserVar=window_overrides=$overrides\a"
  }
-
-function .theme-apply-tmux {
-  tmux set -g @status-z '%a %-I:%M %p' \;\
-       set -g message-command-style "fg=$palette[bfg] bg=$palette[bbg]" \;\
-       set -g message-style "fg=$palette[bfg] bg=$palette[bbg]" \;\
-       set -g mode-style "fg=$palette[visual_fg] bg=$palette[visual_bg]" \;\
-       set -g pane-active-border-style "fg=$palette[bfg] bg=$palette[bg]" \;\
-       set -g pane-border-style "fg=$palette[bbg] bg=$palette[bg]" \;\
-       set -g status-left '' \;\
-       set -g status-right "#{T:@status-x} #{?@status-y,#[fg=$palette[bbg]]\
-$sym[]#[fg=$palette[bfg] bg=$palette[bbg]] #{T:@status-y} ,}#{?@status-z,\
-#[fg=$palette[abg]]$sym[]#[fg=$palette[afg] bg=$palette[abg]] #{T:@status-z} ,}" \;\
-       set -g status-right-length 100 \;\
-       set -g status-style "fg=$palette[cfg] bg=$palette[cbg]" \;\
-       set -g window-status-current-format "#[fg=$palette[cbg] bg=$palette[bbg]\
-]$sym[]#[fg=$palette[bfg]]  #W  #[fg=$palette[bbg] bg=$palette[cbg]]$sym[]" \;\
-       set -g window-status-format ' #I #W   ' \;\
-       set -g window-status-separator ''
-}
 
 function .theme-apply-zsh {
   if [[ $COLORTERM != truecolor ]]; then

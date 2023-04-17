@@ -1,5 +1,5 @@
 function .termdetect-query-term-program {
-  printf ${1:-%s} $'\e''[>0q'
+  echo -n '\e[>0q'
   read -st 1 -d '\'
   if [[ ${REPLY:4} == WezTerm* ]]; then
     REPLY=WezTerm
@@ -24,17 +24,6 @@ case $TERM in
   linux*)
     export TERM=linux-16color
     export FONT_MODE=ascii;;
-  tmux*)
-    export COLORTERM=truecolor
-    if [[ -z $FONT_MODE ]]; then
-      .termdetect-query-term-program '\ePtmux;\e%s\e\\'
-      case $REPLY in
-        WezTerm)
-          export FONT_MODE=nerd;;
-        VTE)
-          export FONT_MODE=unicode13;;
-      esac
-    fi;;
   xterm-256color)
     if [[ -z $TERM_PROGRAM ]]; then
       if [[ -n $VTE_VERSION ]]; then

@@ -20,8 +20,5 @@ export PAGER='less'
 alias grep="${commands[ggrep]+g}grep -E --color=auto"
 alias ls="${commands[gls]+g}ls --color=auto"
 alias rg='rg -S'
-if [[ $COLORTERM == truecolor ]]; then
-  alias tmux='tmux -T RGB'
-fi
 alias vim="vim -u $ZDOTDIR:h/vim/vimrc"
 alias zmv='noglob zmv'

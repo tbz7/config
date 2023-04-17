@@ -12,10 +12,7 @@ local function nav(motion)
   local old = vim.fn.winnr()
   vim.cmd.wincmd(motion)
   if old == vim.fn.winnr() then
-    if vim.env.TMUX then
-      vim.fn.system {
-        'tmux', 'run', '-C', '#{@force-select-pane-' .. motion .. '}' }
-    elseif vim.env.WEZTERM_PANE then
+    if vim.env.WEZTERM_PANE then
       vim.loop.new_tty(1, false):write(
         '\x1b]1337;SetUserVar=force_nav=' .. c.nav_motions[motion].var .. '\a')
     else

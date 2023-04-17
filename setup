@@ -6,7 +6,6 @@ config_dirs=(
   git
   hg
   nvim
-  tmux
   wezterm
 )
 

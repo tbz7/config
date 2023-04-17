@@ -7,7 +7,7 @@ case $state in
   arg)
     case $line[1] in
       apply)
-        _arguments --term --tmux --zsh -s "::theme:($(theme list))";;
+        _arguments --term --zsh -s "::theme:($(theme list))";;
       capture)
         _arguments --apply;;
     esac;;

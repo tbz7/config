@@ -5,7 +5,7 @@ ZLE_SPACE_SUFFIX_CHARS='&|'
 
 function .theme-palette-preexec {
   case $2 in
-    (nvim|ssh|tmux|\$EDITOR)*) __palette_reset=1;;
+    (nvim|ssh|\$EDITOR)*) __palette_reset=1;;
   esac
 }
 

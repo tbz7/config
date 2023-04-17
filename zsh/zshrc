@@ -16,13 +16,6 @@ setopt interactivecomments
 path=({$ZDOTDIR_LOCAL:h,$ZDOTDIR:h}/bin(N) $path)
 fpath=({$ZDOTDIR_LOCAL,$ZDOTDIR}/{completion,functions}(N) $fpath)
 
-if [[ -n $TMUX ]]; then
-  function .eval-tmux-env {
-    eval "$(tmux switchc -Z \; showenv -s)"
-  }
-  add-zsh-hook preexec .eval-tmux-env
-fi
-
 source $ZDOTDIR/includes/termdetect.zsh
 
 source $ZDOTDIR/includes/aliases.zsh
