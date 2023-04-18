@@ -1,0 +1,9 @@
+Match exec "[[ $TERM == wezterm ]]"
+  SetEnv TERM=xterm-256color
+
+Host * 
+  SendEnv TERM_PROGRAM
+  StrictHostKeyChecking no
+  UserKnownHostsFile ~/.local/state/ssh/known_hosts
+
+  Include config_local

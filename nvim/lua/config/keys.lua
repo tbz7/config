@@ -11,13 +11,9 @@ vim.keymap.set('n', '<C-w>-', '<C-w>s')
 local function nav(motion)
   local old = vim.fn.winnr()
   vim.cmd.wincmd(motion)
-  if old == vim.fn.winnr() then
-    if vim.env.WEZTERM_PANE then
-      vim.loop.new_tty(1, false):write(
-        '\x1b]1337;SetUserVar=force_nav=' .. c.nav_motions[motion].var .. '\a')
-    else
-      vim.cmd.wincmd { c.nav_motions[motion].rev, count = 10 }
-    end
+  if old == vim.fn.winnr() and vim.env.TERM == 'wezterm' then
+    vim.loop.new_tty(1, false):write(
+      '\x1b]1337;SetUserVar=force_nav=' .. c.nav_motions[motion].var .. '\a')
   end
 end
 
@@ -25,13 +21,13 @@ local augroup = vim.api.nvim_create_augroup('config-keys', {})
 vim.api.nvim_create_autocmd('UIEnter', {
   group = augroup,
   callback = function()
-    vim.loop.new_tty(1, false):write('\x1b]1337;SetUserVar=process_name=bnZpbQ==\a')
+    vim.loop.new_tty(1, false):write('\x1b]1337;SetUserVar=nvim=dHJ1ZQ==\a')
   end,
 })
 vim.api.nvim_create_autocmd('UILeave', {
   group = augroup,
   callback = function()
-    vim.loop.new_tty(1, false):write('\x1b]1337;SetUserVar=process_name=\a')
+    vim.loop.new_tty(1, false):write('\x1b]1337;SetUserVar=nvim=\a')
   end,
 })
 

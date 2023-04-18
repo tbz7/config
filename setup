@@ -9,15 +9,17 @@ config_dirs=(
   wezterm
 )
 
-dotfiles=(
-  zsh/zshenv
+declare -A links=(
+  ssh/config ~/.ssh/config
+  zsh/zshenv ~/.zshenv
 )
 
 create_dirs=(
   ~/.cache/zsh
   ~/.config
   ~/.local/share/{git,zsh}
-  ~/.local/state/{less,zsh}
+  ~/.local/state/{less,ssh,zsh}
+  ~/.ssh
 )
 
 cleanups=(
@@ -26,7 +28,7 @@ cleanups=(
   ~/.lesshst
   ~/.local/share/{git,nvim,terminfo,zsh}
   ~/.local/state/zsh/theme  # keep history
-  ~/.local/state/{less,nvim}
+  ~/.local/state/{less,nvim,ssh}
   ~/.profile
   ~/.vim*(N)
   ~/.zcomp*(N)
@@ -41,17 +43,17 @@ if [[ -f $dir/local/setup.zsh ]]; then
 fi
 
 if [[ $1 == --clean-only ]]; then
-  rm -rfv $cleanups ~/.config/${^config_dirs}*(N) ~/.${^dotfiles:t}(N)
+  rm -rfv $cleanups ~/.config/${^config_dirs}(N) ${(v)^links}(N)
   return
 elif [[ $1 == --clean ]]; then
   rm -rfv $cleanups
 fi
 
-rm -rf ~/.config/${^config_dirs}*(N) ~/.${^dotfiles:t}(N)
+rm -rf ~/.config/${^config_dirs}(N) ${(v)^links}(N)
 mkdir -p $create_dirs
 ln -sfv $dir/${^config_dirs} ~/.config
-for f in $dotfiles; do
-  ln -sfv $dir/$f ~/.$f:t
+for s d in ${(kv)links}; do
+  ln -sfv $dir/$s $d
 done
 
 touch ~/.hushlogin
@@ -63,9 +65,9 @@ git config -f $git_identity user.email '\<\>'
 
 zsh -ilc 'nvim +qa 2> /dev/null'
 
-if [[ $OSTYPE == darwin* ]]; then
-  mkdir -p ~/.local/share/terminfo
-  tic -xo $_/ $0:A:h/terminfo/backports.ti
+mkdir -p ~/.local/share/terminfo
+tic -xo $_/ $0:A:h/wezterm/wezterm.ti
 
+if [[ $OSTYPE == darwin* ]]; then
   defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 fi

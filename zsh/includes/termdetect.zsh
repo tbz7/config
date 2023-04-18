@@ -41,6 +41,9 @@ case $TERM in
         export COLORTERM=truecolor
         export FONT_MODE=unicode13;;
       WezTerm)
+        if infocmp wezterm &> /dev/null; then
+          TERM=wezterm
+        fi
         export COLORTERM=truecolor
         export FONT_MODE=nerd;;
     esac;;

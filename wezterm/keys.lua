@@ -6,17 +6,17 @@ local action = wezterm.action
 local M = {}
 
 local function nav(win, pane, motion, force)
-  if not force and pane:get_user_vars()['process_name'] == 'nvim' then
+  if not force and pane:get_user_vars().nvim == 'true' then
     win:perform_action(action.SendKey { mods = 'ALT', key = motion }, pane)
   else
     pane = win:active_tab():get_pane_direction(c.nav_motions[motion].dir)
     if pane then
       pane:activate()
-      if pane:get_user_vars()['process_name'] == 'nvim' then
+      if pane:get_user_vars().nvim == 'true' then
         win:perform_action(
           action.SendKey {
             mods = 'ALT',
-            key = string.upper(c.nav_motions[motion].rev),
+            key = c.nav_motions[motion].rev:upper(),
           },
           pane)
       end
@@ -42,8 +42,8 @@ function M.setup(config)
     { mods = 'ALT', key = 'j',  action = nav_action('j') },
     { mods = 'ALT', key = 'k',  action = nav_action('k') },
     { mods = 'ALT', key = 'l',  action = nav_action('l') },
-    { mods = 'ALT', key = '\\', action = action.SplitHorizontal {} },
-    { mods = 'ALT', key = '-',  action = action.SplitVertical {} },
+    { mods = 'ALT', key = '\\', action = action.SplitHorizontal },
+    { mods = 'ALT', key = '-',  action = action.SplitVertical },
     {
       mods = 'SHIFT|ALT',
       key = '|',
