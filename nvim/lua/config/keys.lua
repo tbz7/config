@@ -1,4 +1,4 @@
-local c = require('config.common')
+local nav = require('common.nav')
 
 vim.g.mapleader = ' '
 
@@ -8,12 +8,12 @@ vim.keymap.set({ 'n', 'v' }, 'j', 'gj')
 vim.keymap.set('n', '<C-w>\\', '<C-w>v')
 vim.keymap.set('n', '<C-w>-', '<C-w>s')
 
-local function nav(motion)
+local function do_nav(motion)
   local old = vim.fn.winnr()
   vim.cmd.wincmd(motion)
   if old == vim.fn.winnr() and vim.env.TERM == 'wezterm' then
     vim.loop.new_tty(1, false):write(
-      '\x1b]1337;SetUserVar=force_nav=' .. c.nav_motions[motion].var .. '\a')
+      '\x1b]1337;SetUserVar=force_nav=' .. nav.motions[motion].var .. '\a')
   end
 end
 
@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd('UILeave', {
 
 for _, motion in pairs { 'h', 'j', 'k', 'l' } do
   vim.keymap.set({ 'n', 'i', 'v' }, '<M-' .. motion .. '>', function()
-    nav(motion)
+    do_nav(motion)
   end)
   vim.keymap.set({ 'n', 'i', 'v' }, '<M-' .. motion:upper() .. '>', function()
     vim.cmd.wincmd { motion, count = 10 }

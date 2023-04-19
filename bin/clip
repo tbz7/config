@@ -1,7 +1,3 @@
 #!/usr/bin/env zsh
 
-if [[ $OSTYPE == darwin* ]]; then
-  pbcopy
-else
-  echo -n "\e]52;c;$(base64 | tr -d '\r\n')\e\\"
-fi
+echo -n "\e]52;c;$(base64 | tr -d '\r\n')\e\\"

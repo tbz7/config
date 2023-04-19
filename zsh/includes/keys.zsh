@@ -11,7 +11,7 @@ fi
 
 function .clear-screen-and-history {
   echoti clear
-  echoti E3
+  echo -n '\e[3J'
   zle redisplay
 }
 zle -N clear-screen-and-history .clear-screen-and-history
@@ -31,13 +31,13 @@ bindkey $terminfo[kdch1] delete-char
 bindkey $terminfo[kend] end-of-line
 bindkey $terminfo[khome] beginning-of-line
 bindkey '\e' vi-cmd-mode
+bindkey '\e^l' clear-screen-and-history
 bindkey '\eh' run-help
 bindkey '\et' transpose-words
 bindkey '^k' vi-kill-eol
 bindkey '^n' down-line-or-search
 bindkey '^p' up-line-or-search
 bindkey '^r' history-incremental-search-backward
-bindkey '^xl' clear-screen-and-history
 bindkey '^z' fg
 
 if [[ -f ~/.local/share/zsh/fzf/shell/key-bindings.zsh ]]; then

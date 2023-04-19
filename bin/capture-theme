@@ -1,0 +1,64 @@
+#!/usr/bin/env nvim --headless -c luafile% +qa! -c vim:ft=lua
+
+vim.cmd.colorscheme(vim.fn.argc() > 1 and vim.fn.argv(1) or vim.env.THEME)
+
+local mode1 = vim.fn.argc() > 2 and vim.fn.argv(2) or 'normal'
+local mode2 = vim.fn.argc() > 3 and vim.fn.argv(3) or 'insert'
+local err = vim.fn.argc() > 4 and vim.fn.argv(4) or 'ErrorMsg'
+
+local function hi(name, key)
+  local hl
+  if pcall(function() hl = vim.api.nvim_get_hl_by_name(name, true) end) then
+    return hl and hl[key] and string.format('#%06x', hl[key]) or '#'
+  end
+  return '#'
+end
+
+local function ansi(i)
+  return vim.g['terminal_color_' .. i] or '#'
+end
+
+print([[return {
+  fg             = ']] .. hi('Normal', 'foreground') .. [[',
+  bg             = ']] .. hi('Normal', 'background') .. [[',
+  black          = ']] .. ansi(0) .. [[',
+  red            = ']] .. ansi(1) .. [[',
+  green          = ']] .. ansi(2) .. [[',
+  yellow         = ']] .. ansi(3) .. [[',
+  blue           = ']] .. ansi(4) .. [[',
+  magenta        = ']] .. ansi(5) .. [[',
+  cyan           = ']] .. ansi(6) .. [[',
+  white          = ']] .. ansi(7) .. [[',
+  bright_black   = ']] .. ansi(8) .. [[',
+  bright_red     = ']] .. ansi(9) .. [[',
+  bright_green   = ']] .. ansi(10) .. [[',
+  bright_yellow  = ']] .. ansi(11) .. [[',
+  bright_blue    = ']] .. ansi(12) .. [[',
+  bright_magenta = ']] .. ansi(13) .. [[',
+  bright_cyan    = ']] .. ansi(14) .. [[',
+  bright_white   = ']] .. ansi(15) .. [[',
+  visual_fg      = ']] .. hi('Visual', 'foreground') .. [[',
+  visual_bg      = ']] .. hi('Visual', 'background') .. [[',
+  cursor_bg      = ']] .. hi('Cursor', 'background') .. [[',
+  afg            = ']] .. hi('lualine_a_' .. mode1, 'foreground') .. [[',
+  afg2           = ']] .. hi('lualine_a_' .. mode2, 'foreground') .. [[',
+  afgi           = ']] .. hi('lualine_a_inactive', 'foreground') .. [[',
+  abg            = ']] .. hi('lualine_a_' .. mode1, 'background') .. [[',
+  abg2           = ']] .. hi('lualine_a_' .. mode2, 'background') .. [[',
+  abgi           = ']] .. hi('lualine_a_inactive', 'background') .. [[',
+  bfg            = ']] .. hi('lualine_b_' .. mode1, 'foreground') .. [[',
+  bfg2           = ']] .. hi('lualine_b_' .. mode2, 'foreground') .. [[',
+  bfgi           = ']] .. hi('lualine_b_inactive', 'foreground') .. [[',
+  bbg            = ']] .. hi('lualine_b_' .. mode1, 'background') .. [[',
+  bbg2           = ']] .. hi('lualine_b_' .. mode2, 'background') .. [[',
+  bbgi           = ']] .. hi('lualine_b_inactive', 'background') .. [[',
+  cfg            = ']] .. hi('lualine_c_' .. mode1, 'foreground') .. [[',
+  cfg2           = ']] .. hi('lualine_c_' .. mode2, 'foreground') .. [[',
+  cfgi           = ']] .. hi('lualine_c_inactive', 'foreground') .. [[',
+  cbg            = ']] .. hi('lualine_c_' .. mode1, 'background') .. [[',
+  cbg2           = ']] .. hi('lualine_c_' .. mode2, 'background') .. [[',
+  cbgi           = ']] .. hi('lualine_c_inactive', 'background') .. [[',
+  efg            = ']] .. hi(err, 'foreground') .. [[',
+  ebg            = ']] .. hi(err, 'background') .. [[',
+}
+]])

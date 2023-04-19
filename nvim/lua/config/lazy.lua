@@ -18,7 +18,7 @@ require('lazy').setup({
       enabled = vim.fn.filereadable(nvim_local .. '/lua/local/plugins.lua') == 1,
     },
   },
-  install = { colorscheme = { vim.env.NVIM_COLORSCHEME, 'habamax' } },
+  install = { colorscheme = { vim.env.THEME, 'habamax' } },
   ui = {
     icons = vim.env.FONT_MODE == 'nerd' and {} or {
       cmd = '',

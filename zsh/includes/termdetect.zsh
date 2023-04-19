@@ -48,3 +48,7 @@ case $TERM in
         export FONT_MODE=nerd;;
     esac;;
 esac
+
+if [[ $COLORTERM != truecolor ]]; then
+  zmodload zsh/nearcolor
+fi

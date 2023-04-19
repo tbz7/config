@@ -1,22 +1,22 @@
-local c = require('common')
+local nav = require('common.nav')
 local wezterm = require('wezterm')
 
 local action = wezterm.action
 
 local M = {}
 
-local function nav(win, pane, motion, force)
+local function do_nav(win, pane, motion, force)
   if not force and pane:get_user_vars().nvim == 'true' then
     win:perform_action(action.SendKey { mods = 'ALT', key = motion }, pane)
   else
-    pane = win:active_tab():get_pane_direction(c.nav_motions[motion].dir)
+    pane = win:active_tab():get_pane_direction(nav.motions[motion].dir)
     if pane then
       pane:activate()
       if pane:get_user_vars().nvim == 'true' then
         win:perform_action(
           action.SendKey {
             mods = 'ALT',
-            key = c.nav_motions[motion].rev:upper(),
+            key = nav.motions[motion].rev:upper(),
           },
           pane)
       end
@@ -26,13 +26,13 @@ end
 
 local function nav_action(motion)
   return wezterm.action_callback(function(win, pane)
-    nav(win, pane, motion, false)
+    do_nav(win, pane, motion, false)
   end)
 end
 
 wezterm.on('user-var-changed', function(win, pane, name, value)
   if name == 'force_nav' then
-    nav(win, pane, value, true)
+    do_nav(win, pane, value, true)
   end
 end)
 

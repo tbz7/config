@@ -1,6 +1,6 @@
 local M = {}
 
-M.nav_motions = {
+M.motions = {
   h = { rev = 'l', var = 'aA==', dir = 'Left' },
   j = { rev = 'k', var = 'ag==', dir = 'Down' },
   k = { rev = 'j', var = 'aw==', dir = 'Up' },
