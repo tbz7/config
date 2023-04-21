@@ -1,2 +1,2 @@
 #compdef theme
-_arguments : -s "::theme:($ZDOTDIR/../common/themes/*(:t:r))"
+_arguments : -s "::theme:($ZDOTDIR:h/common/themes/*(:t:r))"

@@ -66,7 +66,7 @@ git config -f $git_identity user.email '\<\>'
 zsh -ilc 'nvim +qa 2> /dev/null'
 
 mkdir -p ~/.local/share/terminfo
-tic -xo $_/ $0:A:h/wezterm/wezterm.ti
+tic -xo $_/ =(curl https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo)
 
 if [[ $OSTYPE == darwin* ]]; then
   defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true

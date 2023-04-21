@@ -11,23 +11,6 @@ if [[ $FONT_MODE == ascii ]]; then
   return
 fi
 
-function .theme-preexec {
-  echo -n "\e]133;C\a"
-  case $2 in
-    (nvim|ssh|\$EDITOR)*) __palette_reset=1;;
-  esac
-}
-
-function .theme-precmd {
-  if [[ $__palette_reset == 1 ]]; then
-    theme $THEME
-    unset __palette_reset
-  fi
-}
-
-add-zsh-hook preexec .theme-preexec
-add-zsh-hook precmd .theme-precmd
-
 function theme {
   local save=false
   if [[ $1 == -s ]]; then
@@ -35,7 +18,7 @@ function theme {
     shift
   fi
 
-  if ! [[ -f $ZDOTDIR/../common/themes/$1.lua ]]; then
+  if ! [[ -f $ZDOTDIR:h/common/themes/$1.lua ]]; then
     echo "Invalid theme: $1" >&2
     1=${THEME:-iceberg}
   elif $save; then
@@ -44,7 +27,7 @@ function theme {
   export THEME=$1
 
   local -A palette=(
-      $(tail -n +2 $ZDOTDIR/../common/themes/$THEME.lua | tr -d "=',{}"))
+      $(tail -n +2 $ZDOTDIR:h/common/themes/$THEME.lua | tr -d "=',{}"))
 
   case $FONT_MODE in
     nerd|powerline) local -A sym=(    ✗ ✗ ↳ ↳ … …);;
@@ -93,10 +76,22 @@ function theme {
        '17'   'visual_bg'
        '19'   'visual_fg') {
     hex=$palette[$name]
-    echo -n "\e]$code;rgb:${hex:1:2}/${hex:3:2}/${hex:5:2}\a"
+    __theme_precmd_seqs+="\e]$code;rgb:${hex:1:2}/${hex:3:2}/${hex:5:2}\a"
   }
 
-  echo -n "\e]1337;SetUserVar=theme=$(echo -n $THEME | base64 | tr -d '\r\n')\a"
+  __theme_precmd_seqs+="\e]1337;SetUserVar=theme="
+  __theme_precmd_seqs+="$(echo -n $THEME | base64 | tr -d '\r\n')\a"
 }
 
 theme ${THEME:-${mapfile[$HOME/.local/state/zsh/theme]:-iceberg}}
+
+function .theme-preexec {
+  echo -n "\e]133;C\a"
+}
+
+function .theme-precmd {
+  echo -n $__theme_precmd_seqs
+}
+
+add-zsh-hook preexec .theme-preexec
+add-zsh-hook precmd .theme-precmd

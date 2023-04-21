@@ -8,6 +8,10 @@ local function setup_theme(config, theme)
   config.colors = {
     background = palette.bg,
     foreground = palette.fg,
+    cursor_bg = palette.fg,
+    cursor_fg = palette.bg,
+    selection_bg = palette.visual_bg,
+    selection_fg = palette.visual_fg,
     tab_bar = {
       active_tab = {
         fg_color = palette.bfg,

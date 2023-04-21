@@ -3,7 +3,7 @@ function .cwd-update {
   if [[ -x $wezterm ]]; then
     __cwd_osc7=$($wezterm set-working-directory)
   else
-    __cwd_osc7 "\e]7;file://$HOST${PWD// /%20}\e\\"
+    __cwd_osc7="\e]7;file://$HOST${PWD// /%20}\e\\"
   fi
 }
 
