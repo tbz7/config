@@ -18,14 +18,13 @@ fpath=({$ZDOTDIR_LOCAL,$ZDOTDIR}/{completion,functions}(N) $fpath)
 
 source $ZDOTDIR/includes/termdetect.zsh
 
-source $ZDOTDIR/includes/aliases.zsh
-source $ZDOTDIR/includes/command-opts.zsh
+source $ZDOTDIR/includes/commands.zsh
 source $ZDOTDIR/includes/cursor.zsh
-source $ZDOTDIR/includes/cwd.zsh
 source $ZDOTDIR/includes/history.zsh
 source $ZDOTDIR/includes/keys.zsh
 source $ZDOTDIR/includes/nav.zsh
 source $ZDOTDIR/includes/theme.zsh
+source $ZDOTDIR/includes/title-cwd.zsh
 
 source $ZDOTDIR/includes/completion.zsh
 source $ZDOTDIR/includes/syntax-highlighting.zsh

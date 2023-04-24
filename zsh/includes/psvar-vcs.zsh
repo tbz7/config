@@ -20,8 +20,8 @@ function .psvar-vcs-fetch {
   local sock='/tmp/prompt-vcs' cmd parts=()
   case $FONT_MODE in
     nerd|powerline) local -A sym=(git  hg ☿);;
-    unicode*)       local -A sym=(git ⇵ hg ☿);;
-    *)              local -A sym=();;
+    ascii)          local -A sym=();;
+    *)              local -A sym=(git ⇵ hg ☿);;
   esac
 
   psvar[$__psvar_vcs]=

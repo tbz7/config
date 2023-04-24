@@ -11,7 +11,6 @@ function M.setup(config)
       action = action.CompleteSelection('ClipboardAndPrimarySelection'),
     },
     {
-      mods = 'NONE',
       event = { Down = { streak = 4, button = 'Left' } },
       action = action.SelectTextAtMouseCursor('SemanticZone'),
     },

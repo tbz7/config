@@ -19,6 +19,7 @@ require('lazy').setup({
     },
   },
   install = { colorscheme = { vim.env.THEME, 'habamax' } },
+  lockfile = vim.fn.stdpath('data') .. '/lazy/lock.json',
   ui = {
     icons = vim.env.FONT_MODE == 'nerd' and {} or {
       cmd = '',

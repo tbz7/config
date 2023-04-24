@@ -32,8 +32,7 @@ function theme {
   case $FONT_MODE in
     nerd|powerline) local -A sym=(    ✗ ✗ ↳ ↳ … …);;
     unicode13)      local -A sym=( 🭮  🭬 ✗ ✗ ↳ ↳ … …);;
-    unicode)        local -A sym=( ''  '' ✗ ✗ ↳ ↳ … …);;
-    *)              local -A sym=( ''  '' ✗ x ↳ '>' … ...);;
+    *)              local -A sym=( ''  '' ✗ ✗ ↳ ↳ … …);;
   esac
 
   local a=$'\a' e=$'\e' x

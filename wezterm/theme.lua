@@ -10,6 +10,7 @@ local function setup_theme(config, theme)
     foreground = palette.fg,
     cursor_bg = palette.fg,
     cursor_fg = palette.bg,
+    cursor_border = palette.fg,
     selection_bg = palette.visual_bg,
     selection_fg = palette.visual_fg,
     tab_bar = {
@@ -21,7 +22,20 @@ local function setup_theme(config, theme)
         fg_color = palette.bfgi,
         bg_color = palette.bbgi,
       },
-    }
+      inactive_tab_hover = {
+        fg_color = palette.bfg,
+        bg_color = palette.bbg,
+      },
+      inactive_tab_edge = palette.bfgi,
+      new_tab = {
+        fg_color = palette.bfgi,
+        bg_color = palette.bbgi,
+      },
+      new_tab_hover = {
+        fg_color = palette.bfg,
+        bg_color = palette.bbg,
+      }
+    },
   }
 
   config.window_frame = {
@@ -36,7 +50,6 @@ end
 
 function M.setup(config)
   config.bold_brightens_ansi_colors = false
-  config.show_new_tab_button_in_tab_bar = false
   config.show_tab_index_in_tab_bar = false
   config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
 

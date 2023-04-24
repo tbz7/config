@@ -1,4 +1,4 @@
-Match exec "[[ $TERM == wezterm ]]"
+Match exec "[[ $TERM == wezterm ]]"                          # vim: ft=sshconfig
   SetEnv TERM=xterm-256color
 
 Host * 

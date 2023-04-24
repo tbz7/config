@@ -10,7 +10,7 @@ if [[ -n $terminfo[smkx] && -n $terminfo[rmkx] ]]; then
 fi
 
 function .clear-screen-and-history {
-  echoti clear
+  zle clear-screen
   echo -n '\e[3J'
   zle redisplay
 }
