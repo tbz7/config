@@ -1,5 +1,15 @@
+__title_prefix=" ${HOST/.*}  –  "
+
+if [[ $FONT_MODE == nerd ]]; then
+  case $OSTYPE-$CPUTYPE in
+    darwin*)      __title_prefix="󰀵 $__title_prefix";;
+    linux*-arm*)  __title_prefix=" $__title_prefix";;
+    linux*)       __title_prefix=" $__title_prefix";;
+  esac
+fi
+
 function .title-cwd-precmd {
-  echo -n "\e]2;zsh\e\\$__cwd_osc7"
+  echo -n "\e]2;${__title_prefix}zsh\e\\$__cwd_osc7"
 }
 
 function .title-cwd-preexec {
@@ -7,7 +17,7 @@ function .title-cwd-preexec {
   while [[ $#words > 0 && $words[1] == *?=* ]]; do
     shift words
   done
-  echo -n "\e]2;${words[1]##*/}\e\\"
+  echo -n "\e]2;$__title_prefix${words[1]##*/}\e\\"
 }
 
 function .title-cwd-chpwd {

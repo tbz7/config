@@ -18,4 +18,8 @@ require('keys').setup(config)
 require('mouse').setup(config)
 require('theme').setup(config)
 
+if next(wezterm.glob(wezterm.config_dir .. '/local.lua')) ~= nil then
+  require('local').setup(config)
+end
+
 return config

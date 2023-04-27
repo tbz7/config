@@ -14,6 +14,11 @@ function clip {
   echo -n "\e]52;c;$(base64 | tr -d '\r\n')\e\\"
 }
 
+# diff
+if [[ -n $commands[colordiff] ]]; then
+  alias diff='colordiff'
+fi
+
 # editor
 export EDITOR=${${commands[(i)nvim]:-${commands[(i)vim]:-nano}}}
 alias e="$EDITOR"

@@ -58,16 +58,15 @@ done
 
 touch ~/.hushlogin
 
-git_identity=~/.local/share/git/identity
-mkdir -p $git_identity:h
-git config -f $git_identity user.name $USER
-git config -f $git_identity user.email '\<\>'
+git config -f ~/.local/share/git/identity user.name $USER
+git config -f ~/.local/share/git/identity user.email '\<\>'
 
 zsh -ilc 'nvim +qa 2> /dev/null'
 
 mkdir -p ~/.local/share/terminfo
-tic -xo $_/ =(curl https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo)
+tic -xo $_/ =(curl -sS https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo)
 
 if [[ $OSTYPE == darwin* ]]; then
+  defaults write -g ApplePressAndHoldEnabled -bool false
   defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 fi

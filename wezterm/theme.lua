@@ -54,7 +54,7 @@ function M.setup(config)
   config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
 
   local theme = 'iceberg'
-  local f = io.open(os.getenv('HOME') .. '/.local/state/zsh/theme', 'rb')
+  local f = io.open(wezterm.home_dir .. '/.local/state/zsh/theme', 'rb')
   if f then
     theme = f:read('a')
     f:close()
