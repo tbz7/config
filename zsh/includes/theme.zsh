@@ -51,6 +51,8 @@ function theme {
   PS2="%{$e]133;P;k=s$a%}%8F$sym[↳]  %f%{$e]133;B$a%}"
   RPS2="%{$e]133;P;k=r$a%}%8F %1^%f"
 
+  __theme_precmd_seqs=
+
   local code name hex
   for code name (
       '4;0'   'black'

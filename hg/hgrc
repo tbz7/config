@@ -1,6 +1,7 @@
 [alias]
 cm = commit --name $1 -m $1
 reword = commit --amend 're:^$'
+d = extdiff --per-file --confirm -p $EDITOR -o '-dc cnoremap q qa'
 
 [defaults]
 evolve = --no-update
@@ -9,12 +10,14 @@ evolve = --no-update
 cmd.meld =
 
 [extensions]
+beautifygraph =
 extdiff =
 purge =
 
 [merge-tools]
-meld.diffargs = --label=$plabel1 $parent --label=$clabel $child
+vimdiff.args = -d $local $output $other -c 'cnoremap q qa|wincmd l'
+vimdiff.disabled = false
+vimdiff.executable = $EDITOR
 
 [ui]
-merge = meld
 origbackuppath = /tmp

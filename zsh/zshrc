@@ -1,7 +1,6 @@
 autoload -U add-zle-hook-widget
 autoload -U add-zsh-hook
 autoload -U run-help && unalias -m run-help
-autoload -U theme
 autoload -U zargs
 autoload -U zmv
 zmodload zsh/datetime

@@ -42,7 +42,7 @@ function .psvar-vcs-fetch {
     fi
   fi
 
-  if print -nu $__psvar_vcs_socket $(($1))$PWD:A; then
+  if print -nu $__psvar_vcs_socket $[$1]$PWD:A; then
     IFS+=: read -ru $__psvar_vcs_socket -d $'\0' -t 1 -A parts
     if [[ -n $parts ]]; then
       psvar[$__psvar_vcs]="${sym[$parts[1]]:-@} $parts[2]${parts[3]:+ *}"

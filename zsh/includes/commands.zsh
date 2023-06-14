@@ -20,7 +20,7 @@ if [[ -n $commands[colordiff] ]]; then
 fi
 
 # editor
-export EDITOR=${${commands[(i)nvim]:-${commands[(i)vim]:-nano}}}
+export EDITOR=${${commands[(i)nvim]:-${commands[(i)vim]:-vi}}}
 alias e="$EDITOR"
 
 # git
@@ -55,7 +55,8 @@ alias har='hg addremove'
 alias hc='hg checkout'
 alias hcm='hg cm'
 alias hcma='hg amend'
-alias hd='hg vimdiff'
+alias hd='hg d'
+alias hd1='hg d -r .~1'
 alias hds='hg diff --stat'
 alias hm='hg meld'
 alias hm1='hg meld -r .~1'
@@ -74,6 +75,9 @@ alias ls="${commands[gls]+g}ls --color=auto"
 if [[ -n $commands[nvim] ]]; then
   export MANPAGER='nvim +Man!'
 fi
+
+# ncdu
+alias ncdu='ncdu --color off'
 
 # rg
 alias rg='rg -S'

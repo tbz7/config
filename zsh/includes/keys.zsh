@@ -15,7 +15,7 @@ function .scroll-then-clear-screen {
   while read -rsk1 c && [[ $c != R ]]; do
     REPLY+=$c
   done
-  echoti indn $((${${${REPLY#*\[}%%;*}:-$LINES} - 1))
+  echoti indn $[${${${REPLY#*\[}%%;*}:-$LINES} - 1]
   echoti cup 0 0
   zle redisplay
 }
