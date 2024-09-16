@@ -1,0 +1,68 @@
+{
+  "Profiles": [
+    {
+      "Allow Change Cursor Blink": true,
+      "Background Color": {
+        "Alpha Component": 1,
+        "Blue Component": 0.12103271484375,
+        "Color Space": "sRGB",
+        "Green Component": 0.099111050367355347,
+        "Red Component": 0.0806884765625
+      },
+      "Blink Allowed": true,
+      "Brighten Bold Text": false,
+      "Columns": 104,
+      "Custom Directory": "Recycle",
+      "Draw Powerline Glyphs": true,
+      "Flashing Bell": true,
+      "Foreground Color": {
+        "Alpha Component": 1,
+        "Blue Component": 0.86198854446411133,
+        "Color Space": "sRGB",
+        "Green Component": 0.86199951171875,
+        "Red Component": 0.86197912693023682
+      },
+      "Guid": "A74C0A3F-72EE-4F98-8436-54ACF5867725",
+      "Keyboard Map": {
+        "0x2d-0x80000-0x1b": {
+          "Action": 28,
+          "Apply Mode": 0,
+          "Escaping": 2,
+          "Text": "A74C0A3F-72EE-4F98-8436-54ACF5867725",
+          "Version": 2
+        },
+        "0x5c-0x80000-0x2a": {
+          "Action": 29,
+          "Apply Mode": 0,
+          "Escaping": 2,
+          "Text": "A74C0A3F-72EE-4F98-8436-54ACF5867725",
+          "Version": 2
+        },
+        "0x69-0x40000-0x22": {
+          "Action": 10,
+          "Apply Mode": 0,
+          "Escaping": 2,
+          "Text": "[105;5u",
+          "Version": 2
+        }
+      },
+      "Name": "Custom",
+      "Non Ascii Font": "JetBrainsMonoNF-Regular 12",
+      "Normal Font": "Monaco 12",
+      "Option Key Sends": 2,
+      "Rows": 30,
+      "Scrollback Lines": 0,
+      "Scrollback With Status Bar": false,
+      "Scrollback in Alternate Screen": false,
+      "Show Mark Indicators": false,
+      "Smart Cursor Color": true,
+      "Title Components": 1,
+      "Unlimited Scrollback": true,
+      "Use Bright Bold": false,
+      "Use Non-ASCII Font": true,
+      "Use Separate Colors for Light and Dark Mode": false,
+      "Silence Bell": true,
+      "Visual Bell": false
+    }
+  ]
+}

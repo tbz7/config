@@ -1,0 +1,4 @@
+autoload -U zload
+
+zload $XDG_CONFIG_HOME/zsh/config/*.zsh
+zload $^config_dirs/zsh/zshrc.d/*.zsh(N)

@@ -1,0 +1,37 @@
+unlet! skip_defaults_vim
+source $VIMRUNTIME/defaults.vim
+
+set autoread
+set background=dark
+set clipboard=unnamed,unnamedplus
+set colorcolumn=80
+set expandtab
+set foldlevel=99
+set foldmethod=syntax
+set hidden
+set hlsearch
+set ignorecase
+set linebreak
+set nojoinspaces
+set noswapfile
+set number
+set scrolloff=2
+set shiftwidth=2
+set smartcase
+set smartindent
+set softtabstop=2
+set viminfofile=$XDG_STATE_HOME/viminfo
+
+colorscheme retrobox
+
+let mapleader = ' '
+
+nnoremap <silent> <CR> :noh<CR><CR>
+
+nnoremap <silent> <Leader>l :set invnumber<CR>
+nnoremap <silent> <Leader>w :set invwrap<CR>
+
+cnoremap w!! w !sudo tee > /dev/null %
+
+let &t_SI = "\e[5 q"
+let &t_EI = "\e[2 q"

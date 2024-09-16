@@ -1,0 +1,21 @@
+declare -g __zloaded=()
+
+function zload {
+  local spec
+  for spec in $@; do
+    if [[ -n $__zloaded[(r)${spec%%:*}] ]]; then
+      continue
+    fi
+    __zloaded+=(${spec%%:*})
+
+    case $spec in
+      lib/*) source $XDG_CONFIG_HOME/zsh/$spec.zsh;;
+      plugin/*) () { [[ -n $1 ]] && source $1 } ${^data_dirs}/zsh/plugins/${spec##*/}.zsh(N);;
+      zsh/*) zmodload $spec;;
+      /*) source $spec;;
+      *) autoload -U $spec;;
+    esac
+  done
+}
+
+zload $@

@@ -1,0 +1,25 @@
+if [[ -n $commands[apt-get] && $@[(I)--no-apt] == 0 ]]; then
+  sudo apt update
+  sudo apt upgrade
+  sudo apt autoremove
+fi
+
+if [[ -n $commands[brew] && $@[(I)--no-brew] == 0 ]]; then
+  brew update
+  brew upgrade
+  brew cleanup -s
+fi
+
+if [[ -n $commands[mas] && $@[(I)--no-mas] == 0 && -z $SSH_CONNECTION ]]; then
+  mas upgrade
+fi
+
+if [[ -n $commands[nix] && $@[(I)--no-nix] == 0 ]]; then
+  if [[ $@[(I)-f] != 0 ]]; then
+    nix registry pin nixpkgs && command nix flake update --flake $XDG_CONFIG_HOME/nix/home(:A)
+  fi
+  nix profile upgrade --all && nix profile wipe-history && nix store gc
+fi
+
+rehash
+compreinit

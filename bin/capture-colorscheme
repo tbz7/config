@@ -1,0 +1,59 @@
+#!/usr/bin/env nvim --headless -c luafile% +qa!
+
+local colorscheme = vim.fn.argc() > 1 and vim.fn.argv(1) or vim.env.COLORSCHEME
+vim.cmd.colorscheme(colorscheme)
+
+local mode1 = vim.fn.argc() > 2 and vim.fn.argv(2) or "normal"
+local mode2 = vim.fn.argc() > 3 and vim.fn.argv(3) or "insert"
+local err = vim.fn.argc() > 4 and vim.fn.argv(4) or "ErrorMsg"
+
+local function hi(name, key)
+  local hl
+  if pcall(function() hl = vim.api.nvim_get_hl_by_name(name, true) end) then
+    return hl and hl[key] and string.format("#%06x", hl[key]) or "#"
+  end
+  return "#"
+end
+
+local function ansi(i)
+  return vim.g["terminal_color_" .. i] or "#"
+end
+
+io.write(string.format("zstyle :colorscheme: ansi \\\
+    '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' \\\
+    '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s'\
+zstyle :colorscheme: fg '%s'\
+zstyle :colorscheme: bg '%s'\
+zstyle :colorscheme: cursor '%s'\
+zstyle :colorscheme: select_fg '%s'\
+zstyle :colorscheme: select_bg '%s'\
+\
+zstyle :zline:main colors \\\
+    afg='%s' abg='%s' bfg='%s' bbg='%s' \\\
+    cfg='%s' cbg='%s' efg='%s' ebg='%s'\
+zstyle :zline:vicmd colors \\\
+    afg='%s' abg='%s' bfg='%s' bbg='%s' \\\
+    cfg='%s' cbg='%s' efg='%s' ebg='%s'\
+zstyle :zline:inactive colors \\\
+    afg='%s' abg='%s' bfg='%s' bbg='%s' \\\
+    cfg='%s' cbg='%s' efg='%s' ebg='%s'\n",
+  ansi(0), ansi(1), ansi(2), ansi(3), ansi(4), ansi(5), ansi(6), ansi(7),
+  ansi(8), ansi(9), ansi(10), ansi(11), ansi(12), ansi(13), ansi(14), ansi(15),
+  hi("Normal", "foreground"),
+  hi("Normal", "background"),
+  hi("Cursor", "background"),
+  hi("Visual", "foreground"),
+  hi("Visual", "background"),
+  hi("lualine_a_" .. mode1, "foreground"), hi("lualine_a_" .. mode1, "background"),
+  hi("lualine_b_" .. mode1, "foreground"), hi("lualine_b_" .. mode1, "background"),
+  hi("lualine_c_" .. mode1, "foreground"), hi("lualine_c_" .. mode1, "background"),
+  hi(err, "foreground"), hi(err, "background"),
+  hi("lualine_a_" .. mode2, "foreground"), hi("lualine_a_" .. mode2, "background"),
+  hi("lualine_b_" .. mode2, "foreground"), hi("lualine_b_" .. mode2, "background"),
+  hi("lualine_c_" .. mode2, "foreground"), hi("lualine_c_" .. mode2, "background"),
+  hi(err, "foreground"), hi(err, "background"),
+  hi("lualine_a_inactive", "foreground"), hi("lualine_a_inactive", "background"),
+  hi("lualine_b_inactive", "foreground"), hi("lualine_b_inactive", "background"),
+  hi("lualine_c_inactive", "foreground"), hi("lualine_c_inactive", "background"),
+  hi("lualine_c_inactive", "foreground"), hi("lualine_c_inactive", "background")
+))

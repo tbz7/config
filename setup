@@ -1,0 +1,63 @@
+#!/usr/bin/env zsh
+
+zmodload zsh/zutil
+
+cd $0:A:h && zparseopts -D -F - u=uninstall -uninstall=uninstall z=zap -zap=zap || exit 1
+
+function delete {
+  for f; do
+    if [[ -e $f ]]; then
+      print -P "%1F\e[9m$f\e[0m%f"
+      rm -rf $f
+    fi
+  done
+}
+
+function symlink {
+  if [[ -n $uninstall ]]; then
+    delete $2
+  elif ! [[ -L $2 && $2:A == $1:A ]]; then
+    delete $2
+    mkdir -p $2:h && ln -sfv $1:A $2
+  fi
+}
+
+delete ~/.bash*(N) ~/.profile
+delete ~/.lesshst
+delete ~/.vim*(.N)
+delete ~/.zcomp*(N) ~/.zlogin ~/.zlogout ~/.zprofile ~/.zsh_history ~/.zshrc
+
+if [[ -z $zap ]]; then
+  mkdir -p ~/.cache/{nvim,zsh}
+  mkdir -p ~/.local/share/{nvim,zsh}
+  mkdir -p ~/.local/state/{less,nvim,python,sqlite3,zsh}
+else
+  delete ~/.cache/{nvim,zsh}
+  delete ~/.local/share/{nvim,zsh}
+  delete ~/.local/state/{nvim,ssh,zsh/^history(N)}
+fi
+
+symlink bin        ~/.local/bin
+symlink git        ~/.config/git
+symlink ideavim    ~/.config/ideavim
+symlink nix        ~/.config/nix
+symlink nvim       ~/.config/nvim
+symlink readline   ~/.config/readline
+symlink shpool     ~/.config/shpool
+symlink ssh/config ~/.ssh/config
+symlink tmux       ~/.config/tmux
+symlink vim        ~/.config/vim
+symlink zsh        ~/.config/zsh
+symlink zsh/zshenv ~/.zshenv
+symlink /          ~/.hushlogin
+
+if [[ -z $uninstall && $OSTYPE == darwin* ]]; then
+  symlink iterm2/nav.py ~/Library/Application\ Support/iTerm2/Scripts/AutoLaunch/nav.py
+  symlink iterm2/profiles.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/profiles.json
+
+  defaults import com.googlecode.iterm2 - < <(plutil -convert xml1 iterm2/settings.json -o -)
+
+  defaults write -g ApplePressAndHoldEnabled -bool false
+  defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+  defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+fi

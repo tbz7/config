@@ -1,0 +1,22 @@
+[diff]
+  guitool = meld
+  tool = vimdiff
+
+[difftool "vimdiff"]
+  cmd = $EDITOR -fdc 'cnoremap q qa|wincmd l|cd "$GIT_PREFIX"' "$LOCAL" "$REMOTE"
+
+[init]
+	defaultBranch = main
+
+[merge]
+  tool = meld
+
+[mergetool]
+  keepBackup = false
+
+[pull]
+  rebase = true
+
+[user]
+  name = tom
+  email = \\<\\>

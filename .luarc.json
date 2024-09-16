@@ -1,0 +1,10 @@
+{
+  "diagnostics": {
+    "globals": ["vim"]
+  },
+  "format": {
+    "defaultConfig": {
+      "quote_style": "double"
+    }
+  }
+}

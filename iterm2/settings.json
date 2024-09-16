@@ -1,0 +1,39 @@
+{
+  "AllowClipboardAccess": true,
+  "AlternateMouseScroll": true,
+  "ClickToSelectCommand": 0,
+  "Default Bookmark Guid": "A74C0A3F-72EE-4F98-8436-54ACF5867725",
+  "EnableAPIServer": true,
+  "GlobalKeyMap": {
+    "0x19-0x60000": {
+      "Action": 2,
+      "Apply Mode": 0,
+      "Escaping": 1,
+      "Text": "",
+      "Version": 2
+    },
+    "0x9-0x40000": {
+      "Action": 0,
+      "Apply Mode": 0,
+      "Escaping": 1,
+      "Text": "",
+      "Version": 2
+    }
+  },
+  "HideActivityIndicator": true,
+  "NoSyncDoNotWarnBeforeMultilinePaste": true,
+  "NoSyncDoNotWarnBeforeMultilinePaste_selection": 0,
+  "NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt": true,
+  "NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt_selection": 1,
+  "NoSyncTipsDisabled": true,
+  "NoSyncTurnOffFocusReportingOnHostChange": true,
+  "NoSyncVariablesToReport": "allow:profileName",
+  "PromptOnQuit": false,
+  "QuitWhenAllWindowsClosed": true,
+  "ShortLivedSessionDuration": 0.25,
+  "ShowNewOutputIndicator": false,
+  "Silence Bell": true,
+  "SplitPaneDimmingAmount": 0.1,
+  "SynchronizeQueryWithFindPasteboard": false,
+  "TabStyleWithAutomaticOption": 5
+}

@@ -1,0 +1,36 @@
+#!/usr/bin/env zsh
+
+set -e
+
+if [[ $OSTYPE == linux* ]]; then
+  sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-channel-add --no-modify-profile
+  exit
+fi
+
+if [[ $UID == 0 ]]; then
+  echo "error: should not be run with sudo"
+  exit 1
+fi
+
+VERSION=2.24.2
+SCRATCH=/tmp/nix-scratch
+
+function cleanup {
+  cd /tmp
+  rm -rf nix-$VERSION-aarch64-darwin nix-$VERSION-aarch64-darwin.tar.xz $SCRATCH
+}
+cleanup
+
+mkdir $SCRATCH
+cd /tmp
+curl -O https://releases.nixos.org/nix/nix-$VERSION/nix-$VERSION-aarch64-darwin.tar.xz
+tar -xf nix-$VERSION-aarch64-darwin.tar.xz
+cd nix-$VERSION-aarch64-darwin
+
+source create-darwin-volume.sh
+sudo chown -R $USER /nix
+
+sed -ie 's/INSTALL_MODE=daemon/INSTALL_MODE=no-daemon/g' install
+./install --no-channel-add --no-modify-profile
+
+cleanup

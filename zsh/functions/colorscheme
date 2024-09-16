@@ -1,0 +1,88 @@
+zload add-zsh-hook
+zload zsh/mapfile
+zload zsh/zutil
+
+function colorscheme {
+  local colorschemes=($XDG_CONFIG_HOME/zsh/colors/*.zsh(:t:r))
+  local save_path=$XDG_STATE_HOME/zsh/colorscheme
+
+  local cmd=() save
+  zparseopts -D - a=cmd -apply=cmd s=save -save=save l=cmd -list=cmd t=cmd -test=cmd
+
+  case ${cmd:---apply} in
+    -a|--apply)
+      if [[ $#@ != 1 || $1 == -* ]]; then
+        __colorscheme_usage
+        return 1
+      fi
+      __colorscheme_apply $1
+      if [[ -n $save ]]; then
+        mapfile[$save_path]=$COLORSCHEME
+      fi;;
+    -l|--list)
+      if [[ -n $@ ]]; then
+        __colorscheme_usage
+        return 1
+      fi
+      print -l $colorschemes;;
+    -t|--test)
+      if [[ $#@ -lt 1 || $#@ -gt 4 ]]; then
+        __colorscheme_usage
+        return 1
+      fi
+      __colorscheme_test $@;;
+  esac
+}
+
+function __colorscheme_usage {
+  print -lu2 "Usage: colorscheme [-s] default|next|${(j.|.)colorschemes}" \
+             '       colorscheme -l' \
+             '       colorscheme -t COLORSCHEME [mode1] [mode2] [err]'
+}
+
+function __colorscheme_apply {
+  case $1 in
+    default)
+      if [[ -f $save_path && -z $colorschemes[(r)$mapfile[$save_path]] ]]; then
+        print -u2 "Invalid colorscheme in $save_path: '$mapfile[$save_path]'"
+        return 1
+      fi
+      export COLORSCHEME=${mapfile[$save_path]:-iceberg};;
+    next)
+      export COLORSCHEME=$colorschemes[$colorschemes[(i)$COLORSCHEME]%$#colorschemes+1];;
+    *)
+      if [[ -z $colorschemes[(r)$1] ]]; then
+        print -u2 "Invalid colorscheme: '$1'"
+        return 1
+      fi
+      export COLORSCHEME=$1;;
+  esac
+  source $XDG_CONFIG_HOME/zsh/colors/$COLORSCHEME.zsh
+}
+
+function __colorscheme_test {
+  export COLORSCHEME=$1
+  eval "$(capture-colorscheme ${@:2})"
+}
+
+function __colorscheme_set_palette {
+  setopt localoptions extendedglob
+  local i n c ansi=()
+
+  zstyle -a :colorscheme: ansi ansi
+  for i in {1..16}; do
+    if [[ $ansi[$i] == \#[[:xdigit:]](#c6) ]]; then
+      echo -n "\e]4;$[i-1];rgb:${ansi[$i]:1:2}/${ansi[$i]:3:2}/${ansi[$i]:5:2}\a"
+    fi
+  done
+
+  for i n in 10 fg 11 bg 12 cursor 17 select_bg 19 select_fg; do
+    zstyle -s :colorscheme: $n c
+    if [[ $c == \#[[:xdigit:]](#c6) ]]; then
+      echo -n "\e]$i;rgb:${c:1:2}/${c:3:2}/${c:5:2}\a"
+    fi
+  done
+}
+add-zsh-hook precmd __colorscheme_set_palette
+
+colorscheme $@

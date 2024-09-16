@@ -1,0 +1,16 @@
+set formatoptions+=j
+set hlsearch incsearch
+set ideajoin
+set ignorecase smartcase
+set nojoinspaces
+
+set clipboard=unnamed,unnamedplus
+
+nnoremap Q @q
+
+nnoremap <silent> <CR> :noh<CR><CR>
+
+nnoremap <silent> <M-h> <C-w>h
+nnoremap <silent> <M-j> <C-w>j
+nnoremap <silent> <M-k> <C-w>k
+nnoremap <silent> <M-l> <C-w>l
