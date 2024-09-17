@@ -39,6 +39,7 @@ fi
 
 symlink bin        ~/.local/bin
 symlink git        ~/.config/git
+symlink helix      ~/.config/helix
 symlink ideavim    ~/.config/ideavim
 symlink nix        ~/.config/nix
 symlink nvim       ~/.config/nvim

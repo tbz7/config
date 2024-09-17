@@ -19,7 +19,7 @@ if [[ -n $commands[colordiff] ]]; then
 fi
 
 # editor
-export EDITOR=${${commands[(i)nvim]:-${commands[(i)vim]:-vi}}}
+export EDITOR=${commands[(i)hx]:-${${commands[(i)nvim]:-${commands[(i)vim]:-vi}}}}
 alias e=$EDITOR
 
 # git
