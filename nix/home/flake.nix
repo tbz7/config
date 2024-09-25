@@ -31,7 +31,6 @@
                   black
                   go
                   gopls
-                  nodePackages.prettier
                   pyright
                   python3
 
@@ -66,7 +65,6 @@
                   black
                   go
                   gopls
-                  nodePackages.prettier
                   pyright
                   python3
                 ];
@@ -79,6 +77,7 @@
           base = {
             packages = [
               alejandra
+              bash-language-server
               colordiff
               coreutils-full
               curlHTTP3
@@ -94,6 +93,7 @@
               gnused
               gnutar
               gzip
+              helix
               htop
               jq
               less
@@ -114,15 +114,20 @@
               pv
               ripgrep
               rsbkb
+              shellcheck
               sqlite-interactive
+              taplo
               tmux
               tree
+              typescript-language-server
               unar
               unzip
               util-linux
               vim
+              vscode-langservers-extracted
               watch
               wget
+              yaml-language-server
               zip
             ];
 

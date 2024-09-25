@@ -1,0 +1,42 @@
+[[language]]
+name = "lua"
+auto-format = true
+
+[[language]]
+name = "nix"
+formatter = { command = "alejandra" }
+auto-format = true
+
+[[language]]
+name = "python"
+formatter = { command = "black" }
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "toml"
+auto-format = true
+
+[[language]]
+name = "zsh"
+grammar = "bash"
+scope = "source.zsh"
+injection-regex = "zsh"
+file-types = [
+  "zlogin",
+  "zlogout",
+  "zprofile",
+  "zsh",
+  "zshenv",
+  "zshrc",
+  { glob = "zsh/completion/*" },
+  { glob = "zsh/functions/*" },
+  { glob = "zsh/site-functions/*" },
+  { glob = "zlogin" },
+  { glob = "zlogout" },
+  { glob = "zprofile" },
+  { glob = "zshenv" },
+  { glob = "zshrc" },
+]
+shebangs = ["zsh"]
+comment-token = "#"
+indent = { tab-width = 2, unit = "  " }

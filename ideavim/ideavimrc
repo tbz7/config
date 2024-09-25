@@ -4,7 +4,7 @@ set ideajoin
 set ignorecase smartcase
 set nojoinspaces
 
-set clipboard=unnamed,unnamedplus
+set clipboard=ideaput,unnamed,unnamedplus
 
 nnoremap Q @q
 

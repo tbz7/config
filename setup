@@ -52,6 +52,10 @@ symlink zsh        ~/.config/zsh
 symlink zsh/zshenv ~/.zshenv
 symlink /          ~/.hushlogin
 
+rm -f helix/runtime/queries/zsh
+mkdir -p helix/runtime/queries
+ln -sf $XDG_STATE_HOME/nix/profile/lib/runtime/queries/bash helix/runtime/queries/zsh
+
 if [[ -z $uninstall && $OSTYPE == darwin* ]]; then
   symlink iterm2/nav.py ~/Library/Application\ Support/iTerm2/Scripts/AutoLaunch/nav.py
   symlink iterm2/profiles.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/profiles.json
