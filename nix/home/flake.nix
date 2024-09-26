@@ -28,12 +28,6 @@
               packages =
                 base.packages
                 ++ [
-                  black
-                  go
-                  gopls
-                  pyright
-                  python3
-
                   exiftool
                   ffmpeg
                   ig'
@@ -54,22 +48,14 @@
                   rclone
                 ];
 
-              inherit (base) neovimPlugins zshPlugins;
+              inherit (base) neovimPlugins;
             };
 
           pi = with pkgs;
             buildHomeEnv {
-              packages =
-                base.packages
-                ++ [
-                  black
-                  go
-                  gopls
-                  pyright
-                  python3
-                ];
+              packages = base.packages ++ [dockerfile-language-server-nodejs];
 
-              inherit (base) neovimPlugins zshPlugins;
+              inherit (base) neovimPlugins;
             };
         };
 
@@ -78,6 +64,7 @@
             packages = [
               alejandra
               bash-language-server
+              black
               colordiff
               coreutils-full
               curlHTTP3
@@ -92,9 +79,12 @@
               gnugrep
               gnused
               gnutar
+              go
+              gopls
               gzip
               helix
               htop
+              iterm2-shell-integration
               jq
               less
               lua-language-server
@@ -112,6 +102,9 @@
               progress
               pstree
               pv
+              pyright
+              python3
+              python312Packages.python-lsp-server
               ripgrep
               rsbkb
               shellcheck
@@ -129,6 +122,7 @@
               wget
               yaml-language-server
               zip
+              zsh-syntax-highlighting
             ];
 
             neovimPlugins = with vimPlugins; {
@@ -161,24 +155,17 @@
                 nvim-web-devicons
               ];
             };
-
-            zshPlugins = [
-              iterm2-shell-integration
-              zsh-syntax-highlighting
-            ];
           };
 
           buildHomeEnv = {
             packages,
             neovimPlugins,
-            zshPlugins,
           }:
             with builtins;
               buildEnv {
                 name = "home";
                 paths =
                   packages
-                  ++ zshPlugins
                   ++ [
                     (linkFarm "neovim-plugins" (pkgs.lib.flatten (attrValues (mapAttrs (phase: p:
                       map (plugin: {

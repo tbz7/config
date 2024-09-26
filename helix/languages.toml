@@ -9,7 +9,7 @@ auto-format = true
 
 [[language]]
 name = "python"
-formatter = { command = "black" }
+formatter = { command = "black", args = ["--stdin-filename", "${INPUT}", "-"] }
 indent = { tab-width = 2, unit = "  " }
 
 [[language]]
