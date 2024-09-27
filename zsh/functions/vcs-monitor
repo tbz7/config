@@ -59,7 +59,11 @@ function __vcs_monitor_serve {
         local active=$request[1] key=${request:1} dir=$request[2] FONT_MODE=$request[3]
 
         if (( $+cache_values[$key] )); then
-          print -nu $fd $cache_values[$key]$'\0'
+          if ! zselect -wt 10 $fd || ! print -nu $fd $cache_values[$key]$'\0'; then
+            exec {fd}>&-
+            connections=(${connections:#$fd})
+            continue
+          fi
           if (( $EPOCHSECONDS - $cache_timestamps[$key] > 60 )); then
             active=1
           fi
@@ -74,7 +78,7 @@ function __vcs_monitor_serve {
           } 2>/dev/null)
           cache_values[$key]=$result
           cache_timestamps[$key]=$EPOCHSECONDS
-          if ! print -nu $fd $result$'\0'; then
+          if ! zselect -wt 10 $fd || ! print -nu $fd $result$'\0'; then
             exec {fd}>&-
             connections=(${connections:#$fd})
           fi
@@ -99,7 +103,8 @@ function __vcs_monitor_fetch {
     fi
   fi
 
-  if ! print -nu $__vcs_monitor_socket_fd ${1:-1}:$PWD:$FONT_MODE$'\0' 2>/dev/null; then
+  if ! zselect -wt 10 $__vcs_monitor_socket_fd \
+      || ! print -nu $__vcs_monitor_socket_fd ${1:-1}:$PWD:$FONT_MODE$'\0' 2>/dev/null; then
     exec {__vcs_monitor_socket_fd}>&-
     zle -F $__vcs_monitor_socket_fd
     __vcs_monitor_socket_fd=
