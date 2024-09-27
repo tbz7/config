@@ -1,19 +1,46 @@
+[language-server]
+ruff = { command = "ruff", args = ["server"] }
+scls = { command = "simple-completion-language-server" }
+
+[[language]]
+name = "bash"
+language-servers = ["bash-language-server", "scls"]
+
+[[language]]
+name = "json"
+language-servers = ["vscode-json-language-server", "scls"]
+
 [[language]]
 name = "lua"
+shebangs = ["lua", "luajit", "nvim"]
 auto-format = true
 
 [[language]]
 name = "nix"
+language-servers = ["scls"]
 formatter = { command = "alejandra" }
 auto-format = true
 
 [[language]]
 name = "python"
-formatter = { command = "black", args = ["--stdin-filename", "${INPUT}", "-"] }
+language-servers = [
+  { name = "ruff", except-features = [
+    "hover",
+  ] },
+  "pylsp",
+  "scls",
+]
 indent = { tab-width = 2, unit = "  " }
 
 [[language]]
+name = "txt"
+scope = "source.txt"
+file-types = ["txt"]
+language-servers = ["scls"]
+
+[[language]]
 name = "toml"
+language-servers = ["taplo", "scls"]
 auto-format = true
 
 [[language]]
@@ -39,4 +66,5 @@ file-types = [
 ]
 shebangs = ["zsh"]
 comment-token = "#"
+language-servers = ["scls"]
 indent = { tab-width = 2, unit = "  " }

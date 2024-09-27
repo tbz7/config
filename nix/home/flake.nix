@@ -2,8 +2,17 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    ig.url = "git+https://koholi.net/git/tom/ig";
-    ig.inputs.nixpkgs.follows = "nixpkgs";
+    ig = {
+      url = "git+https://koholi.net/git/tom/ig";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    scls = {
+      url = "github:estin/simple-completion-language-server";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
+    };
   };
 
   outputs = {
@@ -11,6 +20,7 @@
     nixpkgs,
     flake-utils,
     ig,
+    scls,
   }:
     flake-utils.lib.eachDefaultSystem (
       system: let
@@ -19,6 +29,7 @@
           overlays = [(import ./overlay.nix)];
         };
         ig' = ig.packages.${system}.default;
+        scls' = scls.defaultPackage.${system};
       in rec {
         packages = with lib; {
           default = buildHomeEnv base;
@@ -28,6 +39,9 @@
               packages =
                 base.packages
                 ++ [
+                  go
+                  gopls
+
                   exiftool
                   ffmpeg
                   ig'
@@ -53,7 +67,13 @@
 
           pi = with pkgs;
             buildHomeEnv {
-              packages = base.packages ++ [dockerfile-language-server-nodejs];
+              packages =
+                base.packages
+                ++ [
+                  dockerfile-language-server-nodejs
+                  go
+                  gopls
+                ];
 
               inherit (base) neovimPlugins;
             };
@@ -64,7 +84,6 @@
             packages = [
               alejandra
               bash-language-server
-              black
               colordiff
               coreutils-full
               curlHTTP3
@@ -79,8 +98,6 @@
               gnugrep
               gnused
               gnutar
-              go
-              gopls
               gzip
               helix
               htop
@@ -102,11 +119,12 @@
               progress
               pstree
               pv
-              pyright
               python3
               python312Packages.python-lsp-server
               ripgrep
               rsbkb
+              ruff
+              scls'
               shellcheck
               sqlite-interactive
               taplo
