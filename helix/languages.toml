@@ -1,3 +1,9 @@
+use-grammars = { only = ["zsh"] }
+
+[[grammar]]
+name = "zsh"
+source = { git = "https://github.com/tree-sitter-grammars/tree-sitter-zsh", rev = "47e2caf4ed7e466f51cfbb13a860a192c300506f" }
+
 [language-server]
 ruff = { command = "ruff", args = ["server"] }
 scls = { command = "simple-completion-language-server" }
@@ -45,7 +51,7 @@ auto-format = true
 
 [[language]]
 name = "zsh"
-grammar = "bash"
+grammar = "zsh"
 scope = "source.zsh"
 injection-regex = "zsh"
 file-types = [
