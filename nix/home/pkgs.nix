@@ -1,5 +1,5 @@
-final: prev:
-with final; {
+{pkgs}:
+with pkgs; {
   ciso = stdenv.mkDerivation rec {
     pname = "ciso";
     version = "v1.0.2";
@@ -30,8 +30,8 @@ with final; {
 
   coreutils-full = buildEnv {
     name = "coreutils-full";
-    paths = [prev.coreutils-full hello];
-    postBuild = "rm $out/bin/id $out/bin/hello";
+    paths = [coreutils-full hello];
+    postBuild = ''rm $out/bin/{id,hello,uptime}'';
   };
 
   iterm2-shell-integration = stdenv.mkDerivation {
@@ -78,21 +78,17 @@ with final; {
     installPhase = "install -Dm755 supmover $out/bin/supmover";
   };
 
-  vimPlugins =
-    prev.vimPlugins
-    // {
-      vim-gotham = vimUtils.buildVimPlugin {
-        pname = "vim-gotham";
-        version = "2023-01-19";
-        src = fetchFromGitHub {
-          owner = "whatyouhide";
-          repo = "vim-gotham";
-          rev = "747ee82960b4a7ed75ac133bb84bfc02b5ac9e27";
-          sha256 = "6xJPZNbgFdyt+J14+8sn5UVAozEsLvpyOftdqldWuaA=";
-        };
-        meta.homepage = "https://github.com/whatyouhide/vim-gotham";
-      };
+  vim-gotham = vimUtils.buildVimPlugin {
+    pname = "vim-gotham";
+    version = "2023-01-19";
+    src = fetchFromGitHub {
+      owner = "whatyouhide";
+      repo = "vim-gotham";
+      rev = "747ee82960b4a7ed75ac133bb84bfc02b5ac9e27";
+      sha256 = "6xJPZNbgFdyt+J14+8sn5UVAozEsLvpyOftdqldWuaA=";
     };
+    meta.homepage = "https://github.com/whatyouhide/vim-gotham";
+  };
 
   wudcompress = stdenv.mkDerivation rec {
     pname = "wudcompress";
@@ -108,7 +104,7 @@ with final; {
     installPhase = "install -Dm755 a.out $out/bin/wudcompress";
   };
 
-  zsh-syntax-highlighting = prev.zsh-syntax-highlighting.overrideAttrs (_: {
+  zsh-syntax-highlighting = zsh-syntax-highlighting.overrideAttrs (_: {
     postInstall = ''
       mkdir -p $out/share/zsh
       mv $out/share/zsh-syntax-highlighting $out/share/zsh/plugins

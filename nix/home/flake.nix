@@ -17,19 +17,19 @@
 
   outputs = {
     self,
-    nixpkgs,
     flake-utils,
-    ig,
-    scls,
-  }:
+    ...
+  } @ inputs:
     flake-utils.lib.eachDefaultSystem (
       system: let
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = [(import ./overlay.nix)];
-        };
-        ig' = ig.packages.${system}.default;
-        scls' = scls.defaultPackage.${system};
+        nixpkgs = import inputs.nixpkgs {inherit system;};
+        pkgs =
+          nixpkgs
+          // (nixpkgs.callPackage ./pkgs.nix {})
+          // (with inputs; {
+            ig = ig.packages.${system}.default;
+            scls = scls.defaultPackage.${system};
+          });
       in rec {
         packages = with lib; {
           default = buildHomeEnv base;
@@ -44,7 +44,7 @@
 
                   exiftool
                   ffmpeg
-                  ig'
+                  ig
                   imagemagick
                   mediainfo
                   oxipng
@@ -113,6 +113,7 @@
               ncurses
               neovim
               netcat
+              nil
               nix-tree
               p7zip
               perl
@@ -124,7 +125,7 @@
               ripgrep
               rsbkb
               ruff
-              scls'
+              scls
               shellcheck
               sqlite-interactive
               taplo

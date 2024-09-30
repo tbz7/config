@@ -71,6 +71,9 @@ alias npi='np install'
 alias npl='np list'
 alias npr='np remove'
 alias npu='np upgrade --all'
+if [[ $OSTYPE == darwin* ]]; then
+  ulimit -n 10240
+fi
 
 # ncdu
 alias ncdu='ncdu --color off'
