@@ -1,7 +1,12 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    helix = {
+      url = "github:helix-editor/helix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
+    };
     ig = {
       url = "git+https://koholi.net/git/tom/ig";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,6 +30,7 @@
   outputs = {
     self,
     flake-utils,
+    nixpkgs,
     ...
   } @ inputs:
     flake-utils.lib.eachDefaultSystem (system: let
@@ -33,6 +39,7 @@
         nixpkgs
         // (nixpkgs.callPackage ./pkgs.nix {})
         // (with inputs; {
+          helix = helix.packages.${system}.default;
           ig = ig.packages.${system}.default;
           neovim-env = neovim-env.packages.${system}.default;
           scls = scls.defaultPackage.${system};

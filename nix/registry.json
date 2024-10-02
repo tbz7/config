@@ -6,10 +6,10 @@
         "type": "indirect"
       },
       "to": {
-        "lastModified": 1727335715,
+        "lastModified": 1727811607,
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "28b5b8af91ffd2623e995e20aee56510db49001a",
+        "rev": "1839883cd0068572aed75fb9442b508bbd9ef09c",
         "type": "github"
       }
     }

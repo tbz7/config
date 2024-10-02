@@ -51,8 +51,10 @@ symlink zsh        ~/.config/zsh
 symlink zsh/zshenv ~/.zshenv
 symlink /          ~/.hushlogin
 
+mkdir -p helix/runtime/queries
+ln -sfT ~/.local/state/nix/profile/share/nix/inputs/helix/runtime/queries/bash $_/zsh
+
 if [[ -n $commands[hx] ]]; then
-  symlink ~/.local/state/nix/profile/lib/runtime/queries/bash helix/runtime/queries/zsh
   hx --grammar fetch && hx --grammar build
 fi
 
