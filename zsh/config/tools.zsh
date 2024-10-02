@@ -60,9 +60,8 @@ export LS_COLORS=${(j.:.)=:-'di=34' 'ow=34;40' 'ln=35' {or,mi}'=7;31'
 alias ls='ls --color=auto'
 
 # man
-if [[ $EDITOR == nvim ]]; then
-  export MANPAGER='nvim +Man!'
-fi
+export MANPAGER='less --use-color -Dd+b -DP+WK'
+export MANROFFOPT='-c'
 
 # nix
 alias nix='noglob nix'

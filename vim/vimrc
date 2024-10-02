@@ -22,7 +22,9 @@ set smartindent
 set softtabstop=2
 set viminfofile=$XDG_STATE_HOME/viminfo
 
-colorscheme retrobox
+colorscheme slate
+silent! colorscheme habamax
+silent! colorscheme retrobox
 
 let mapleader = ' '
 

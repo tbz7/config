@@ -42,22 +42,21 @@ symlink git        ~/.config/git
 symlink helix      ~/.config/helix
 symlink ideavim    ~/.config/ideavim
 symlink nix        ~/.config/nix
-symlink nvim       ~/.config/nvim
 symlink readline   ~/.config/readline
 symlink shpool     ~/.config/shpool
 symlink ssh/config ~/.ssh/config
 symlink tmux       ~/.config/tmux
-symlink vim        ~/.config/vim
+symlink vim/vimrc  ~/.vimrc
 symlink zsh        ~/.config/zsh
 symlink zsh/zshenv ~/.zshenv
 symlink /          ~/.hushlogin
 
 if [[ -n $commands[hx] ]]; then
+  symlink ~/.local/state/nix/profile/lib/runtime/queries/bash helix/runtime/queries/zsh
   hx --grammar fetch && hx --grammar build
 fi
 
 if [[ -z $uninstall && $OSTYPE == darwin* ]]; then
-  symlink iterm2/nav.py ~/Library/Application\ Support/iTerm2/Scripts/AutoLaunch/nav.py
   symlink iterm2/profiles.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/profiles.json
 
   defaults import com.googlecode.iterm2 - < <(plutil -convert xml1 iterm2/settings.json -o -)

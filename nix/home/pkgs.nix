@@ -78,18 +78,6 @@ with pkgs; {
     installPhase = "install -Dm755 supmover $out/bin/supmover";
   };
 
-  vim-gotham = vimUtils.buildVimPlugin {
-    pname = "vim-gotham";
-    version = "2023-01-19";
-    src = fetchFromGitHub {
-      owner = "whatyouhide";
-      repo = "vim-gotham";
-      rev = "747ee82960b4a7ed75ac133bb84bfc02b5ac9e27";
-      sha256 = "6xJPZNbgFdyt+J14+8sn5UVAozEsLvpyOftdqldWuaA=";
-    };
-    meta.homepage = "https://github.com/whatyouhide/vim-gotham";
-  };
-
   wudcompress = stdenv.mkDerivation rec {
     pname = "wudcompress";
     version = src.rev;

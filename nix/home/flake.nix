@@ -6,6 +6,13 @@
       url = "git+https://koholi.net/git/tom/ig";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    neovim-env = {
+      url = "git+https://koholi.net/git/tom/neovim-env";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
+    };
     scls = {
       url = "github:estin/simple-completion-language-server";
       inputs = {
@@ -28,6 +35,7 @@
           // (nixpkgs.callPackage ./pkgs.nix {})
           // (with inputs; {
             ig = ig.packages.${system}.default;
+            neovim-env = neovim-env.packages.${system}.default;
             scls = scls.defaultPackage.${system};
           });
       in rec {
@@ -61,8 +69,6 @@
                   mas
                   rclone
                 ];
-
-              inherit (base) neovimPlugins;
             };
 
           pi = with pkgs;
@@ -74,8 +80,6 @@
                   go
                   gopls
                 ];
-
-              inherit (base) neovimPlugins;
             };
         };
 
@@ -111,7 +115,7 @@
               mtr
               ncdu
               ncurses
-              neovim
+              neovim-env
               netcat
               nil
               nix-tree
@@ -135,7 +139,6 @@
               unar
               unzip
               util-linux
-              vim
               vscode-langservers-extracted
               watch
               wget
@@ -143,65 +146,20 @@
               zip
               zsh-syntax-highlighting
             ];
-
-            neovimPlugins = with vimPlugins; {
-              start = [
-                cmp-buffer
-                cmp-nvim-lsp
-                cmp-nvim-lua
-                cmp-path
-                cmp-vsnip
-                conform-nvim
-                fidget-nvim
-                gruvbox-nvim
-                iceberg-vim
-                lspkind-nvim
-                lualine-nvim
-                nord-vim
-                nvim-cmp
-                nvim-lspconfig
-                nvim-tree-lua
-                oil-nvim
-                plenary-nvim
-                telescope-nvim
-                tokyonight-nvim
-                vim-caddyfile
-                vim-gotham
-                vim-suda
-                vim-vsnip
-              ];
-              opt = [
-                nvim-web-devicons
-              ];
-            };
           };
 
-          buildHomeEnv = {
-            packages,
-            neovimPlugins,
-          }:
+          buildHomeEnv = {packages}:
             with builtins;
               buildEnv {
                 name = "home";
                 paths =
                   packages
                   ++ [
-                    (linkFarm "neovim-plugins" (pkgs.lib.flatten (attrValues (mapAttrs (phase: p:
-                      map (plugin: {
-                        name = "share/nvim/site/pack/default/${phase}/${plugin.pname}";
-                        path = plugin;
+                    (linkFarm "home-inputs" (pkgs.lib.mapAttrsToList (name: input: {
+                        name = "share/nix/inputs/${name}";
+                        path = input;
                       })
-                      p)
-                    neovimPlugins))))
-                    (
-                      linkFarm "home-inputs" (
-                        pkgs.lib.mapAttrsToList (name: input: {
-                          name = "share/nix/inputs/${name}";
-                          path = input;
-                        })
-                        self.inputs
-                      )
-                    )
+                      self.inputs))
                   ];
               };
         };

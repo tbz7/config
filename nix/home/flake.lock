@@ -60,6 +60,30 @@
         "type": "github"
       }
     },
+    "neovim-env": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "wrapper-manager": "wrapper-manager"
+      },
+      "locked": {
+        "lastModified": 1727835931,
+        "narHash": "sha256-kcgktYFjElQ5rKPT1T4S7Jd4SJZon0SZlzPzbCR1mBs=",
+        "ref": "refs/heads/main",
+        "rev": "621ed4627dc780a590b912835f969f0b4ccff66e",
+        "revCount": 1,
+        "type": "git",
+        "url": "https://koholi.net/git/tom/neovim-env"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://koholi.net/git/tom/neovim-env"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1727335715,
@@ -80,6 +104,7 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "ig": "ig",
+        "neovim-env": "neovim-env",
         "nixpkgs": "nixpkgs",
         "scls": "scls"
       }
@@ -120,6 +145,27 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "wrapper-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "neovim-env",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1724503599,
+        "narHash": "sha256-WVhNq3QjnG/2mi772CkTxZCQcomKV5S03TbQKwe1Kj4=",
+        "owner": "viperML",
+        "repo": "wrapper-manager",
+        "rev": "c936f9203217e654a6074d206505c16432edbc70",
+        "type": "github"
+      },
+      "original": {
+        "owner": "viperML",
+        "repo": "wrapper-manager",
         "type": "github"
       }
     }
