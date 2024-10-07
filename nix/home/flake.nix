@@ -27,65 +27,22 @@
     flake-utils,
     ...
   } @ inputs:
-    flake-utils.lib.eachDefaultSystem (
-      system: let
-        nixpkgs = import inputs.nixpkgs {inherit system;};
-        pkgs =
-          nixpkgs
-          // (nixpkgs.callPackage ./pkgs.nix {})
-          // (with inputs; {
-            ig = ig.packages.${system}.default;
-            neovim-env = neovim-env.packages.${system}.default;
-            scls = scls.defaultPackage.${system};
-          });
-      in rec {
-        packages = with lib; {
-          default = buildHomeEnv base;
-
-          mbp = with pkgs;
-            buildHomeEnv {
-              packages =
-                base.packages
-                ++ [
-                  go
-                  gopls
-
-                  exiftool
-                  ffmpeg
-                  ig
-                  imagemagick
-                  mediainfo
-                  oxipng
-                  supmover
-
-                  bchunk
-                  ciso
-                  # mame-tools
-                  ps3dec
-                  wudcompress
-
-                  android-tools
-                  cliclick
-                  mas
-                  rclone
-                ];
-            };
-
-          pi = with pkgs;
-            buildHomeEnv {
-              packages =
-                base.packages
-                ++ [
-                  dockerfile-language-server-nodejs
-                  go
-                  gopls
-                ];
-            };
-        };
-
-        lib = with pkgs; {
-          base = {
-            packages = [
+    flake-utils.lib.eachDefaultSystem (system: let
+      nixpkgs = import inputs.nixpkgs {inherit system;};
+      pkgs =
+        nixpkgs
+        // (nixpkgs.callPackage ./pkgs.nix {})
+        // (with inputs; {
+          ig = ig.packages.${system}.default;
+          neovim-env = neovim-env.packages.${system}.default;
+          scls = scls.defaultPackage.${system};
+        });
+    in
+      with pkgs; {
+        packages = rec {
+          default = buildEnv {
+            name = "home-default";
+            paths = [
               alejandra
               bash-language-server
               colordiff
@@ -145,24 +102,54 @@
               yaml-language-server
               zip
               zsh-syntax-highlighting
+
+              (linkFarm "home-inputs" (lib.mapAttrsToList (name: input: {
+                  name = "share/nix/inputs/${name}";
+                  path = input;
+                })
+                self.inputs))
             ];
           };
 
-          buildHomeEnv = {packages}:
-            with builtins;
-              buildEnv {
-                name = "home";
-                paths =
-                  packages
-                  ++ [
-                    (linkFarm "home-inputs" (pkgs.lib.mapAttrsToList (name: input: {
-                        name = "share/nix/inputs/${name}";
-                        path = input;
-                      })
-                      self.inputs))
-                  ];
-              };
+          mbp = buildEnv {
+            name = "home-mbp";
+            paths = [
+              default
+
+              go
+              gopls
+
+              exiftool
+              ffmpeg
+              ig
+              imagemagick
+              mediainfo
+              oxipng
+              supmover
+
+              bchunk
+              ciso
+              # mame-tools
+              ps3dec
+              wudcompress
+
+              android-tools
+              cliclick
+              mas
+              rclone
+            ];
+          };
+
+          bee = buildEnv {
+            name = "home-bee";
+            paths = [
+              default
+
+              dockerfile-language-server-nodejs
+              go
+              gopls
+            ];
+          };
         };
-      }
-    );
+      });
 }
