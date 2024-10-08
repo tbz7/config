@@ -3,18 +3,14 @@ Host kohogit
   Port 2222
   ProxyJump ssh.koholi.net
 
-Host mbp pi ssh.koholi.net
+Host bee mbp pi ssh.koholi.net
   User tom
-
-Host mbp
-  ProxyJump ssh.koholi.net
 
 Host probe*
   User pi
 
 Host *
-  ControlMaster auto
-  ControlPath /tmp/ssh-%C
-  ControlPersist 10m
   SendEnv COLORTERM FONT_MODE TERM_PROGRAM
   StrictHostKeyChecking no
+
+Include ssh_config.d/*

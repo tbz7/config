@@ -94,8 +94,9 @@ unalias -m run-help
 zload run-help
 
 # ssh
-alias mbp='ssh mbp'
-alias pi='ssh ssh.koholi.net'
+alias bee='ssh ssh.koholi.net'
+alias mbp='ssh -o ProxyJump=ssh.koholi.net mbp'
+alias pi='ssh -o ProxyJump=ssh.koholi.net pi'
 
 # sqlite3
 export SQLITE_HISTORY=$XDG_STATE_HOME/sqlite3/history
