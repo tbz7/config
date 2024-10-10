@@ -1,5 +1,7 @@
-unlet! skip_defaults_vim
-source $VIMRUNTIME/defaults.vim
+if !has("ide")
+  unlet! skip_defaults_vim
+  source $VIMRUNTIME/defaults.vim
+endif
 
 set autoread
 set background=dark
@@ -22,18 +24,106 @@ set smartindent
 set softtabstop=2
 set viminfofile=$XDG_STATE_HOME/viminfo
 
-colorscheme slate
-silent! colorscheme habamax
-silent! colorscheme retrobox
+if has("ide")
+  set clipboard+=ideaput
+  set ideajoin
+  set idearefactormode=keep
+else
+  colorscheme slate
+  silent! colorscheme habamax
+  silent! colorscheme retrobox
+
+  let &t_SI = "\e[5 q"
+  let &t_EI = "\e[2 q"
+endif
 
 let mapleader = ' '
 
-nnoremap <silent> <CR> :noh<CR><CR>
+nnoremap <silent> <Enter> :noh<Enter><Enter>
 
-nnoremap <silent> <Leader>l :set invnumber<CR>
-nnoremap <silent> <Leader>w :set invwrap<CR>
+noremap <M-h> <C-w>h
+noremap <M-j> <C-w>j
+noremap <M-k> <C-w>k
+noremap <M-l> <C-w>l
+noremap <M-\> <C-w>v
+noremap <M--> <C-w>s
 
-cnoremap w!! w !sudo tee > /dev/null %
+" TODO known differences in [aBbdEeFfiOoQqRSsTtuVWwyY`~<>|!$]
+nnoremap c vc
+nnoremap <M-c> v"_c
+vnoremap <M-c> "_c
+ noremap d x
+ noremap <M-d> "_x
+vnoremap O <Esc>O
+vnoremap o <Esc>o
+nnoremap U <C-r>
+vnoremap U <Esc><C-r>
+vnoremap u <Esc>u
+nnoremap X V
+vnoremap X k
+nnoremap x V
+vnoremap x j
+nnoremap y vy
+ noremap ! :r!
+nnoremap % ggVG
+vnoremap % <Esc>ggVG
+nnoremap < v<
+nnoremap > v>
+nnoremap ` vu
+vnoremap ` u
+nnoremap <M-`> vU
+vnoremap <M-`> U
+vnoremap \| :!
+nnoremap ~ v~
+ noremap <C-s> m'
+if has("ide")
+   map C <Action>(EditorCloneCaretBelow)
+  nmap = V<Action>(ReformatCode)
+  vmap =  <Action>(ReformatCode)
+  nmap <C-c> v<Action>(CommentByLineComment)<Esc>
+  vmap <C-c>  <Action>  (CommentByLineComment)<Esc>
+endif
 
-let &t_SI = "\e[5 q"
-let &t_EI = "\e[2 q"
+" TODO known differences in [gfDtcbamkj.w]
+noremap ge G
+noremap gh 0
+noremap gl $
+noremap gs ^
+if has("ide")
+  nmap gd <Action>(GotoDeclaration)
+  nmap gi <Action>(GotoImplementation)
+  nmap gn <Action>(NextTab)
+  nmap gp <Action>(PreviousTab)
+  nmap gr <Action>(ShowUsages)
+  nmap gy <Action>(GotoTypeDeclaration)
+endif
+
+" TODO match mode (m)
+ noremap m v
+ noremap mm %
+
+" TODO view modes (z, Z)
+
+noremap <Leader>! :w !sudo tee > /dev/null %<Enter>
+noremap <silent> <Leader>l :set invnumber<Enter>
+noremap <silent> <Leader>w :set invwrap<Enter>
+
+if has("ide")
+  " TODO known differences in [FbgdD'GyYpPR/hcC] and <M-c>
+  nmap <Leader>? <Action>(GotoAction)
+  nmap <Leader>S <Action>(GotoSymbol)
+  nmap <Leader>a <Action>(ShowIntentionActions)
+  nmap <Leader>f <Action>(GotoFile)
+  nmap <Leader>j <Action>(RecentLocations)
+  nmap <Leader>k <Action>(QuickJavaDoc)
+  nmap <Leader>r <Action>(Refactorings.QuickListPopupAction)
+  nmap <Leader>s <Action>(FileStructurePopup)
+
+  " TODO known differences in [DGtaceTp ]
+  nmap [d <Action>(GotoPreviousError)
+  nmap ]d <Action>(GotoNextError)
+  nmap [f <Action>(MethodUp)
+  nmap ]f <Action>(MethodDown)
+  nmap [g <Action>(VcsShowPrevChangeMarker)
+  nmap ]g <Action>(VcsShowNextChangeMarker)
+endif
