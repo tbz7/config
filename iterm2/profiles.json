@@ -44,6 +44,34 @@
           "Escaping": 2,
           "Text": "[105;5u",
           "Version": 2
+        },
+        "0x68-0x80000-0x4": {
+          "Version": 2,
+          "Apply Mode": 0,
+          "Action": 18,
+          "Text": "",
+          "Escaping": 2
+        },
+        "0x6a-0x80000-0x26": {
+          "Version": 2,
+          "Apply Mode": 0,
+          "Action": 21,
+          "Text": "",
+          "Escaping": 2
+        },
+        "0x6c-0x80000-0x25": {
+          "Version": 2,
+          "Apply Mode": 0,
+          "Action": 19,
+          "Text": "",
+          "Escaping": 2
+        },
+        "0x6b-0x80000-0x28": {
+          "Version": 2,
+          "Apply Mode": 0,
+          "Action": 20,
+          "Text": "",
+          "Escaping": 2
         }
       },
       "Name": "Custom",

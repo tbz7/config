@@ -9,7 +9,10 @@
     };
     ig = {
       url = "git+https://koholi.net/git/tom/ig";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
     };
     neovim-env = {
       url = "git+https://koholi.net/git/tom/neovim-env";
@@ -108,7 +111,9 @@
               wget
               yaml-language-server
               zip
-              zsh-syntax-highlighting
+              (zsh-syntax-highlighting.overrideAttrs (_: prev: {
+                installFlags = prev.installFlags ++ ["SHARE_DIR=$(out)/share/zsh/plugins"];
+              }))
 
               (linkFarm "home-inputs" (lib.mapAttrsToList (name: input: {
                   name = "share/nix/inputs/${name}";
@@ -116,6 +121,7 @@
                 })
                 self.inputs))
             ];
+            postBuild = ''rm $out/bin/{id,stty,uptime}'';
           };
 
           mbp = buildEnv {
@@ -156,6 +162,7 @@
               dockerfile-language-server-nodejs
               go
               gopls
+              ig
               jujutsu
               shpool
             ];

@@ -25,6 +25,8 @@ export -TU XDG_DATA_DIRS data_dirs=(
 
 if [[ $OSTYPE == darwin* ]]; then
   eval $(/usr/libexec/path_helper)
+elif [[ $OSTYPE == linux* && -f /usr/lib/locale/locale-archive ]]; then
+  export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
 fi
 
 typeset -U path=(

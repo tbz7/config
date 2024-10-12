@@ -65,16 +65,19 @@
     },
     "ig": {
       "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1725844566,
-        "narHash": "sha256-ahMDcgYGEJOgIohpskNsQiNQyygM393CQhpCO9RqiH0=",
+        "lastModified": 1728426713,
+        "narHash": "sha256-lUzyCBKOGP1xJ3smxhQNVVW8tjhnpC8a/+RtLq3X+aY=",
         "ref": "refs/heads/main",
-        "rev": "b53cd5c8f84ea312161bf982a5868a82c08ac882",
-        "revCount": 1,
+        "rev": "dee54aced4ee884760efa2251e3bdde7e94edcab",
+        "revCount": 2,
         "type": "git",
         "url": "https://koholi.net/git/tom/ig"
       },

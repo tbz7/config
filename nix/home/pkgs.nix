@@ -28,12 +28,6 @@ with pkgs; {
     installPhase = "install -Dm755 cliclick $out/bin/cliclick";
   };
 
-  coreutils-full = buildEnv {
-    name = "coreutils-full";
-    paths = [coreutils-full hello];
-    postBuild = ''rm $out/bin/{id,hello,uptime}'';
-  };
-
   iterm2-shell-integration = stdenv.mkDerivation {
     pname = "iterm2-shell-integration";
     version = "2024-08-10";
@@ -49,8 +43,6 @@ with pkgs; {
       install -Dm755 $src/utilities/* -t $out/bin
     '';
   };
-
-  nerdfonts-jetbrains-mono = nerdfonts.override {fonts = ["JetBrainsMono"];};
 
   ps3dec = stdenv.mkDerivation {
     pname = "ps3dec";
@@ -91,11 +83,4 @@ with pkgs; {
     buildPhase = "$CC WudCompress/*.cpp";
     installPhase = "install -Dm755 a.out $out/bin/wudcompress";
   };
-
-  zsh-syntax-highlighting = zsh-syntax-highlighting.overrideAttrs (_: {
-    postInstall = ''
-      mkdir -p $out/share/zsh
-      mv $out/share/zsh-syntax-highlighting $out/share/zsh/plugins
-    '';
-  });
 }
