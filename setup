@@ -40,6 +40,7 @@ fi
 symlink bin        ~/.local/bin
 symlink git        ~/.config/git
 symlink helix      ~/.config/helix
+symlink jj         ~/.config/jj
 symlink nix        ~/.config/nix
 symlink readline   ~/.config/readline
 symlink shpool     ~/.config/shpool

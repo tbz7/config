@@ -49,6 +49,9 @@ export FZF_DEFAULT_OPTS="-m --reverse --cycle --height=40% \
 export GREP_COLORS='cx=90:mt=31:fn=32:ln=34:bn=33:se='
 alias grep='grep -E --color=auto'
 
+# jj
+export JJ_CONFIG=$XDG_CONFIG_HOME/jj/config.toml
+
 # less
 export LESS='-iR --follow-name'
 export LESSHISTFILE=$XDG_STATE_HOME/less/history

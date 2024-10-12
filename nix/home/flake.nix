@@ -55,6 +55,7 @@
               colordiff
               coreutils-full
               curlHTTP3
+              diffedit3
               diffutils
               dig
               dos2unix
@@ -124,6 +125,7 @@
 
               go
               gopls
+              jujutsu
 
               exiftool
               ffmpeg
@@ -154,6 +156,7 @@
               dockerfile-language-server-nodejs
               go
               gopls
+              jujutsu
               shpool
             ];
           };

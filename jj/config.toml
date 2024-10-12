@@ -1,0 +1,22 @@
+[aliases]
+d = ["diff"]
+e = ["edit"]
+l = ["log"]
+n = ["next"]
+p = ["prev"]
+s = ["status"]
+
+[colors]
+"diff removed token" = { underline = false }
+"diff added token" = { underline = false }
+
+[ui]
+diff-editor = ":builtin"
+default-command = "log"
+
+[ui.movement]
+edit = true
+
+[user]
+name = "tom"
+email = "tom@"
