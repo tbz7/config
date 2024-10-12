@@ -97,7 +97,6 @@
               shellcheck
               sqlite-interactive
               taplo
-              tmux
               tree
               typescript-language-server
               unar
@@ -155,6 +154,7 @@
               dockerfile-language-server-nodejs
               go
               gopls
+              shpool
             ];
           };
         };

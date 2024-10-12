@@ -1,13 +1,28 @@
-Host kohogit
-  Hostname localhost
-  Port 2222
-  ProxyJump ssh.koholi.net
-
 Host bee mbp pi ssh.koholi.net
   User tom
 
 Host probe*
   User pi
+
+Match localnetwork 10.0.0.0/24 localuser tom
+  Tag home
+
+Match host bee-* tagged home
+  Hostname bee
+Match host bee,bee-* !tagged home
+  Hostname ssh.koholi.net
+
+Match host mbp,pi !tagged home
+  ProxyJump ssh.koholi.net
+
+Host kohogit
+  ProxyJump bee
+  Hostname localhost
+  Port 2222
+
+Host *-shpool*
+  RemoteCommand shpool attach -f %k
+  RequestTTY yes
 
 Host *
   SendEnv COLORTERM FONT_MODE TERM_PROGRAM

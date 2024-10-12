@@ -1,1 +1,2 @@
+forward_env = ["COLORTERM", "FONT_MODE", "TERM_PROGRAM"]
 prompt_prefix = ""

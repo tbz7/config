@@ -44,7 +44,6 @@ symlink nix        ~/.config/nix
 symlink readline   ~/.config/readline
 symlink shpool     ~/.config/shpool
 symlink ssh/config ~/.ssh/config
-symlink tmux       ~/.config/tmux
 symlink vim/vimrc  ~/.config/ideavim/ideavimrc
 symlink vim/vimrc  ~/.vimrc
 symlink zsh        ~/.config/zsh

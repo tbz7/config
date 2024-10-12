@@ -7,7 +7,7 @@ zload vcs-monitor
 
 colorscheme default
 
-prompt zline -- -a '%m' -b '%33<…<%~' -e '%(?..✗)' -z '%1v'
+prompt zline -- -a "${${SHPOOL_SESSION_NAME/-shpool}:-%m}" -b '%33<…<%~' -e '%(?..✗)' -z '%1v'
 vcs-monitor --psvar 1
 
 function __title-set {
