@@ -39,6 +39,7 @@ with pkgs; {
     };
     phases = ["installPhase" "fixupPhase"];
     installPhase = ''
+      install -Dm644 $src/shell_integration/fish $out/share/fish/vendor_conf.d/iterm2-shell-integration.fish
       install -Dm644 $src/shell_integration/zsh $out/share/zsh/plugins/iterm2-shell-integration.zsh
       install -Dm755 $src/utilities/* -t $out/bin
     '';

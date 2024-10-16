@@ -64,6 +64,7 @@
               dos2unix
               file
               findutils
+              fish
               fzf
               gawk
               git

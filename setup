@@ -38,6 +38,7 @@ else
 fi
 
 symlink bin        ~/.local/bin
+symlink fish       ~/.config/fish
 symlink git        ~/.config/git
 symlink helix      ~/.config/helix
 symlink jj         ~/.config/jj

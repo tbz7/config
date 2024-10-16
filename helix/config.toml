@@ -1,4 +1,4 @@
-theme = "tokyonight_moon"
+theme = "tokyonight_moon" # TODO tie to shell theme
 
 [editor]
 color-modes = true

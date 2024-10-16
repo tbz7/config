@@ -13,6 +13,10 @@ name = "bash"
 language-servers = ["bash-language-server", "scls"]
 
 [[language]]
+name = "fish"
+language-servers = ["scls"]
+
+[[language]]
 name = "json"
 language-servers = ["vscode-json-language-server", "scls"]
 
@@ -36,6 +40,7 @@ language-servers = [
   "pylsp",
   "scls",
 ]
+# TODO either remove or apply to ruff
 indent = { tab-width = 2, unit = "  " }
 
 [[language]]
@@ -74,3 +79,5 @@ shebangs = ["zsh"]
 comment-token = "#"
 language-servers = ["scls"]
 indent = { tab-width = 2, unit = "  " }
+
+# TODO more matchers like gitconfig
