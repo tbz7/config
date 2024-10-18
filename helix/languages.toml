@@ -1,9 +1,3 @@
-use-grammars = { only = ["zsh"] }
-
-[[grammar]]
-name = "zsh"
-source = { git = "https://github.com/tree-sitter-grammars/tree-sitter-zsh", rev = "47e2caf4ed7e466f51cfbb13a860a192c300506f" }
-
 [language-server]
 ruff = { command = "ruff", args = ["server"] }
 scls = { command = "simple-completion-language-server" }
@@ -53,31 +47,5 @@ language-servers = ["scls"]
 name = "toml"
 language-servers = ["taplo", "scls"]
 auto-format = true
-
-[[language]]
-name = "zsh"
-grammar = "zsh"
-scope = "source.zsh"
-injection-regex = "zsh"
-file-types = [
-  "zlogin",
-  "zlogout",
-  "zprofile",
-  "zsh",
-  "zshenv",
-  "zshrc",
-  { glob = "zsh/completion/*" },
-  { glob = "zsh/functions/*" },
-  { glob = "zsh/site-functions/*" },
-  { glob = "zlogin" },
-  { glob = "zlogout" },
-  { glob = "zprofile" },
-  { glob = "zshenv" },
-  { glob = "zshrc" },
-]
-shebangs = ["zsh"]
-comment-token = "#"
-language-servers = ["scls"]
-indent = { tab-width = 2, unit = "  " }
 
 # TODO more matchers like gitconfig

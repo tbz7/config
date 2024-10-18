@@ -1,2 +1,0 @@
-#compdef file fzf ncdu
-_gnu_generic $@

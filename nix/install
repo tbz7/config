@@ -1,24 +1,24 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env fish
 
 set -e
 
-if [[ $OSTYPE == linux* ]]; then
-  sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-channel-add --no-modify-profile
-  exit
-fi
+if [ (uname) = Linux ]
+    sh (curl -L https://nixos.org/nix/install | psub) --no-daemon --no-channel-add --no-modify-profile
+    exit
+end
 
-if [[ $UID == 0 ]]; then
-  echo "error: should not be run with sudo"
-  exit 1
-fi
+if [ $EUID = 0 ]
+    echo "error: should not be run with sudo"
+    exit 1
+end
 
 VERSION=2.24.2
 SCRATCH=/tmp/nix-scratch
 
-function cleanup {
-  cd /tmp
-  rm -rf nix-$VERSION-aarch64-darwin nix-$VERSION-aarch64-darwin.tar.xz $SCRATCH
-}
+function cleanup
+    cd /tmp
+    rm -rf nix-$VERSION-aarch64-darwin nix-$VERSION-aarch64-darwin.tar.xz $SCRATCH
+end
 cleanup
 
 mkdir $SCRATCH

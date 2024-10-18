@@ -1,3 +1,0 @@
-#!/usr/bin/env zsh
-
-for f; ffmpeg -i $f -c:a libopus -ab 128k $f:r.opus

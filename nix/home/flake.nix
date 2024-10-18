@@ -28,6 +28,14 @@
         flake-utils.follows = "flake-utils";
       };
     };
+    zsh-env = {
+      url = "git+https://koholi.net/git/tom/zsh-env";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+        wrapper-manager.follows = "neovim-env/wrapper-manager";
+      };
+    };
   };
 
   outputs = {
@@ -46,6 +54,7 @@
           ig = ig.packages.${system}.default;
           neovim-env = neovim-env.packages.${system}.default;
           scls = scls.defaultPackage.${system};
+          zsh-env = zsh-env.packages.${system}.default;
         });
     in
       with pkgs; {
@@ -112,9 +121,7 @@
               wget
               yaml-language-server
               zip
-              (zsh-syntax-highlighting.overrideAttrs (_: prev: {
-                installFlags = prev.installFlags ++ ["SHARE_DIR=$(out)/share/zsh/plugins"];
-              }))
+              zsh-env
 
               (linkFarm "home-inputs" (lib.mapAttrsToList (name: input: {
                   name = "share/nix/inputs/${name}";

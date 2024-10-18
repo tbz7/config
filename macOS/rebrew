@@ -1,9 +1,9 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env fish
 
-if [[ -z $commands[brew] ]]; then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  eval $(/opt/homebrew/bin/brew shellenv)
-fi
+if ! command -sq brew
+    /bin/bash (curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | psub)
+    eval (/opt/homebrew/bin/brew shellenv)
+end
 
-brew bundle install --no-lock --file=$0:h/Brewfile
+brew bundle install --no-lock --file=(dirname (status -f))/Brewfile
 brew cleanup -s

@@ -153,7 +153,8 @@
         "ig": "ig",
         "neovim-env": "neovim-env",
         "nixpkgs": "nixpkgs",
-        "scls": "scls"
+        "scls": "scls",
+        "zsh-env": "zsh-env"
       }
     },
     "rust-overlay": {
@@ -239,6 +240,33 @@
         "owner": "viperML",
         "repo": "wrapper-manager",
         "type": "github"
+      }
+    },
+    "zsh-env": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "wrapper-manager": [
+          "neovim-env",
+          "wrapper-manager"
+        ]
+      },
+      "locked": {
+        "lastModified": 1729216557,
+        "narHash": "sha256-tlzptTt0sKIXLKvHKPkWJ9HK9/D5nx0HnGiMT/F/8vI=",
+        "ref": "refs/heads/main",
+        "rev": "d435b579e0caa50d155da629bc08424a9f3e3ce7",
+        "revCount": 1,
+        "type": "git",
+        "url": "https://koholi.net/git/tom/zsh-env"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://koholi.net/git/tom/zsh-env"
       }
     }
   },

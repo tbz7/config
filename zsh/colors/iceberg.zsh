@@ -1,1 +1,0 @@
-iceberg-dark.zsh

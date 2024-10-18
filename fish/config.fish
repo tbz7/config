@@ -79,3 +79,6 @@ abbr npi nix profile install
 abbr npl nix profile list
 abbr npr nix profile remove
 abbr npu nix profile upgrade --all
+
+abbr -p anywhere --set-cursor w '(which %)'
+abbr -p anywhere --set-cursor W '(realpath (which %))'

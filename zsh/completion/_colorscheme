@@ -1,2 +1,0 @@
-#compdef colorscheme
-_arguments : -s "::colorscheme:(default next $(colorscheme -l))"
