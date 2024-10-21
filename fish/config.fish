@@ -2,8 +2,6 @@ fish_add_path -g ~/.local/bin /opt/homebrew/bin
 
 status is-interactive || return
 
-set -U fish_color_comment brblack
-
 set fish_greeting
 set fish_vi_force_cursor 1
 set fish_cursor_default block
