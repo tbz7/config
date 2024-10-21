@@ -16,7 +16,6 @@ end
 for d in fish git helix jj nix readline shpool
     symlink $d ~/.config/$d
 end
-symlink bin ~/.local/bin
 symlink ssh/config ~/.ssh/config
 symlink vim/vimrc ~/.config/ideavim/ideavimrc
 symlink vim/vimrc ~/.vimrc

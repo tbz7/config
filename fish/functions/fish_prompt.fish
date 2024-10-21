@@ -1,14 +1,17 @@
 function fish_prompt
-    set -g fish_prompt_mode $fish_bind_mode
-    switch $fish_prompt_mode
-        case replace_one
-            set fish_prompt_mode replace
-        case default
-            set fish_prompt_mode normal
-    end
     if [ "$fish_prompt_inactive" = true ]
-        set fish_prompt_mode inactive
+        set -g fish_prompt_mode inactive
         set -e fish_prompt_inactive
+    else
+        switch $fish_bind_mode
+            case default
+                set -g fish_prompt_mode normal
+            case paste # pass
+            case replace_one
+                set -g fish_prompt_mode replace
+            case '*'
+                set -g fish_prompt_mode $fish_bind_mode
+        end
     end
 
     set -l arrow 
@@ -29,37 +32,25 @@ function fish_prompt
         (set_color $normal)
 end
 
-function fish_prompt_inactive
+function fish_prompt_cancel
+    set -g fish_prompt_inactive true
+    commandline -f repaint cancel-commandline repaint
+end
+
+function fish_prompt_execute
     set -g fish_prompt_inactive true
     commandline -f repaint execute
 end
 
-function fish_prompt_inactive2 --on-event fish_focus_out
-    set -g fish_prompt_inactive true
-    commandline -f repaint
-end
-
-function fish_prompt_active --on-event fish_focus_in
+function fish_prompt_focus_in --on-event fish_focus_in
     set -e fish_prompt_inactive
     commandline -f repaint
 end
 
-function fish_enable_focus --on-event fish_prompt
-    echo -en '\e[?1004h'
-end
-
-function fish_disable_focus --on-event fish_preexec
-    echo -en '\e[?1004l'
-end
-
-function fish_prompt_cancel
+function fish_prompt_focus_out --on-event fish_focus_out
     set -g fish_prompt_inactive true
-    commandline -f repaint cancel-commandline repaint-mode
+    commandline -f repaint
 end
 
-bind -M insert \r fish_prompt_inactive
 bind -M insert \cc fish_prompt_cancel
-
-bind \e\[O 'emit fish_focus_out'
-bind -M insert \e\[O 'emit fish_focus_out'
-bind -M visual \e\[O 'emit fish_focus_out'
+bind -M insert \r fish_prompt_execute

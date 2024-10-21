@@ -1,9 +1,11 @@
 function prompt_pwd --description 'short CWD for the prompt'
-    set -l np (string escape --style=regex -- "$NIX_PROFILES[1]")
-    set -l tmp (string replace -r '^'"$np"'($|/)' '~nix$1' $PWD)
+    set -l replacements $prompt_pwd_extra_replacements $NIX_PROFILES[1]:'~nix' $HOME:'~'
 
-    set -l realhome (string escape --style=regex -- ~)
-    set -l tmp (string replace -r '^'"$realhome"'($|/)' '~$1' $tmp)
+    set -l wd $PWD
+    for r in $replacements
+        set -l esc (string split : $r)
+        set wd (string replace -r "^$esc[1](\$|/)" $esc[2]'$1' "$wd")
+    end
 
-    string shorten -lc … -m 30 $tmp
+    string shorten -lc … -m 30 $wd
 end

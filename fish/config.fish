@@ -1,19 +1,15 @@
-fish_add_path -g ~/.local/bin /opt/homebrew/bin
-
 status is-interactive || return
 
-set fish_greeting
-set fish_vi_force_cursor 1
-set fish_cursor_default block
-set fish_cursor_external line
-set fish_cursor_insert line blink
-set fish_cursor_replace_one underscore blink
-set fish_cursor_replace underscore
-set fish_cursor_visual underscore
+set -g fish_cursor_default block
+set -g fish_cursor_external line
+set -g fish_cursor_insert line blink
+set -g fish_cursor_replace_one underscore blink
+set -g fish_cursor_replace underscore
+set -g fish_cursor_visual underscore
+set -g fish_vi_force_cursor 1
+set -g iterm2_hostname $hostname
 
-function tokyonight --on-event fish_prompt
-    source $__fish_config_dir/themes/tokyonight-moon.fish
-end
+source $__fish_config_dir/themes/tokyonight-moon.fish
 
 fish_vi_key_bindings
 
@@ -49,6 +45,7 @@ set -gx MANROFFOPT -c
 set -gx PYTHON_HISTORY ~/.local/state/python/history
 set -gx SQLITE_HISTORY ~/.local/state/sqlite3/history
 
+alias clip fish_clipboard_copy
 alias grep 'grep -E --color=auto'
 alias ncdu 'ncdu --color off'
 alias rg 'rg -S'
@@ -68,7 +65,7 @@ abbr gcm git commit -m
 abbr gcma git commit --amend --no-edit
 abbr gd git difftool
 abbr gds git diff --stat
-abbr gl git log --graph --format="'%Cred%h%Creset %s %Cgreen(%cr) %Cblue<%an>'"
+abbr gl git l
 abbr gm git difftool -g --dir-diff
 abbr gr git rebase
 

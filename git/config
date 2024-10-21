@@ -1,3 +1,6 @@
+[alias]
+  l = log --graph --format='%Cred%h%Creset %s %Cgreen(%cr) %Cblue<%an>'
+
 [diff]
   guitool = meld
   tool = vimdiff

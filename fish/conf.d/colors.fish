@@ -1,4 +1,4 @@
-function fish_set_term_colors --on-event fish_prompt --on-variable fish_color_prompt_error
+function fish_set_term_colors --on-event fish_prompt
     set -q term_color_palette || return
     set -l i 0
     for c in $term_color_palette
