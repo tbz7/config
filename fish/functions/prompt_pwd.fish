@@ -4,7 +4,9 @@ function prompt_pwd --description 'short CWD for the prompt'
     set -l wd $PWD
     for r in $replacements
         set -l esc (string split : $r)
-        set wd (string replace -r "^$esc[1](\$|/)" $esc[2]'$1' "$wd")
+        if [ -n "$esc[1]" ]
+            set wd (string replace -r "^$esc[1](\$|/)" $esc[2]'$1' "$wd")
+        end
     end
 
     string shorten -lc … -m 30 $wd

@@ -46,7 +46,6 @@ set -gx PYTHON_HISTORY ~/.local/state/python/history
 set -gx SQLITE_HISTORY ~/.local/state/sqlite3/history
 
 alias clip fish_clipboard_copy
-alias grep 'grep -E --color=auto'
 alias ncdu 'ncdu --color off'
 alias rg 'rg -S'
 alias sqlite3 "LS_COLORS= command sqlite3 --cmd '.mode qbox'"

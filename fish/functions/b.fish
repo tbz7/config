@@ -1,7 +1,7 @@
 function b
-    set -l host bee
     if [ -n "$argv[1]" ]
-        set host bee-shpool-$argv[1]
+        ssh bee-shpool-$argv[1]
+    else
+        ssh bee
     end
-    ssh $host
 end
