@@ -9,7 +9,7 @@ set -g fish_cursor_visual underscore
 set -g fish_vi_force_cursor 1
 set -g iterm2_hostname $hostname
 
-source $__fish_config_dir/themes/tokyonight-moon.fish
+source $__fish_config_dir/themes/tokyonight.fish
 
 fish_vi_key_bindings
 
