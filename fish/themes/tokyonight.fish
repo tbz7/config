@@ -25,6 +25,7 @@ set -l red_bright ff8d94
 set -l terminal_black 444a73
 set -l yellow ffc777
 set -l yellow_bright ffd8ab
+set -gx HELIX_THEME tokyonight_moon
 
 switch "$argv[1]"
     case day
@@ -54,6 +55,7 @@ switch "$argv[1]"
         set terminal_black a1a6c5
         set yellow 8c6c3e
         set yellow_bright a27629
+        set HELIX_THEME tokyonight_day
     case night
         set bg 1a1b26
         set bg_statusline 16161e
@@ -81,6 +83,7 @@ switch "$argv[1]"
         set terminal_black 414868
         set yellow e0af68
         set yellow_bright faba4a
+        set HELIX_THEME tokyonight
     case storm
         set bg 24283b
         set bg_statusline 1f2335
@@ -108,6 +111,7 @@ switch "$argv[1]"
         set terminal_black 414868
         set yellow e0af68
         set yellow_bright faba4a
+        set HELIX_THEME tokyonight_storm
 end
 
 set -g term_color_palette \

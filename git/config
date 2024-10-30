@@ -6,10 +6,10 @@
   tool = vimdiff
 
 [difftool "vimdiff"]
-  cmd = nvim -fdc 'cnoremap q qa|wincmd l|cd "$GIT_PREFIX"' "$LOCAL" "$REMOTE"
+  cmd = vim -fdc 'cnoremap q qa|wincmd l|cd "$GIT_PREFIX"' "$LOCAL" "$REMOTE"
 
 [init]
-	defaultBranch = main
+  defaultBranch = main
 
 [merge]
   tool = meld

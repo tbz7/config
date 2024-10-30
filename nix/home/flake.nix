@@ -1,7 +1,7 @@
 {
   inputs = {
     helix = {
-      url = "github:helix-editor/helix";
+      url = "github:mattwparas/helix?ref=steel-event-system";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-utils.follows = "flake-utils";
@@ -14,13 +14,6 @@
         flake-utils.follows = "flake-utils";
       };
     };
-    neovim-env = {
-      url = "git+https://koholi.net/git/tom/neovim-env";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
-      };
-    };
     scls = {
       url = "github:estin/simple-completion-language-server";
       inputs = {
@@ -28,13 +21,16 @@
         flake-utils.follows = "flake-utils";
       };
     };
-    zsh-env = {
-      url = "git+https://koholi.net/git/tom/zsh-env";
+    vcs-status = {
+      url = "git+https://koholi.net/git/tom/vcs-status";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-utils.follows = "flake-utils";
-        wrapper-manager.follows = "neovim-env/wrapper-manager";
       };
+    };
+    wrapper-manager = {
+      url = "github:viperML/wrapper-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -42,6 +38,7 @@
     self,
     flake-utils,
     nixpkgs,
+    wrapper-manager,
     ...
   } @ inputs:
     flake-utils.lib.eachDefaultSystem (system: let
@@ -50,11 +47,20 @@
         nixpkgs
         // (nixpkgs.callPackage ./pkgs.nix {})
         // (with inputs; {
-          helix = helix.packages.${system}.default;
+          helix = wrapper-manager.lib.build {
+            inherit pkgs;
+            modules = [
+              {
+                wrappers.helix = {
+                  basePackage = helix.packages.${system}.default;
+                  env.STEEL_HOME.value = helix.packages.${system}.helix-cogs;
+                };
+              }
+            ];
+          };
           ig = ig.packages.${system}.default;
-          neovim-env = neovim-env.packages.${system}.default;
           scls = scls.defaultPackage.${system};
-          zsh-env = zsh-env.packages.${system}.default;
+          vcs-status = vcs-status.packages.${system}.default;
         });
     in
       with pkgs; {
@@ -93,7 +99,6 @@
               mtr
               ncdu
               ncurses
-              neovim-env
               netcat
               nil
               nix-tree
@@ -116,12 +121,13 @@
               unar
               unzip
               util-linux
+              vcs-status
+              vim
               vscode-langservers-extracted
               watch
               wget
               yaml-language-server
               zip
-              zsh-env
 
               (linkFarm "home-inputs" (lib.mapAttrsToList (name: input: {
                   name = "share/nix/inputs/${name}";

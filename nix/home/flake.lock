@@ -50,15 +50,16 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1727744745,
-        "narHash": "sha256-10PtZHgDq7S5n8ez0iT9eLWvAlEDtEi572yFzidLW/0=",
-        "owner": "helix-editor",
+        "lastModified": 1730087740,
+        "narHash": "sha256-kvkt4TyizALuEz5u6HpTC17SzGKbmhWtZybtPxm9e/E=",
+        "owner": "mattwparas",
         "repo": "helix",
-        "rev": "57ec3b7330de3f5a7b37e766a758f13fdf3c0da5",
+        "rev": "7d4f9183e69eda17627e9b6cd9cf32c0b63aeda0",
         "type": "github"
       },
       "original": {
-        "owner": "helix-editor",
+        "owner": "mattwparas",
+        "ref": "steel-event-system",
         "repo": "helix",
         "type": "github"
       }
@@ -108,30 +109,6 @@
         "type": "github"
       }
     },
-    "neovim-env": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "wrapper-manager": "wrapper-manager"
-      },
-      "locked": {
-        "lastModified": 1727835931,
-        "narHash": "sha256-kcgktYFjElQ5rKPT1T4S7Jd4SJZon0SZlzPzbCR1mBs=",
-        "ref": "refs/heads/main",
-        "rev": "621ed4627dc780a590b912835f969f0b4ccff66e",
-        "revCount": 1,
-        "type": "git",
-        "url": "https://koholi.net/git/tom/neovim-env"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://koholi.net/git/tom/neovim-env"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1727811607,
@@ -151,10 +128,10 @@
         "flake-utils": "flake-utils",
         "helix": "helix",
         "ig": "ig",
-        "neovim-env": "neovim-env",
         "nixpkgs": "nixpkgs",
         "scls": "scls",
-        "zsh-env": "zsh-env"
+        "vcs-status": "vcs-status",
+        "wrapper-manager": "wrapper-manager"
       }
     },
     "rust-overlay": {
@@ -221,10 +198,32 @@
         "type": "github"
       }
     },
+    "vcs-status": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1729702650,
+        "narHash": "sha256-VfsPI8RE7P9eNytkqeYXviOAOaArtDEWhNue7/WIO14=",
+        "ref": "refs/heads/main",
+        "rev": "b8970b31fa79a0632a564925a2101e15176708c4",
+        "revCount": 1,
+        "type": "git",
+        "url": "https://koholi.net/git/tom/vcs-status"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://koholi.net/git/tom/vcs-status"
+      }
+    },
     "wrapper-manager": {
       "inputs": {
         "nixpkgs": [
-          "neovim-env",
           "nixpkgs"
         ]
       },
@@ -240,33 +239,6 @@
         "owner": "viperML",
         "repo": "wrapper-manager",
         "type": "github"
-      }
-    },
-    "zsh-env": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "wrapper-manager": [
-          "neovim-env",
-          "wrapper-manager"
-        ]
-      },
-      "locked": {
-        "lastModified": 1729216557,
-        "narHash": "sha256-tlzptTt0sKIXLKvHKPkWJ9HK9/D5nx0HnGiMT/F/8vI=",
-        "ref": "refs/heads/main",
-        "rev": "d435b579e0caa50d155da629bc08424a9f3e3ce7",
-        "revCount": 1,
-        "type": "git",
-        "url": "https://koholi.net/git/tom/zsh-env"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://koholi.net/git/tom/zsh-env"
       }
     }
   },
