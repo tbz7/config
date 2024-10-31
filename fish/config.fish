@@ -9,27 +9,18 @@ set -g fish_cursor_visual underscore
 set -g fish_vi_force_cursor 1
 set -g iterm2_hostname $hostname
 
-source $__fish_config_dir/themes/tokyonight.fish
-
-fish_vi_key_bindings
+fish_hybrid_key_bindings
 
 bind -M insert \e\[105\;5u nextd-or-forward-word
 bind -M insert \e\[1\;2C nextd-or-forward-word
 bind -M insert \cO prevd-or-backward-word
 bind -M insert \e\[1\;2D prevd-or-forward-word
-bind -M insert \cK kill-line
-bind -M insert \cN history-prefix-search-forward
-bind -M insert \cP history-prefix-search-backward
-bind -M insert \et transpose-words
+bind -M insert \cc kill-whole-line
 bind -M insert \cz 'fg; commandline -f repaint'
 
-set -gx PAGER less
-set -gx EDITOR vi
-for e in hx nvim vim
-    command -sq $e && set EDITOR $e && break
-end
 
 set -gx COPYFILE_DISABLE true
+set -gx EDITOR (for e in hx nvim vim vi nano; if command -q $e; echo $e; break; end; end )
 set -gx FZF_DEFAULT_OPTS -m --reverse --cycle --height=40% \
     --color=hl:1,hl+:1,bg+:0,info:8,border:0,prompt:4,pointer:4,marker:2,spinner:8,header:-1
 set -gx GOPATH ~/.cache/go
@@ -42,13 +33,14 @@ set -gx --path LS_COLORS di=34 ow=34\;40 ln=35 {or,mi}=7\;31 ex=91 \
     \*{~,.{bak,log,swp,tmp,class,o,pyc,DS_Store,lock}}=90
 set -gx MANPAGER less --use-color -Dd+b -DP+WK
 set -gx MANROFFOPT -c
+set -gx PAGER less
 set -gx PYTHON_HISTORY ~/.local/state/python/history
 set -gx SQLITE_HISTORY ~/.local/state/sqlite3/history
 
 alias clip fish_clipboard_copy
 alias ncdu 'ncdu --color off'
 alias rg 'rg -S'
-alias sqlite3 "LS_COLORS= command sqlite3 --cmd '.mode qbox'"
+alias sqlite3 "env -u LS_COLORS sqlite3 --cmd '.mode qbox'"
 
 abbr cdd cd ~/Desktop
 abbr cdot cd (path dirname (path resolve $__fish_config_dir))

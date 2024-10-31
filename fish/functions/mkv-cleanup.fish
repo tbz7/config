@@ -5,12 +5,12 @@ function mkv-cleanup
             -e track:a1 -s flag-default=true
 
         for e in (mkvmerge -J $f | jq -r '.tracks[] | select(.type=="audio") | "\(.properties.number):\(.properties.language):\(.properties.default_track)"')
-            set e (string split : $e)
+            set -l e (string split : $e)
             mkvpropedit $f -e track:$e[1] -s language=$e[2] -s flag-default=$e[3]
         end
 
         for e in (mkvmerge -J $f | jq -r '.tracks[] | select(.type=="subtitles") | "\(.properties.number):\(.properties.language):\(.properties.default_track)"')
-            set e (string split : $e)
+            set -l e (string split : $e)
             mkvpropedit $f -e track:$e[1] -s language=$e[2] -s flag-default=$e[3]
         end
     end

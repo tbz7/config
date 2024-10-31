@@ -1,4 +1,4 @@
-test -d ~/.local/state/nix/profile || exit
+test -d ~/.local/state/nix/profile || return
 
 set -Ux NIX_PROFILES ~/.local/state/nix/profile
 

@@ -1,3 +1,11 @@
+status is-interactive || return
+
+if [ -z "$fish_theme_default" ]
+    set -U fish_theme_default tokyonight moon
+end
+
+theme $fish_theme_default
+
 function fish_set_term_colors --on-event fish_prompt
     set -q term_color_palette || return
     set -l i 0
