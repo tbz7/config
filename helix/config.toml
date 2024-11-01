@@ -1,4 +1,4 @@
-theme = "tokyonight_moon"
+theme = "match-fish"
 
 [editor]
 color-modes = true
@@ -51,6 +51,8 @@ esc = ["collapse_selection", "keep_primary_selection"]
 "}" = "goto_next_paragraph"
 
 [keys.normal." "]
+"[" = ":set gutters.layout []"
+"]" = ':set gutters.layout ["diagnostics","spacer","line-numbers","spacer","diff"]'
 "w" = ":toggle soft-wrap.enable"
 "W" = '@<C-s>%<A-|>sudo tee "<C-r>%"<ret>:reload<ret><C-o>'
 

@@ -17,7 +17,7 @@ set -l statuslinenc_bg 0f1117
 set -l statuslinenc_fg 3e445e
 set -l visual_bg 272c42
 set -l xline_gradient_bg 2e313f
-set -gx HELIX_THEME iceberg-dark
+set -g helix_theme iceberg-dark
 
 if [ "$argv[1]" = light ]
     set blue 2d539e
@@ -36,7 +36,7 @@ if [ "$argv[1]" = light ]
     set statuslinenc_fg 8b98b6
     set visual_bg c9cdd7
     set xline_gradient_bg 9fa6c0
-    set HELIX_THEME iceberg-light
+    set helix_theme iceberg-light
 
     set -g term_color_palette \
         $cursorline_bg $red $green $orange $blue $purple $lblue $normal_fg \

@@ -1,7 +1,7 @@
 {
   inputs = {
     helix = {
-      url = "github:mattwparas/helix?ref=steel-event-system";
+      url = "github:helix-editor/helix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-utils.follows = "flake-utils";
