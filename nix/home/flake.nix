@@ -28,17 +28,12 @@
         flake-utils.follows = "flake-utils";
       };
     };
-    wrapper-manager = {
-      url = "github:viperML/wrapper-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
     self,
     flake-utils,
     nixpkgs,
-    wrapper-manager,
     ...
   } @ inputs:
     flake-utils.lib.eachDefaultSystem (system: let
@@ -47,17 +42,7 @@
         nixpkgs
         // (nixpkgs.callPackage ./pkgs.nix {})
         // (with inputs; {
-          helix = wrapper-manager.lib.build {
-            inherit pkgs;
-            modules = [
-              {
-                wrappers.helix = {
-                  basePackage = helix.packages.${system}.default;
-                  env.STEEL_HOME.value = helix.packages.${system}.helix-cogs;
-                };
-              }
-            ];
-          };
+          helix = helix.packages.${system}.default;
           ig = ig.packages.${system}.default;
           scls = scls.defaultPackage.${system};
           vcs-status = vcs-status.packages.${system}.default;
