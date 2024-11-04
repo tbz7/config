@@ -1,6 +1,9 @@
-if !has("ide")
+if has("ide")
+  source ~/.vim/helix-vim/helix.idea.vim
+else
   unlet! skip_defaults_vim
   source $VIMRUNTIME/defaults.vim
+  source ~/.vim/helix-vim/helix.vim
 endif
 
 set autoread
@@ -22,7 +25,7 @@ set shiftwidth=2
 set smartcase
 set smartindent
 set softtabstop=2
-set viminfofile=$XDG_STATE_HOME/viminfo
+set viminfofile=~/.local/state/vim/viminfo
 
 if has("ide")
   set clipboard+=ideaput
@@ -36,97 +39,7 @@ else
   let &t_EI = "\e[2 q"
 endif
 
-let mapleader = ' '
-
-nnoremap <silent> <Enter> :noh<Enter><Enter>
-
-noremap <M-h> <C-w>h
-noremap <M-j> <C-w>j
-noremap <M-k> <C-w>k
-noremap <M-l> <C-w>l
-noremap <M-\> <C-w>v
-noremap <M--> <C-w>s
-
-" TODO known differences in [aBbdEeFfiOoQqRSsTtuVWwyY`~<>|!$]
-nnoremap c vc
-nnoremap <M-c> v"_c
-vnoremap <M-c> "_c
- noremap d x
- noremap <M-d> "_x
-vnoremap O <Esc>O
-vnoremap o <Esc>o
-nnoremap U <C-r>
-vnoremap U <Esc><C-r>
-vnoremap u <Esc>u
-nnoremap <C-S-x> 0v$o
-vnoremap <C-S-x> k
-nnoremap <C-x> 0v$
-vnoremap <C-x> j
-nnoremap X 0v$o
-vnoremap X <Esc>`>v`<k0
-nnoremap x 0v$
-vnoremap x <Esc>`<v`>j$
-nnoremap y vy
- noremap ! :r!
-nnoremap % ggVG
-vnoremap % <Esc>ggVG
-nnoremap < v<
-nnoremap > v>
-nnoremap ` vu
-vnoremap ` u
-nnoremap <M-`> vU
-vnoremap <M-`> U
-vnoremap \| :!
-nnoremap ~ v~
- noremap <C-s> m'
-if has("ide")
-   map C <Action>(EditorCloneCaretBelow)
-  nmap = V<Action>(ReformatCode)
-  vmap =  <Action>(ReformatCode)
-  nmap <C-c> v<Action>(CommentByLineComment)<Esc>
-  vmap <C-c>  <Action>  (CommentByLineComment)<Esc>
-endif
-
-" TODO known differences in [gfDtcbamkj.w]
-noremap ge G
-noremap gh 0
-noremap gl $
-noremap gs ^
-if has("ide")
-  nmap gd <Action>(GotoDeclaration)
-  nmap gi <Action>(GotoImplementation)
-  nmap gn <Action>(NextTab)
-  nmap gp <Action>(PreviousTab)
-  nmap gr <Action>(ShowUsages)
-  nmap gy <Action>(GotoTypeDeclaration)
-endif
-
-" TODO match mode (m)
- noremap m v
- noremap mm %
-
-" TODO view modes (z, Z)
-
-noremap <Leader>! :w !sudo tee > /dev/null %<Enter>
-noremap <silent> <Leader>l :set invnumber<Enter>
-noremap <silent> <Leader>w :set invwrap<Enter>
-
-if has("ide")
-  " TODO known differences in [FbgdD'GyYpPR/hcC] and <M-c>
-  nmap <Leader>? <Action>(GotoAction)
-  nmap <Leader>S <Action>(GotoSymbol)
-  nmap <Leader>a <Action>(ShowIntentionActions)
-  nmap <Leader>f <Action>(GotoFile)
-  nmap <Leader>j <Action>(RecentLocations)
-  nmap <Leader>k <Action>(QuickJavaDoc)
-  nmap <Leader>r <Action>(Refactorings.QuickListPopupAction)
-  nmap <Leader>s <Action>(FileStructurePopup)
-
-  " TODO known differences in [DGtaceTp ]
-  nmap [d <Action>(GotoPreviousError)
-  nmap ]d <Action>(GotoNextError)
-  nmap [f <Action>(MethodUp)
-  nmap ]f <Action>(MethodDown)
-  nmap [g <Action>(VcsShowPrevChangeMarker)
-  nmap ]g <Action>(VcsShowNextChangeMarker)
-endif
+nnoremap <Space><Space>[ <Esc>:set nonumber<CR>
+nnoremap <Space><Space>] <Esc>:set number<CR>
+nnoremap <Space><Space>w <Esc>:set invwrap<CR>
+nnoremap <Space><Space>W <Esc>:w !sudo tee > /dev/null %<CR>

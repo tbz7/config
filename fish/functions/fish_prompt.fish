@@ -1,4 +1,6 @@
 function fish_prompt
+    echo -en "\e]133;D;$status\a\e]133;A\a"
+
     set -l arrow 
     set -l mode (prompt_mode)
     set -l a 'fish_color_prompt_'$mode'_a'
@@ -12,4 +14,10 @@ function fish_prompt
         (set_color $$b) (prompt_pwd) (set_color $b_to_normal) $arrow
 
     set_color normal
+
+    echo -en '\e]133;B\a'
+end
+
+function __fish_prompt_preexec --on-event fish_preexec
+    echo -en '\e]133;C\a'
 end

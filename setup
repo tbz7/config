@@ -13,16 +13,15 @@ function symlink
     end
 end
 
-for d in fish git helix jj readline shpool
+for d in fish git helix ideavim jj readline shpool
     symlink $d ~/.config/$d
 end
 symlink ssh/config ~/.ssh/config
-symlink vim/vimrc ~/.config/ideavim/ideavimrc
-symlink vim/vimrc ~/.vimrc
+symlink vim ~/.vim
 
 touch ~/.hushlogin
 
-mkdir -p ~/.local/state/{less,nvim,python,sqlite3}
+mkdir -p ~/.local/state/{less,python,sqlite3,vim}
 
 if [ (uname) = Darwin ]
     symlink iterm2/profiles.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/profiles.json

@@ -1,14 +1,5 @@
 status is-interactive || return
 
-set -g fish_cursor_default block
-set -g fish_cursor_external line
-set -g fish_cursor_insert line blink
-set -g fish_cursor_replace_one underscore blink
-set -g fish_cursor_replace underscore
-set -g fish_cursor_visual underscore
-set -g fish_vi_force_cursor 1
-set -g iterm2_hostname $hostname
-
 fish_hybrid_key_bindings
 
 bind -M insert \e\[105\;5u nextd-or-forward-word
@@ -19,7 +10,7 @@ bind -M insert \cc kill-whole-line
 bind -M insert \cz 'fg; commandline -f repaint'
 
 set -gx COPYFILE_DISABLE true
-set -gx EDITOR (for e in hx nvim vim vi nano; if command -q $e; echo $e; break; end; end )
+set -gx EDITOR (for e in hx vim nvim vi nano; if command -q $e; echo $e; break; end; end )
 set -gx FZF_DEFAULT_OPTS -m --reverse --cycle --height=40% \
     --color=hl:1,hl+:1,bg+:0,info:8,border:0,prompt:4,pointer:4,marker:2,spinner:8,header:-1
 set -gx GOPATH ~/.cache/go

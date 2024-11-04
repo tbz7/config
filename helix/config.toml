@@ -1,6 +1,7 @@
 theme = "match-fish"
 
 [editor]
+auto-pairs = false
 color-modes = true
 popup-border = "all"
 rulers = [100]
@@ -36,35 +37,8 @@ right = [
 [editor.whitespace.render]
 tab = "all"
 
-[keys.normal]
-esc = ["collapse_selection", "keep_primary_selection"]
-"$" = "extend_to_line_end"
-"0" = "extend_to_line_start"
-"G" = "goto_file_end"
-"C-x" = "select_line_below"
-"X" = "extend_line_above"
-"C-X" = "select_line_above"
-";" = "repeat_last_motion"
-"\\" = "match_brackets"
-"^" = "goto_first_nonwhitespace"
-"{" = "goto_prev_paragraph"
-"}" = "goto_next_paragraph"
-
-[keys.normal." "]
+[keys.normal." "." "]
 "[" = ":set gutters.layout []"
 "]" = ':set gutters.layout ["diagnostics","spacer","line-numbers","spacer","diff"]'
 "w" = ":toggle soft-wrap.enable"
 "W" = '@<C-s>%<A-|>sudo tee "<C-r>%"<ret>:reload<ret><C-o>'
-
-[keys.select]
-"$" = "extend_to_line_end"
-"0" = "extend_to_line_start"
-"G" = "goto_file_end"
-"C-x" = "select_line_below"
-"X" = "extend_line_above"
-"C-X" = "select_line_above"
-";" = "repeat_last_motion"
-"\\" = "match_brackets"
-"^" = "goto_first_nonwhitespace"
-"{" = "goto_prev_paragraph"
-"}" = "goto_next_paragraph"

@@ -25,7 +25,7 @@ Host *-shpool*
   RequestTTY yes
 
 Host *
-  SendEnv COLORTERM FONT_MODE TERM_PROGRAM
+  SendEnv COLORTERM TERM_PROGRAM
   StrictHostKeyChecking no
 
 Include ssh_config.d/*
