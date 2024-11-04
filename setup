@@ -13,7 +13,7 @@ function symlink
     end
 end
 
-for d in fish git helix jj nix readline shpool
+for d in fish git helix jj readline shpool
     symlink $d ~/.config/$d
 end
 symlink ssh/config ~/.ssh/config

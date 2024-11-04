@@ -28,12 +28,6 @@ shebangs = ["lua", "luajit"]
 auto-format = true
 
 [[language]]
-name = "nix"
-language-servers = ["nil", "scls"]
-formatter = { command = "alejandra" }
-auto-format = true
-
-[[language]]
 name = "python"
 language-servers = [
   { name = "ruff", except-features = [

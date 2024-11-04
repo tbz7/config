@@ -44,7 +44,6 @@ alias sqlite3 "env -u LS_COLORS sqlite3 --cmd '.mode qbox'"
 abbr cdb cd $HOMEBREW_PREFIX
 abbr cdd cd ~/Desktop
 abbr cdot cd (path dirname (path resolve $__fish_config_dir))
-abbr cdn cd $NIX_PROFILES[1]
 
 abbr e $EDITOR
 
@@ -59,12 +58,6 @@ abbr gds git diff --stat
 abbr gl git l
 abbr gm git difftool -g --dir-diff
 abbr gr git rebase
-
-abbr np nix profile
-abbr npi nix profile install
-abbr npl nix profile list
-abbr npr nix profile remove
-abbr npu nix profile upgrade --all
 
 abbr t set fish_theme
 
