@@ -14,10 +14,9 @@ fish_hybrid_key_bindings
 bind -M insert \e\[105\;5u nextd-or-forward-word
 bind -M insert \e\[1\;2C nextd-or-forward-word
 bind -M insert \cO prevd-or-backward-word
-bind -M insert \e\[1\;2D prevd-or-forward-word
+bind -M insert \e\[1\;2D prevd-or-backward-word
 bind -M insert \cc kill-whole-line
 bind -M insert \cz 'fg; commandline -f repaint'
-
 
 set -gx COPYFILE_DISABLE true
 set -gx EDITOR (for e in hx nvim vim vi nano; if command -q $e; echo $e; break; end; end )
@@ -42,6 +41,7 @@ alias ncdu 'ncdu --color off'
 alias rg 'rg -S'
 alias sqlite3 "env -u LS_COLORS sqlite3 --cmd '.mode qbox'"
 
+abbr cdb cd $HOMEBREW_PREFIX
 abbr cdd cd ~/Desktop
 abbr cdot cd (path dirname (path resolve $__fish_config_dir))
 abbr cdn cd $NIX_PROFILES[1]

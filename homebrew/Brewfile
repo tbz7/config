@@ -1,0 +1,119 @@
+tap "homebrew/bundle"
+tap "tom/homebrew", "https://koholi.net/git/tom/homebrew.git"
+
+brew "bash-language-server"
+brew "bind"
+brew "coreutils", link: false
+brew "curl", link: true
+brew "diffedit3"
+brew "diffutils"
+brew "dos2unix"
+brew "file", link: true
+brew "findutils", link: false
+brew "fish"
+brew "fish-lsp", args: ["HEAD"]
+brew "fzf"
+brew "gawk"
+brew "git"
+brew "gnu-sed", link: false
+brew "gnu-tar", link: false
+brew "grep", link: false
+brew "gzip"
+brew "helix", args: ["HEAD"]
+brew "htop"
+brew "jq"
+brew "less"
+brew "lua-language-server"
+brew "luajit"
+brew "man-db"
+brew "moreutils"
+brew "mtr"
+brew "ncdu"
+brew "netcat"
+brew "p7zip"
+brew "perl"
+brew "progress"
+brew "pstree"
+brew "pv"
+brew "python"
+brew "python-lsp-server"
+brew "ripgrep"
+brew "rsbkb"
+brew "ruff"
+brew "simple-completion-language-server", args: ["HEAD"]
+brew "shellcheck"
+brew "solargraph"
+brew "sqlite", link: true
+brew "taplo"
+brew "tree"
+brew "typescript-language-server"
+brew "unar"
+brew "util-linux", link: true
+brew "vcs-status", args: ["HEAD"]
+brew "vim"
+brew "vscode-langservers-extracted"
+brew "watch"
+brew "wget"
+brew "whois", link: true
+brew "yaml-language-server"
+brew "zip", link: true
+
+if OS.linux? && !defined? common_only
+  brew "dockerfile-language-server"
+  brew "go"
+  brew "gopls"
+  brew "jj"
+
+  brew "shpool"
+
+  brew "ig", args: ["HEAD"]
+end
+
+if OS.mac? && !defined? common_only
+  tap "homebrew/services"
+  tap "artginzburg/tap"
+  brew "artginzburg/tap/sudo-touchid"
+
+  brew "go"
+  brew "gopls"
+  brew "jj"
+
+  brew "exiftool"
+  brew "ffmpeg"
+  brew "ig", args: ["HEAD"]
+  brew "imagemagick"
+  brew "oxipng"
+  brew "supmover"
+
+  brew "bchunk"
+  brew "ciso"
+  brew "ps3dec", args: ["HEAD"]
+  brew "rom-tools"
+  brew "wudcompress", args: ["HEAD"]
+
+  brew "cliclick"
+  brew "mas"
+  brew "rclone"
+
+  cask "aegisub"
+  cask "android-platform-tools"
+  cask "audacity"
+  cask "firefox"
+  cask "font-jetbrains-mono-nerd-font"
+  cask "handbrake"
+  cask "iina"
+  cask "istat-menus"
+  cask "iterm2"
+  cask "jdownloader"
+  cask "krita"
+  cask "makemkv"
+  cask "mediainfo"
+  cask "mkvtoolnix"
+  cask "musicbrainz-picard"
+  cask "the-unarchiver"
+  cask "windows-app"
+
+  mas "Bitwarden", id: 1352778147
+  mas "Numbers", id: 409203825
+  mas "Pages", id: 409201541
+end

@@ -1,5 +1,9 @@
 function prompt_pwd --description 'short CWD for the prompt'
-    set -l replacements $prompt_pwd_extra_replacements $NIX_PROFILES[1]:'~nix' $HOME:'~'
+    set -l replacements \
+        $prompt_pwd_extra_replacements \
+        $NIX_PROFILES[1]:'~nix' \
+        $HOMEBREW_PREFIX:'~homebrew' \
+        $HOME:'~'
 
     set -l wd $PWD
     for r in $replacements

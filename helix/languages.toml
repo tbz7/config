@@ -2,13 +2,21 @@
 ruff = { command = "ruff", args = ["server"] }
 scls = { command = "simple-completion-language-server" }
 
+[language-server.fish_lsp]
+command = "fish-lsp"
+args = ["start"]
+
+[language-server.fish_lsp.environment]
+fish_lsp_show_client_popups = "false"
+fish_lsp_diagnostic_disable_error_codes = "2002"
+
 [[language]]
 name = "bash"
 language-servers = ["bash-language-server", "scls"]
 
 [[language]]
 name = "fish"
-language-servers = ["scls"]
+language-servers = ["fish-lsp", "scls"]
 
 [[language]]
 name = "json"

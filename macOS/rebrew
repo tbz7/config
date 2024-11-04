@@ -1,9 +1,0 @@
-#!/usr/bin/env fish
-
-if ! command -sq brew
-    /bin/bash (curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | psub)
-    eval (/opt/homebrew/bin/brew shellenv)
-end
-
-brew bundle install --no-lock --file=(dirname (status -f))/Brewfile
-brew cleanup -s
