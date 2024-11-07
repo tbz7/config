@@ -3,7 +3,7 @@ function prompt_vcs --description 'VCS info for the prompt'
 
     set -l vcs (string split ':' (vcs-status --notify-pid $fish_pid $PWD 2>/dev/null))
 
-    echo $vcs[2] (string replace -f true '*' $vcs[3])
+    echo (string replace -ra '<([^>]+)>' "\e[4m\$1\e[24m" $vcs[2]) (string replace -f true '*' $vcs[3])
 end
 
 function __prompt_vcs_pre_prompt --on-event fish_prompt

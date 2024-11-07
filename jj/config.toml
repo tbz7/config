@@ -7,12 +7,12 @@ p = ["prev"]
 s = ["status"]
 
 [colors]
-"diff removed token" = { underline = false }
 "diff added token" = { underline = false }
+"diff removed token" = { underline = false }
 
 [ui]
-diff-editor = ":builtin"
 default-command = "log"
+diff-editor = ":builtin"
 
 [ui.movement]
 edit = true
@@ -20,3 +20,16 @@ edit = true
 [user]
 name = "tom"
 email = "tom@"
+
+[template-aliases]
+# TODO improve these
+'friendly_name(c)' = '''
+  coalesce(
+      c.bookmarks().join(' '),
+      '<' ++ c.change_id().shortest(4).prefix() ++ '>' ++ c.change_id().shortest(4).rest(),
+  )
+'''
+prompt_refname = '''
+  friendly_name(self) ++ if(empty, ' (' ++ parents.map(|p| friendly_name(p)).join(',' ) ++ ')')
+'''
+prompt_dirty = '!immutable && !empty'
