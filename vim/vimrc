@@ -39,6 +39,9 @@ else
   let &t_EI = "\e[2 q"
 endif
 
+map X ZVv
+xmap vX Zkv
+
 nnoremap <Space><Space>[ <Esc>:set nonumber<CR>
 nnoremap <Space><Space>] <Esc>:set number<CR>
 nnoremap <Space><Space>w <Esc>:set invwrap<CR>

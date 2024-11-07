@@ -7,8 +7,8 @@ command = "fish-lsp"
 args = ["start"]
 
 [language-server.fish_lsp.environment]
-fish_lsp_show_client_popups = "false"
 fish_lsp_diagnostic_disable_error_codes = "2002"
+fish_lsp_show_client_popups = "false"
 
 [[language]]
 name = "bash"
@@ -16,7 +16,16 @@ language-servers = ["bash-language-server", "scls"]
 
 [[language]]
 name = "fish"
-language-servers = ["fish-lsp", "scls"]
+language-servers = ["fish_lsp", "scls"]
+
+[[language]]
+name = "git-config"
+file-types = [
+  { glob = ".gitmodules" },
+  { glob = ".gitconfig" },
+  { glob = ".git/config" },
+  { glob = "git/config" },
+]
 
 [[language]]
 name = "json"
@@ -36,8 +45,14 @@ language-servers = [
   "pylsp",
   "scls",
 ]
-# TODO either remove or apply to ruff
-indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "sshclientconfig"
+file-types = [
+  { glob = ".ssh/config" },
+  { glob = "ssh/config" },
+  { glob = "/etc/ssh/ssh_config" },
+]
 
 [[language]]
 name = "txt"
@@ -49,5 +64,3 @@ language-servers = ["scls"]
 name = "toml"
 language-servers = ["taplo", "scls"]
 auto-format = true
-
-# TODO more matchers like gitconfig

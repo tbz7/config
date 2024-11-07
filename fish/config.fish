@@ -7,7 +7,7 @@ bind -M insert \e\[1\;2C nextd-or-forward-word
 bind -M insert \cO prevd-or-backward-word
 bind -M insert \e\[1\;2D prevd-or-backward-word
 bind -M insert \cc kill-whole-line
-bind -M insert \cz 'fg; commandline -f repaint'
+bind -M insert \cz send-job-to-foreground
 
 set -gx COPYFILE_DISABLE true
 set -gx EDITOR (for e in hx vim nvim vi nano; if command -q $e; echo $e; break; end; end )
