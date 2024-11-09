@@ -27,6 +27,10 @@ set smartindent
 set softtabstop=2
 set viminfofile=~/.local/state/vim/viminfo
 
+let g:netrw_banner = 0
+let g:netrw_dirhistmax = 0
+let g:netrw_liststyle = 3
+
 if has("ide")
   set clipboard+=ideaput
   set ideajoin
@@ -42,7 +46,8 @@ endif
 map X ZVv
 xmap vX Zkv
 
-nnoremap <Space><Space>[ <Esc>:set nonumber<CR>
-nnoremap <Space><Space>] <Esc>:set number<CR>
-nnoremap <Space><Space>w <Esc>:set invwrap<CR>
-nnoremap <Space><Space>W <Esc>:w !sudo tee > /dev/null %<CR>
+nnoremap <Space>[ <Esc>:set nonumber<CR>
+nnoremap <Space>] <Esc>:set number<CR>
+nnoremap <Space>t <Esc>:Explore<CR>
+nnoremap <Space>w <Esc>:set invwrap<CR>
+nnoremap <Space>W <Esc>:w !sudo tee > /dev/null %<CR>

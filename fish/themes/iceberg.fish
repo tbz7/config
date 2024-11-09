@@ -107,6 +107,6 @@ set -g fish_color_prompt_replace_a $normal_bg --background=$orange
 set -g fish_color_prompt_replace_b $fish_color_prompt_insert_b
 set -g fish_color_prompt_replace_c $fish_color_prompt_insert_c
 set -g fish_color_prompt_inactive_a $fish_color_prompt_insert_c
-set -g fish_color_prompt_inactive_b $fish_color_prompt_insert_a
+set -g fish_color_prompt_inactive_b $fish_color_prompt_insert_c
 set -g fish_color_prompt_inactive_c $fish_color_prompt_insert_c
 set -g fish_color_prompt_error $normal_bg --background=$red

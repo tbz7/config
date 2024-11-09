@@ -45,8 +45,9 @@ x = "select_line_below"
 X = "select_line_above"
 x = "select_line_below"
 
-[keys.normal." "." "]
+[keys.normal." "]
 "[" = ":set gutters.layout []"
 "]" = ':set gutters.layout ["diagnostics","spacer","line-numbers","spacer","diff"]'
+t = '@:sh hxt --open-tree "<C-r>%"<ret>'
 w = ":toggle soft-wrap.enable"
 W = '@<C-s>%<A-|>sudo tee "<C-r>%"<ret>:reload<ret><C-o>'
