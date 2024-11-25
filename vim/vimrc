@@ -1,53 +1,61 @@
-if has("ide")
-  source ~/.vim/helix-vim/helix.idea.vim
-else
+if !has('ide')
   unlet! skip_defaults_vim
   source $VIMRUNTIME/defaults.vim
-  source ~/.vim/helix-vim/helix.vim
-endif
 
-set autoread
-set background=dark
-set clipboard=unnamed,unnamedplus
-set colorcolumn=80
-set expandtab
-set foldlevel=99
-set foldmethod=syntax
-set hidden
-set hlsearch
-set ignorecase
-set linebreak
-set nojoinspaces
-set noswapfile
-set number
-set scrolloff=2
-set shiftwidth=2
-set smartcase
-set smartindent
-set softtabstop=2
-set viminfofile=~/.local/state/vim/viminfo
+  set autoread
+  set background=dark
+  set clipboard=unnamed,unnamedplus
+  set colorcolumn=100
+  set expandtab
+  set foldlevel=99
+  set foldmethod=syntax
+  set hidden
+  set linebreak
+  set nojoinspaces
+  set noswapfile
+  set number
+  set shiftwidth=2
+  set smartindent
+  set softtabstop=2
+  set viminfofile=~/.local/state/vim/viminfo
 
-let g:netrw_banner = 0
-let g:netrw_dirhistmax = 0
-let g:netrw_liststyle = 3
-
-if has("ide")
-  set clipboard+=ideaput
-  set ideajoin
-  set idearefactormode=keep
-else
   colorscheme slate
   silent! colorscheme habamax
 
   let &t_SI = "\e[5 q"
   let &t_EI = "\e[2 q"
+
+  let g:netrw_banner = 0
+  let g:netrw_dirhistmax = 0
+  let g:netrw_liststyle = 3
+else
+  set clipboard=unnamed,unnamedplus,ideaput
+  set ideajoin
+  set idearefactormode=visual
 endif
 
-map X ZVv
-xmap vX Zkv
+set hlsearch
+set ignorecase
+set incsearch
+set smartcase
 
-nnoremap <Space>[ <Esc>:set nonumber<CR>
-nnoremap <Space>] <Esc>:set number<CR>
-nnoremap <Space>t <Esc>:Explore<CR>
-nnoremap <Space>w <Esc>:set invwrap<CR>
-nnoremap <Space>W <Esc>:w !sudo tee > /dev/null %<CR>
+source ~/.vim/helix-keys.vim
+
+nnoremap <Space>[ <Esc>:set nonumber<Enter>
+nnoremap <Space>] <Esc>:set number<Enter>
+nnoremap <Space>t <Esc>:Explore<Enter>
+nnoremap <Space>w <Esc>:set invwrap<Enter>
+nnoremap <Space>W <Esc>:w !sudo tee > /dev/null %<Enter>
+
+nnoremap <silent> <Enter> :noh<Enter>
+vnoremap <silent> <Enter> <Esc>:noh<Enter>gv
+" TODO the timeout on : is annoying
+vnoremap :p/ :!perl -pe 's/'<Left>
+noremap :s/ :s/\v
+
+noremap <A-h> <C-w>h
+noremap <A-j> <C-w>j
+noremap <A-k> <C-w>k
+noremap <A-l> <C-w>l
+noremap <A-\> <C-w>v
+noremap <A--> <C-w>s

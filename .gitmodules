@@ -1,3 +1,0 @@
-[submodule "vim/helix.vim"]
-	path = vim/helix-vim
-	url = https://github.com/chtenb/helix.vim
