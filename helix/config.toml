@@ -18,6 +18,9 @@ render = true
 [editor.lsp]
 display-inlay-hints = true
 
+[editor.soft-wrap]
+enable = true
+
 [editor.statusline]
 mode.normal = "N"
 mode.insert = "I"
@@ -35,6 +38,7 @@ right = [
 ]
 
 [editor.whitespace.render]
+default = "trailing"
 tab = "all"
 
 [keys.normal]
@@ -45,9 +49,10 @@ x = "select_line_below"
 X = "select_line_above"
 x = "select_line_below"
 
-[keys.normal." "]
+[keys.normal.space]
 "[" = ":set gutters.layout []"
 "]" = ':set gutters.layout ["diagnostics","spacer","line-numbers","spacer","diff"]'
-t = '@:sh hxt --open-tree "<C-r>%"<ret>'
+t = "file_browser"
+T = "file_browser_in_current_buffer_directory"
 w = ":toggle soft-wrap.enable"
 W = '@<C-s>%<A-|>sudo tee "<C-r>%"<ret>:reload<ret><C-o>'

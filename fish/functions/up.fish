@@ -1,5 +1,5 @@
 function up
-    argparse no-apt no-brew no-mas f -- $argv
+    argparse no-apt no-brew no-mas -- $argv
 
     if command -sq apt-get && ! set -q _flag_no_apt
         sudo apt update

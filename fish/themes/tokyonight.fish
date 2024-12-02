@@ -170,4 +170,3 @@ set -g fish_color_prompt_replace_c $fish_color_prompt_insert_c
 set -g fish_color_prompt_inactive_a $fg_gutter --background=$bg_statusline --bold
 set -g fish_color_prompt_inactive_b $fg_gutter --background=$bg_statusline --bold
 set -g fish_color_prompt_inactive_c $fg_gutter --background=$bg_statusline
-set -g fish_color_prompt_error $black --background=$red1

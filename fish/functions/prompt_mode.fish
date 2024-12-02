@@ -23,8 +23,6 @@ function __prompt_mode_focus_out --on-event fish_focus_out
 end
 
 set -l execute 'set __prompt_mode_inactive true; commandline -f repaint execute'
-for k in \n \r
-    bind -M insert $k $execute
-    bind -m insert $k $execute
-    bind -M replace -m insert $k "$execute repaint-mode"
-end
+bind -M insert enter $execute
+bind -m insert enter $execute
+bind -M replace -m insert enter "$execute repaint-mode"

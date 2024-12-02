@@ -3,8 +3,8 @@
 cd (realpath (dirname (status -f))) || exit 1
 
 function symlink
-    if ! [ -L $argv[2] ] || [ (realpath $argv[1]) != (realpath $argv[2]) ]
-        if [ -e $argv[2] ]
+    if ! test -L $argv[2] || [ (realpath $argv[1]) != (realpath $argv[2]) ]
+        if test -e $argv[2]
             echo -e "$(set_color red)\e[9m$argv[2]\e[0m$(set_color normal)"
             rm -rf $argv[2]
         end

@@ -1,9 +1,9 @@
 status is-interactive || return
 
 function __theme_load --on-variable fish_theme
-    if [ -z "$fish_theme" ]
+    if test -z "$fish_theme"
         set -U fish_theme tokyonight moon
-    else if ! [ -f $__fish_config_dir/themes/$fish_theme[1].fish ]
+    else if ! test -f $__fish_config_dir/themes/$fish_theme[1].fish
         echo "Invalid theme: $fish_theme[1]" >&2
         set fish_theme tokyonight moon
     end
@@ -31,7 +31,7 @@ function __theme_update_helix
     set -gq fish_theme && return
     set -l path ~/.config/helix/themes/match-fish.toml
     set -l body "inherits = \"$helix_theme\""
-    if ! [ -f $path ] || [ "$(cat $path)" != $body ]
+    if ! test -f $path || [ "$(cat $path)" != $body ]
         mkdir -p (dirname $path)
         echo $body >$path
         killall -q -USR1 hx

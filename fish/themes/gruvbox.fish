@@ -112,4 +112,3 @@ set -g fish_color_prompt_visual_c $bg0 --background=$bg4
 set -g fish_color_prompt_inactive_a $bg4 --background=$bg1
 set -g fish_color_prompt_inactive_b $fish_color_prompt_inactive_a
 set -g fish_color_prompt_inactive_c $fish_color_prompt_inactive_a
-set -g fish_color_prompt_error $bg0 --background=$red

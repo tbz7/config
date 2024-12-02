@@ -2,18 +2,18 @@ status is-interactive || return
 
 fish_hybrid_key_bindings
 
-bind -M insert \e\[105\;5u nextd-or-forward-word
-bind -M insert \e\[1\;2C nextd-or-forward-word
-bind -M insert \cO prevd-or-backward-word
-bind -M insert \e\[1\;2D prevd-or-backward-word
-bind -M insert \cc kill-whole-line
-bind -M insert \cz send-job-to-foreground
+bind -M insert ctrl-i nextd-or-forward-word
+bind -M insert ctrl-o prevd-or-backward-word
+bind -M insert ctrl-z send-job-to-foreground
 
-command -q fzf && fzf --fish | source
-command -q tmux && fish_add_path ~/.config/helix/hxt
+if command -q fzf
+    fzf --fish | source
+    bind -e ctrl-r
+    bind -e ctrl-r -M insert
+end
 
 set -gx COPYFILE_DISABLE true
-set -gx EDITOR (for e in hxt hx vim nvim vi nano; if command -q $e; echo $e; break; end; end )
+set -gx EDITOR (for e in hx vim nvim vi nano; if command -q $e; echo $e; break; end; end )
 set -gx FZF_DEFAULT_OPTS -m --reverse --cycle --height=40% \
     --color=hl:1,hl+:1,bg+:0,info:8,border:0,prompt:4,pointer:4,marker:2,spinner:8,header:-1
 set -gx GOPATH ~/.cache/go

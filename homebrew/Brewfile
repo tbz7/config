@@ -10,7 +10,7 @@ brew "diffutils"
 brew "dos2unix"
 brew "file", link: true
 brew "findutils", link: false
-brew "fish"
+brew "tom/homebrew/fish", args: ["HEAD"]
 brew "fish-lsp", args: ["HEAD"]
 brew "fzf"
 brew "gawk"
@@ -19,7 +19,7 @@ brew "gnu-sed", link: false
 brew "gnu-tar", link: false
 brew "grep", link: false
 brew "gzip"
-brew "helix", args: ["HEAD"]
+brew "tom/homebrew/helix", args: ["HEAD"]
 brew "htop"
 brew "jq"
 brew "less"
@@ -45,7 +45,6 @@ brew "shellcheck"
 brew "solargraph"
 brew "sqlite", link: true
 brew "taplo"
-brew "tmux"
 brew "tree"
 brew "typescript-language-server"
 brew "unar"

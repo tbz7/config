@@ -1,5 +1,5 @@
 function send-job-to-foreground
-    if [ -z "$(commandline)" ]
+    if test -z "$(commandline)"
         commandline fg
         __prompt_mode_focus_out
         commandline -f execute

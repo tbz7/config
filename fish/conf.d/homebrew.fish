@@ -1,6 +1,6 @@
-if [ -d /opt/homebrew ]
+if test -d /opt/homebrew
     set -gx HOMEBREW_PREFIX /opt/homebrew
-else if [ -d /home/linuxbrew/.linuxbrew ]
+else if test -d /home/linuxbrew/.linuxbrew
     set -gx HOMEBREW_PREFIX /home/linuxbrew/.linuxbrew
 else
     return
