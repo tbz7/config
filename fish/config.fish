@@ -4,13 +4,10 @@ fish_hybrid_key_bindings
 
 bind -M insert ctrl-i nextd-or-forward-word
 bind -M insert ctrl-o prevd-or-backward-word
+bind -M insert ctrl-n down-or-search
 bind -M insert ctrl-z send-job-to-foreground
 
-if command -q fzf
-    fzf --fish | source
-    bind -e ctrl-r
-    bind -e ctrl-r -M insert
-end
+command -q fzf && fzf --fish | grep -v 'bind .* fzf-history-widget' | source
 
 set -gx COPYFILE_DISABLE true
 set -gx EDITOR (for e in hx vim nvim vi nano; if command -q $e; echo $e; break; end; end )

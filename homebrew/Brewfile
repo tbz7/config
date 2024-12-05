@@ -56,7 +56,6 @@ brew "watch"
 brew "wget"
 brew "whois", link: true
 brew "yaml-language-server"
-brew "yazi"
 brew "zip", link: true
 
 if OS.linux? && !defined? common_only

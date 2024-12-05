@@ -16,9 +16,10 @@ Match host mbp,pi !tagged home
   ProxyJump ssh.koholi.net
 
 Host kohogit
-  ProxyJump bee
+  CanonicalizeHostname no
   Hostname localhost
   Port 2222
+  ProxyJump bee
 
 Host *-shpool-*
   RemoteCommand shpool attach -f $(echo %k | sed 's/.*-shpool-//')

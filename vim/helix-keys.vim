@@ -23,19 +23,19 @@ map j <Down>
 xmap h <Left>
 xmap l <Right>
 
-" diff: some issues around line breaks
-nnoremap <silent> b :let g:hxs=0<Enter>vbiwliwelv`<vb
-nnoremap <silent> B :let g:hxs=0<Enter>vBiWliWElv`<vB
-nnoremap <silent> e :let g:hxs=0<Enter>veiwhiwbhv`>ve
-nnoremap <silent> E :let g:hxs=0<Enter>vEiWhiWBhv`>vE
-nnoremap <silent> w :let g:hxs=0<Enter>vlwhbv`>vwh
-nnoremap <silent> W :let g:hxs=0<Enter>vlWhBv`>vWh
-xnoremap <expr> b (g:hxs ? 'b' : "\<Esc>vbiwliwelv`<vb")
-xnoremap <expr> B (g:hxs ? 'B' : "\<Esc>vBiWliWElv`<vB")
-xnoremap <expr> e (g:hxs ? 'e' : "\<Esc>veiwhiwbhv`>ve")
-xnoremap <expr> E (g:hxs ? 'E' : "\<Esc>vEiWhiWBhv`>vE")
-xnoremap <expr> w (g:hxs ? 'lwh' : "\<Esc>vlwhbv`>vwh")
-xnoremap <expr> W (g:hxs ? 'lWh' : "\<Esc>vlWhBv`>vWh")
+" diff: some issues with whitespace and newlines, w/W get stuck at EOL in ideavim
+nnoremap <silent> b :let g:hxs=0<Enter>m`hviwo``<Esc>`<vlb
+nnoremap <silent> B :let g:hxs=0<Enter>m`hviWo``<Esc>`<vlB
+nnoremap <silent> e :let g:hxs=0<Enter>m`lviw``<Esc>`>vhe
+nnoremap <silent> E :let g:hxs=0<Enter>m`lviW``<Esc>`>vhE
+nnoremap <silent> w :let g:hxs=0<Enter>m`lviw``<Esc>`>vwh
+nnoremap <silent> W :let g:hxs=0<Enter>m`lviW``<Esc>`>vWh
+xnoremap <expr> b (g:hxs ? '' : "\<Esc>m`hviwo``\<Esc>`<vl") .. 'b'
+xnoremap <expr> B (g:hxs ? '' : "\<Esc>m`hviWo``\<Esc>`<vl") .. 'B'
+xnoremap <expr> e (g:hxs ? '' : "\<Esc>m`lviw``\<Esc>`>vh") .. 'e'
+xnoremap <expr> E (g:hxs ? '' : "\<Esc>m`lviW``\<Esc>`>vh") .. 'E'
+xnoremap <expr> w (g:hxs ? '' : "\<Esc>m`lviw``\<Esc>`>vh") .. 'lwh'
+xnoremap <expr> W (g:hxs ? '' : "\<Esc>m`lviW``\<Esc>`>vh") .. 'lWh'
 
 " diff: only works on current line
 nnoremap <silent> f :let g:hxs=0<Enter>vf
@@ -90,7 +90,7 @@ xnoremap ` ugv
 nnoremap <A-`> vU
 xnoremap <A-`> Ugv
 
-" diff: Helix extends the selection during insert mode
+" diff: Helix keeps the selection during insert mode
 if has('ide')
   xnoremap a <Esc>`>a
   xnoremap i <Esc>`<i
@@ -142,8 +142,7 @@ endif
 nnoremap d vyi<Del><Esc>gvv
 nnoremap <A-d> vvi<Del><Esc>gvv
 xnoremap <A-d> "_d
-" diff: doesn't work at eol in ideavim
-nnoremap c vc
+nnoremap c vyi<Del>
 nnoremap <A-c> v"_c
 xnoremap <A-c> "_c
 

@@ -51,7 +51,8 @@ name = "sshclientconfig"
 file-types = [
   { glob = ".ssh/config" },
   { glob = "ssh/config" },
-  { glob = "/etc/ssh/ssh_config" },
+  { glob = "ssh_config" },
+  { glob = "ssh_config.d/*.conf" },
 ]
 
 [[language]]

@@ -1,19 +1,21 @@
 function up
-    argparse no-apt no-brew no-mas -- $argv
+    argparse a/all -- $argv
 
-    if command -sq apt-get && ! set -q _flag_no_apt
-        sudo apt update
-        and sudo apt upgrade
-        and sudo apt autoremove
-    end
-
-    if command -sq brew && ! set -q _flag_no_brew
+    if command -sq brew
         brew update
         and brew upgrade
         and brew cleanup -s
     end
 
-    if command -sq mas && ! set -q SSH_CONNECTION && ! set -q _flag_no_mas
-        mas upgrade
+    if set -q _flag_all
+        if command -sq apt-get
+            sudo apt update
+            and sudo apt upgrade
+            and sudo apt autoremove
+        end
+
+        if command -sq mas
+            mas upgrade
+        end
     end
 end

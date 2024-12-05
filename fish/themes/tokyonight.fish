@@ -167,6 +167,6 @@ set -g fish_color_prompt_visual_c $fish_color_prompt_insert_c
 set -g fish_color_prompt_replace_a $terminal_black --background=$red
 set -g fish_color_prompt_replace_b $red --background=$fg_gutter
 set -g fish_color_prompt_replace_c $fish_color_prompt_insert_c
-set -g fish_color_prompt_inactive_a $fg_gutter --background=$bg_statusline --bold
-set -g fish_color_prompt_inactive_b $fg_gutter --background=$bg_statusline --bold
+set -g fish_color_prompt_inactive_a $fg_gutter --background=$bg_statusline
+set -g fish_color_prompt_inactive_b $fg_gutter --background=$bg_statusline
 set -g fish_color_prompt_inactive_c $fg_gutter --background=$bg_statusline
