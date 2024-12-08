@@ -11,12 +11,8 @@ fish_lsp_diagnostic_disable_error_codes = "2002"
 fish_lsp_show_client_popups = "false"
 
 [[language]]
-name = "bash"
-language-servers = ["bash-language-server", "scls"]
-
-[[language]]
 name = "fish"
-language-servers = ["fish_lsp", "scls"]
+language-servers = ["fish_lsp"]
 
 [[language]]
 name = "git-config"
@@ -28,23 +24,8 @@ file-types = [
 ]
 
 [[language]]
-name = "json"
-language-servers = ["vscode-json-language-server", "scls"]
-
-[[language]]
 name = "lua"
-shebangs = ["lua", "luajit"]
 auto-format = true
-
-[[language]]
-name = "python"
-language-servers = [
-  { name = "ruff", except-features = [
-    "hover",
-  ] },
-  "pylsp",
-  "scls",
-]
 
 [[language]]
 name = "sshclientconfig"
@@ -59,9 +40,7 @@ file-types = [
 name = "txt"
 scope = "source.txt"
 file-types = ["txt"]
-language-servers = ["scls"]
 
 [[language]]
 name = "toml"
-language-servers = ["taplo", "scls"]
 auto-format = true
