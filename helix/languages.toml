@@ -1,67 +1,17 @@
-[language-server]
-ruff = { command = "ruff", args = ["server"] }
-scls = { command = "simple-completion-language-server" }
-
 [language-server.fish_lsp]
 command = "fish-lsp"
 args = ["start"]
-
-[language-server.fish_lsp.environment]
-fish_lsp_diagnostic_disable_error_codes = "2002"
-fish_lsp_show_client_popups = "false"
-
-[[language]]
-name = "bash"
-language-servers = ["bash-language-server", "scls"]
+environment.fish_lsp_diagnostic_disable_error_codes = "2002"
+environment.fish_lsp_show_client_popups = "false"
 
 [[language]]
 name = "fish"
-language-servers = ["fish_lsp", "scls"]
-
-[[language]]
-name = "git-config"
-file-types = [
-  { glob = ".gitmodules" },
-  { glob = ".gitconfig" },
-  { glob = ".git/config" },
-  { glob = "git/config" },
-]
-
-[[language]]
-name = "json"
-language-servers = ["vscode-json-language-server", "scls"]
+language-servers = ["fish_lsp"]
 
 [[language]]
 name = "lua"
-shebangs = ["lua", "luajit"]
 auto-format = true
 
 [[language]]
-name = "python"
-language-servers = [
-  { name = "ruff", except-features = [
-    "hover",
-  ] },
-  "pylsp",
-  "scls",
-]
-
-[[language]]
-name = "sshclientconfig"
-file-types = [
-  { glob = ".ssh/config" },
-  { glob = "ssh/config" },
-  { glob = "ssh_config" },
-  { glob = "ssh_config.d/*.conf" },
-]
-
-[[language]]
-name = "txt"
-scope = "source.txt"
-file-types = ["txt"]
-language-servers = ["scls"]
-
-[[language]]
 name = "toml"
-language-servers = ["taplo", "scls"]
 auto-format = true
