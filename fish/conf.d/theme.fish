@@ -11,7 +11,6 @@ function __theme_load --on-variable fish_theme
     source $__fish_config_dir/themes/$fish_theme[1].fish $fish_theme[2..-1]
 
     __theme_set_term_palette
-    __theme_update_helix
 end
 
 function __theme_set_term_palette --on-event fish_prompt
@@ -25,17 +24,6 @@ function __theme_set_term_palette --on-event fish_prompt
     echo -n (string replace -r '(..)(..)(..)' "\e]12;rgb:\$1/\$2/\$3\a" $term_color_cursor)
     echo -n (string replace -r '(..)(..)(..)' "\e]17;rgb:\$1/\$2/\$3\a" $term_color_selection_background)
     echo -n (string replace -r '(..)(..)(..)' "\e]19;rgb:\$1/\$2/\$3\a" $term_color_selection_foreground)
-end
-
-function __theme_update_helix
-    set -gq fish_theme && return
-    set -l path ~/.config/helix/themes/match-fish.toml
-    set -l body "inherits = \"$helix_theme\""
-    if ! test -f $path || [ "$(cat $path)" != $body ]
-        mkdir -p (dirname $path)
-        echo $body >$path
-        killall -q -USR1 hx
-    end
 end
 
 __theme_load

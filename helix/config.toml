@@ -1,4 +1,4 @@
-theme = "match-fish"
+theme = "tokyonight_moon"
 
 [editor]
 auto-pairs = false

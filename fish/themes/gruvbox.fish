@@ -17,26 +17,26 @@ set -l blue 83a598
 set -l purple d3869b
 set -l aqua 8ec07c
 set -l orange fe8019
-set -g helix_theme gruvbox
+set -gx HELIX_THEME gruvbox
 
 switch "$argv[1]-$argv[2]"
     case dark-hard
         set bg0 1d2021
-        set helix_theme gruvbox_dark_hard
+        set HELIX_THEME gruvbox_dark_hard
     case dark-soft
         set bg0 32302f
-        set helix_theme gruvbox_dark_soft
+        set HELIX_THEME gruvbox_dark_soft
     case light-\*
         switch "$argv[2]"
             case hard
                 set bg0 f9f5d7
-                set helix_theme gruvbox_light_hard
+                set HELIX_THEME gruvbox_light_hard
             case soft
                 set bg0 f2e5bc
-                set helix_theme gruvbox_light_soft
+                set HELIX_THEME gruvbox_light_soft
             case '*'
                 set bg0 fbf1c7
-                set helix_theme gruvbox_light
+                set HELIX_THEME gruvbox_light
         end
         set bg1 ebdbb2
         set bg2 d5c4a1

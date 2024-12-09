@@ -50,7 +50,7 @@ abbr gl git l
 abbr gm git difftool -g --dir-diff
 abbr gr git rebase
 
-abbr t set fish_theme
+abbr t set -g fish_theme
 
 abbr -p anywhere --set-cursor w '(which %)'
 abbr -p anywhere --set-cursor W '(realpath (which %))'
