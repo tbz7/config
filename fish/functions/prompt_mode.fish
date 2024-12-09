@@ -13,13 +13,17 @@ function __prompt_mode_pre_prompt --on-event fish_prompt
 end
 
 function __prompt_mode_focus_in --on-event fish_focus_in
-    set __prompt_mode_inactive false
-    commandline -f repaint
+    if [ "$__prompt_mode_inactive" != false ]
+        set __prompt_mode_inactive false
+        commandline -f repaint
+    end
 end
 
 function __prompt_mode_focus_out --on-event fish_focus_out
-    set __prompt_mode_inactive true
-    commandline -f repaint
+    if [ "$__prompt_mode_inactive" != true ]
+        set __prompt_mode_inactive true
+        commandline -f repaint
+    end
 end
 
 set -l execute 'set __prompt_mode_inactive true; commandline -f repaint execute'
