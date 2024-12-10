@@ -1,5 +1,8 @@
 status is-interactive || return
 
+set -gx --path LS_COLORS di=34 ow=34\;40 ln=35 {or,mi}=7\;31 ex=91 \
+    \*{~,.{bak,log,swp,tmp,class,o,pyc,DS_Store,lock}}=90
+
 function __theme_load --on-variable fish_theme
     if test -z "$fish_theme"
         set -U fish_theme tokyonight moon

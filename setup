@@ -13,7 +13,7 @@ function symlink
     end
 end
 
-for d in fish git helix ideavim jj readline shpool
+for d in fish fzf git helix ideavim jj readline rg shpool sqlite3
     symlink $d ~/.config/$d
 end
 symlink ssh/config ~/.ssh/config

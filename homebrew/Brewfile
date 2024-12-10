@@ -12,6 +12,7 @@ brew "file", link: true
 brew "findutils", link: false
 brew "tom/homebrew/fish", args: ["HEAD"]
 brew "fish-lsp", args: ["HEAD"]
+brew "fd"
 brew "fzf"
 brew "gawk"
 brew "git"
@@ -25,7 +26,7 @@ brew "jq"
 brew "less"
 brew "lua-language-server"
 brew "luajit"
-brew "man-db"
+brew "man-db", link: false
 brew "moreutils"
 brew "mtr"
 brew "ncdu"
