@@ -1,0 +1,2 @@
+forward_env = ['COLORTERM', 'TERM_PROGRAM']
+prompt_prefix = ''

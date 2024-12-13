@@ -1,0 +1,56 @@
+# name: TokyoNight Moon
+# preferred_background: 222436
+
+fish_color_autosuggestion 545c7e
+fish_color_cancel 545c7e
+fish_color_command 65bcff
+fish_color_comment 636da6 --italics
+fish_color_cwd 82aaff
+fish_color_cwd_root ff757f
+fish_color_end 89ddff
+fish_color_error ff757f
+fish_color_escape c099ff
+fish_color_history_current c3e88d --bold
+fish_color_host c3e88d
+fish_color_host_remote ffc777
+fish_color_keyword c099ff
+fish_color_normal c8d3f5
+fish_color_operator 89ddff
+fish_color_option ffc777
+fish_color_param c8d3f5
+fish_color_quote c3e88d
+fish_color_redirection 86e1fc
+fish_color_search_match --background=363c58
+fish_color_selection --background=2d3f76
+fish_color_status ff757f
+fish_color_user c3e88d
+fish_color_valid_path --underline
+
+fish_pager_color_completion c8d3f5
+fish_pager_color_description ffc777
+fish_pager_color_prefix c8d3f5 --bold
+fish_pager_color_progress 82aaff
+fish_pager_color_selected_background --background=363c58
+
+fish_color_term_foreground c8d3f5
+fish_color_term_background 222436
+fish_color_term_cursor_background c8d3f5
+fish_color_term_selection_background 2d3f76
+fish_color_term_selection_foreground c8d3f5
+
+fish_color_term_black 1b1d2b
+fish_color_term_red ff757f
+fish_color_term_green c3e88d
+fish_color_term_yellow ffc777
+fish_color_term_blue 82aaff
+fish_color_term_magenta c099ff
+fish_color_term_cyan 86e1fc
+fish_color_term_white 828bb8
+fish_color_term_bright_black 444a73
+fish_color_term_bright_red ff8d94
+fish_color_term_bright_green c7fb6d
+fish_color_term_bright_yellow ffd8ab
+fish_color_term_bright_blue 9ab8ff
+fish_color_term_bright_magenta caabff
+fish_color_term_bright_cyan b2ebff
+fish_color_term_bright_white c8d3f5
