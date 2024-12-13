@@ -1,0 +1,32 @@
+Host bee mbp pi ssh.koholi.net
+  User tom
+
+Host probe*
+  User pi
+
+Match localnetwork 10.0.0.0/24 localuser tom
+  Tag home
+
+Match host bee-* tagged home
+  Hostname bee
+Match host bee,bee-* !tagged home
+  Hostname ssh.koholi.net
+
+Match host mbp,pi !tagged home
+  ProxyJump ssh.koholi.net
+
+Host kohogit
+  CanonicalizeHostname no
+  Hostname localhost
+  Port 2222
+  ProxyJump bee
+
+Host *-shpool-*
+  RemoteCommand shpool attach -f $(echo %k | sed 's/.*-shpool-//')
+  RequestTTY yes
+
+Host *
+  SendEnv COLORTERM TERM_PROGRAM
+  StrictHostKeyChecking no
+
+Include ssh_config.d/*

@@ -1,0 +1,102 @@
+tap "fish-shell/fish-beta-4"
+tap "homebrew/bundle"
+tap "tom/homebrew", "https://koholi.net/git/tom/homebrew.git"
+
+brew "bash-language-server"
+brew "fd"
+brew "fish-lsp"
+brew "fish-shell/fish-beta-4/fish"
+brew "fzf"
+brew "tom/homebrew/helix"
+brew "jj"
+brew "ncdu"
+brew "pstree"
+brew "python-lsp-server"
+brew "rsbkb"
+brew "ruff"
+brew "simple-completion-language-server"
+brew "sqlite", link: true
+brew "taplo"
+brew "tom/homebrew/termtest"
+brew "typescript-language-server"
+brew "vscode-langservers-extracted"
+
+if OS.linux?
+  # sudo apt install curl dos2unix git htop p7zip progress pv ripgrep shellcheck tree unar vim
+
+  brew "dockerfile-language-server"
+  brew "shpool"
+  brew "yaml-language-server"
+end
+
+if OS.mac?
+  tap "artginzburg/tap"
+  tap "homebrew/services"
+
+  brew "coreutils", link: false
+  brew "diffutils"
+  brew "dos2unix"
+  brew "file", link: true
+  brew "findutils", link: false
+  brew "gnu-sed", link: false
+  brew "gnu-tar", link: false
+  brew "grep", link: false
+  brew "gzip"
+  brew "htop"
+  brew "man-db", link: false
+  brew "moreutils"
+  brew "mtr"
+  brew "p7zip"
+  brew "progress"
+  brew "pv"
+  brew "ripgrep"
+  brew "shellcheck"
+  brew "tree"
+  brew "unar"
+  brew "util-linux", link: true
+  brew "watch"
+  brew "wget"
+
+  brew "bchunk"
+  brew "ciso"
+  brew "cliclick"
+  brew "exiftool"
+  brew "ffmpeg"
+  brew "ig"
+  brew "imagemagick"
+  brew "mas"
+  brew "oxipng"
+  brew "ps3dec"
+  brew "rclone"
+  brew "rom-tools"
+  brew "sudo-touchid"
+  brew "supmover"
+  brew "wudcompress"
+
+  cask "aegisub"
+  cask "android-platform-tools"
+  cask "audacity"
+  cask "firefox"
+  cask "font-jetbrains-mono-nerd-font"
+  cask "gog-galaxy"
+  cask "gramps"
+  cask "handbrake"
+  cask "iina"
+  cask "istat-menus"
+  cask "iterm2@beta"
+  cask "jdownloader"
+  cask "krita"
+  cask "makemkv"
+  cask "mediainfo"
+  cask "mkvtoolnix"
+  cask "musicbrainz-picard"
+  cask "scummvm"
+  cask "steam"
+  cask "stolendata-mpv"
+  cask "the-unarchiver"
+  cask "windows-app"
+
+  mas "Bitwarden", id: 1352778147
+  mas "Numbers", id: 409203825
+  mas "Pages", id: 409201541
+end
