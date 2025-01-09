@@ -1,0 +1,41 @@
+#!/bin/sh
+
+set -e
+
+cd "$(dirname "$0")"
+tmp=
+
+for f in * ssh/config; do
+  case "$f" in
+    iterm2|setup|ssh) continue;;
+    bin) dest=~/.local/bin;;
+    ssh/config) dest=~/.ssh/config;;
+    vim) dest=~/.vim;;
+    *) dest=~/.config/"$f";;
+  esac
+
+  if test -L "$dest"; then
+    test "$(readlink "$dest")" != "$PWD/$f" || continue
+  elif test -e "$dest"; then
+    test -n "$tmp" || tmp="$(mktemp -dt config.XXXXXX)"
+
+    mkdir -p "$tmp$(dirname "/$f")"
+    mv "$dest" "$tmp/$f"
+
+    echo "existing '$dest' moved to '$tmp/$f'"
+  fi
+
+  mkdir -p "$(dirname "$dest")"
+  ln -sTfv "$PWD/$f" "$dest"
+done
+
+touch ~/.hushlogin
+
+if test "$(uname)" = Darwin; then
+  defaults write -g ApplePressAndHoldEnabled -bool false
+  defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+  defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+  defaults delete-all com.googlecode.iterm2
+  plutil -convert xml1 iterm2/prefs.json -o - | defaults import com.googlecode.iterm2 -
+fi

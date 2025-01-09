@@ -1,0 +1,23 @@
+Host mabe mbp probe* ssh.koholi.net
+  User tom
+
+Match localnetwork 10.0.0.0/24 localuser tom
+  Tag home
+
+Match host mabe-* tagged home
+  Hostname mabe
+Match host mabe,mabe-* !tagged home
+  Hostname ssh.koholi.net
+
+Match host mbp !tagged home
+  ProxyJump ssh.koholi.net
+
+Host *-shpool-*
+  RemoteCommand shpool attach -f $(echo %k | sed 's/.*-shpool-//')
+  RequestTTY yes
+
+Host *
+  SendEnv COLORTERM TERM_PROGRAM
+  StrictHostKeyChecking no
+
+Include ssh_config.d/*

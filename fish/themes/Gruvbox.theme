@@ -1,0 +1,56 @@
+# name: Gruvbox
+# preferred_background: 282828
+
+fish_color_autosuggestion 665c54
+fish_color_cancel 665c54
+fish_color_command fabd2f
+fish_color_comment 928374 --italics
+fish_color_cwd 458588
+fish_color_cwd_root fb4934
+fish_color_end d3869b
+fish_color_error fb4934
+fish_color_escape fe8019
+fish_color_history_current b8bb26 --bold
+fish_color_host 98971a
+fish_color_host_remote fabd2f
+fish_color_keyword fb4934
+fish_color_normal ebdbb2
+fish_color_operator d3869b
+fish_color_option 83a598
+fish_color_param ebdbb2
+fish_color_quote b8bb26
+fish_color_redirection d3869b
+fish_color_search_match --background=fabd2f
+fish_color_selection --background=504945
+fish_color_status fb4934
+fish_color_user b8bb26
+fish_color_valid_path --underline
+
+fish_pager_color_completion ebdbb2
+fish_pager_color_description fb4934
+fish_pager_color_prefix ebdbb2 --bold
+fish_pager_color_progress 83a598
+fish_pager_color_selected_background --background=504945
+
+fish_color_term_foreground ebdbb2
+fish_color_term_background 282828
+fish_color_term_cursor_background ebdbb2
+fish_color_term_selection_background 665c54
+fish_color_term_selection_foreground ebdbb2
+
+fish_color_term_black 282828
+fish_color_term_red cc241d
+fish_color_term_green 98971a
+fish_color_term_yellow d79921
+fish_color_term_blue 458588
+fish_color_term_magenta b16286
+fish_color_term_cyan 689d6a
+fish_color_term_white a89984
+fish_color_term_bright_black 928374
+fish_color_term_bright_red fb4934
+fish_color_term_bright_green b8bb26
+fish_color_term_bright_yellow fabd2f
+fish_color_term_bright_blue 83a598
+fish_color_term_bright_magenta d3869b
+fish_color_term_bright_cyan 8ec07c
+fish_color_term_bright_white ebdbb2

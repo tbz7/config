@@ -1,0 +1,98 @@
+#!/usr/bin/env python3
+
+from itertools import chain
+
+
+def palette_table():
+    pal = list(
+        chain(*zip(zip(range(8), range(30, 38)), zip(range(8, 16), range(90, 98))))
+    )
+    return [
+        f"     bg  {"  ".join(f"{x:02}" for (x, _) in pal)}  fg",
+        f" bg     \033[7m{"".join(f"\033[{X}m ab " for (_, X) in pal)}\033[39m ab \033[m",
+        *(
+            f" {y:02} \033[{Y}m ab {"".join(f"\033[{X + 10}m ab " for (_, X) in pal)}"
+            f"\033[7;39;{Y + 10}m ab \033[m"
+            for (y, Y) in pal
+        ),
+        f" fg  ab {"".join(f"\033[{X + 10}m ab " for (_, X) in pal)}\033[7;49m    \033[m",
+    ]
+
+
+def color_cube():
+    return (
+        "".join(
+            f"\033[48;5;{16 + r * 36 + g * 6 + b}m  "
+            for g in range(6)
+            for b in range(6)
+        )
+        + "\033[m"
+        for r in range(6)
+    )
+
+
+def grays():
+    return "".join(f"\033[48;5;{i}m   " for i in range(232, 256)) + "\033[m"
+
+
+def true_colors():
+    return (
+        "".join(
+            "\033[48;2;"
+            f"{int(-255 / 71 * i + 255)};"
+            f"{int(255 - abs(i * (510 / 71) - 255))};"
+            f"{int(255 / 71 * i)}m "
+            for i in range(72)
+        )
+        + "\033[m"
+    )
+
+
+def text_styles():
+    return "normal " + " ".join(
+        f"\033[{start}m{name}\033[{stop}m"
+        for (name, start, stop) in [
+            ("bold", 1, 22),
+            ("dim", 2, 22),
+            ("italics", 3, 23),
+            ("under", 4, 24),
+            ("under2", 21, 24),
+            ("over", 53, 55),
+            ("blink", 5, 25),
+            ("blink2", 6, 25),
+            ("reverse", 7, 27),
+            ("strikeout", 9, 0),
+        ]
+    )
+
+
+def line_styles():
+    return " ".join(
+        f"\033[{start}m{name}\033[{stop}m"
+        for (name, start, stop) in [
+            ("single", "4:1", "4:0"),
+            ("double", "4:2", "4:0"),
+            ("curly", "4:3", "4:0"),
+            ("dotted", "4:4", "4:0"),
+            ("dashed", "4:5", "4:0"),
+            ("over", 53, 55),
+            ("strike", 9, 0),
+        ]
+    )
+
+
+print(f"""
+{"\n".join(palette_table())}
+
+    {"\n    ".join(color_cube())}
+
+    {grays()}
+
+    {true_colors()}
+
+    {text_styles()}
+    \033[31m{text_styles()}
+    \033[8minvisible\033[m
+    {line_styles()}
+    \033[58:5:1m{line_styles()}
+""")

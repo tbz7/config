@@ -1,0 +1,56 @@
+theme = 'tokyonight_moon'
+
+[editor]
+auto-pairs = false
+color-modes = true
+popup-border = 'all'
+rulers = [100]
+text-width = 100
+
+[editor.cursor-shape]
+insert = 'bar'
+select = 'underline'
+
+[editor.indent-guides]
+render = true
+
+[editor.lsp]
+display-inlay-hints = true
+
+[editor.soft-wrap]
+enable = true
+
+[editor.statusline]
+mode.normal = 'N'
+mode.insert = 'I'
+mode.select = 'S'
+right = [
+  'diagnostics',
+  'selections',
+  'register',
+  'file-encoding',
+  'file-type',
+  'spacer',
+  'position-percentage',
+  'spacer',
+  'position',
+]
+
+[editor.whitespace.render]
+space = 'all'
+tab = 'all'
+
+[keys.normal]
+x = 'select_line_below'
+X = 'select_line_above'
+
+[keys.select]
+x = 'select_line_below'
+X = 'select_line_above'
+
+[keys.normal.space]
+F = 'file_picker_in_current_buffer_directory'
+l = ':set gutters []'
+L = ':set gutters ["diagnostics","spacer","line-numbers","spacer","diff"]'
+w = ':toggle soft-wrap.enable'
+W = '@<C-s>%<A-|>sudo tee "<C-r>%"<ret>:reload<ret><C-o>'

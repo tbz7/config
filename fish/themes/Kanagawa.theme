@@ -1,0 +1,56 @@
+# name: Kanagawa Wave
+# preferred_background: 1f1f28
+
+fish_color_autosuggestion 54546d
+fish_color_cancel 54546d
+fish_color_command 7fb4ca
+fish_color_comment 727169 --italics
+fish_color_cwd 7e9cd8
+fish_color_cwd_root 957fb8
+fish_color_end c0a36e
+fish_color_error e82424
+fish_color_escape c0a36e
+fish_color_history_current 98bb6c --bold
+fish_color_host 98bb6c
+fish_color_host_remote 7fb4ca
+fish_color_keyword 957fb8
+fish_color_normal dcd7ba
+fish_color_operator 9cabca
+fish_color_option b8b4d0
+fish_color_param dcd7ba
+fish_color_quote 98bb6c
+fish_color_redirection c0a36e
+fish_color_search_match --background=363646
+fish_color_selection --background=2d4f67
+fish_color_status 957fb8
+fish_color_user 98bb6c
+fish_color_valid_path --underline
+
+fish_pager_color_completion dcd7ba
+fish_pager_color_description 957fb8
+fish_pager_color_prefix dcd7ba --bold
+fish_pager_color_progress 6a9589
+fish_pager_color_selected_background --background=363646
+
+fish_color_term_foreground dcd7ba
+fish_color_term_background 1f1f28
+fish_color_term_cursor_background 7aa89f
+fish_color_term_selection_background 2d4f67
+fish_color_term_selection_foreground dcd7ba
+
+fish_color_term_black 16161d
+fish_color_term_red c34043
+fish_color_term_green 76946a
+fish_color_term_yellow c0a36e
+fish_color_term_blue 7e9cd8
+fish_color_term_magenta 957fb8
+fish_color_term_cyan 6a9589
+fish_color_term_white c8c093
+fish_color_term_bright_black 727169
+fish_color_term_bright_red e82424
+fish_color_term_bright_green 98bb6c
+fish_color_term_bright_yellow e6c384
+fish_color_term_bright_blue 7fb4ca
+fish_color_term_bright_magenta 938aa9
+fish_color_term_bright_cyan 7aa89f
+fish_color_term_bright_white dcd7ba

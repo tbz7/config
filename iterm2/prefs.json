@@ -1,0 +1,116 @@
+{
+  "AllowClipboardAccess": true,
+  "AlternateMouseScroll": true,
+  "ClickToSelectCommand": 0,
+  "Default Bookmark Guid": "F4AEE7DB-2D79-4DB5-BD83-043605C1EB37",
+  "GlobalKeyMap": {
+    "0x9-0x40000-0x30": {
+      "Version": 2,
+      "Apply Mode": 0,
+      "Action": 0,
+      "Text": "",
+      "Escaping": 2
+    },
+    "0x6a-0x80000-0x26": {
+      "Version": 2,
+      "Apply Mode": 0,
+      "Action": 21,
+      "Text": "",
+      "Escaping": 2
+    },
+    "0x19-0x60000-0x30": {
+      "Version": 2,
+      "Apply Mode": 0,
+      "Action": 2,
+      "Text": "",
+      "Escaping": 2
+    },
+    "0x6c-0x80000-0x25": {
+      "Version": 2,
+      "Apply Mode": 0,
+      "Action": 19,
+      "Text": "",
+      "Escaping": 2
+    },
+    "0x2d-0x80000-0x1b": {
+      "Version": 2,
+      "Apply Mode": 0,
+      "Action": 28,
+      "Text": "F4AEE7DB-2D79-4DB5-BD83-043605C1EB37",
+      "Escaping": 2
+    },
+    "0x5c-0x80000-0x2a": {
+      "Version": 2,
+      "Apply Mode": 0,
+      "Action": 29,
+      "Text": "F4AEE7DB-2D79-4DB5-BD83-043605C1EB37",
+      "Escaping": 2
+    },
+    "0x68-0x80000-0x4": {
+      "Version": 2,
+      "Apply Mode": 0,
+      "Action": 18,
+      "Text": "",
+      "Escaping": 2
+    },
+    "0x6b-0x80000-0x28": {
+      "Version": 2,
+      "Apply Mode": 0,
+      "Action": 20,
+      "Text": "",
+      "Escaping": 2
+    }
+  },
+  "HideActivityIndicator": true,
+  "New Bookmarks": [
+    {
+      "ASCII Anti Aliased": true,
+      "Allow Change Cursor Blink": true,
+      "Blink Allowed": true,
+      "Brighten Bold Text": false,
+      "Close Sessions On End": 1,
+      "Columns": 104,
+      "Custom Directory": "Recycle",
+      "Draw Powerline Glyphs": true,
+      "Flashing Bell": true,
+      "Guid": "F4AEE7DB-2D79-4DB5-BD83-043605C1EB37",
+      "Mouse Reporting": true,
+      "Name": "Default",
+      "Non Ascii Font": "JetBrainsMonoNF-Regular 12",
+      "Non-ASCII Anti Aliased": true,
+      "Normal Font": "Monaco 12",
+      "Option Key Sends": 2,
+      "Rows": 30,
+      "Scrollback Lines": 0,
+      "Scrollback With Status Bar": false,
+      "Scrollback in Alternate Screen": false,
+      "Show Mark Indicators": false,
+      "Silence Bell": true,
+      "Smart Cursor Color": true,
+      "Terminal Type": "xterm-256color",
+      "Title Components": 1,
+      "Unlimited Scrollback": true,
+      "Use Bright Bold": false,
+      "Use Non-ASCII Font": true,
+      "Visual Bell": false
+    }
+  ],
+  "NoSyncDoNotWarnBeforeMultilinePaste": true,
+  "NoSyncDoNotWarnBeforeMultilinePaste_selection": 0,
+  "NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt": true,
+  "NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt_selection": 1,
+  "NoSyncTipsDisabled": true,
+  "NoSyncTurnOffBracketedPasteOnHostChange": false,
+  "NoSyncTurnOffFocusReportingOnHostChange": false,
+  "NoSyncTurnOffMouseReportingOnHostChange": true,
+  "PromptOnQuit": false,
+  "QuitWhenAllWindowsClosed": true,
+  "SUEnableAutomaticChecks": true,
+  "ShortLivedSessionDuration": 0.25,
+  "ShowNewOutputIndicator": false,
+  "Silence Bell": true,
+  "SplitPaneDimmingAmount": 0.1,
+  "SuppressRestartAnnouncement": true,
+  "SynchronizeQueryWithFindPasteboard": false,
+  "TabStyleWithAutomaticOption": 5
+}
