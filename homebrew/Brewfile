@@ -4,7 +4,7 @@ tap 'tom/homebrew', 'https://git.koholi.net/tom/homebrew.git'
 
 brew 'bash-language-server'
 brew 'fd'
-brew 'tom/homebrew/fish-lsp'
+brew 'fish-lsp'
 brew 'fish-shell/fish-beta-4/fish'
 brew 'fzf'
 brew 'helix'

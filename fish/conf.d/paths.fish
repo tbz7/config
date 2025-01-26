@@ -20,8 +20,9 @@ set -gx HOMEBREW_BUNDLE_FILE ~/.config/homebrew/Brewfile
 set -gx INPUTRC ~/.config/readline/inputrc
 set -gx JJ_CONFIG ~/.config/jj/config.toml
 set -gx RIPGREP_CONFIG_PATH ~/.config/rg/rgrc
+set -gx WGETRC ~/.config/wget/wgetrc
 
-mkdir -p ~/.local/state/{less,python,sqlite3,vim}
+mkdir -p ~/.local/state/{less,python,sqlite3,vim,wget}
 set -gx LESSHISTFILE ~/.local/state/less/history
 set -gx PYTHON_HISTORY ~/.local/state/python/history
 set -gx SQLITE_HISTORY ~/.local/state/sqlite3/history

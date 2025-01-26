@@ -1,8 +1,3 @@
-[language-server.fish_lsp]
-command = 'fish-lsp'
-args = ['start']
-environment.fish_lsp_show_client_popups = 'false'
-
 [language-server.scls]
 command = 'simple-completion-language-server'
 
@@ -16,7 +11,7 @@ language-servers = ['vscode-css-language-server', 'scls']
 
 [[language]]
 name = 'fish'
-language-servers = ['fish_lsp', 'scls']
+language-servers = ['fish-lsp', 'scls']
 
 [[language]]
 name = 'git-config'

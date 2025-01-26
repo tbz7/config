@@ -1,7 +1,6 @@
 theme = 'tokyonight_moon'
 
 [editor]
-auto-pairs = false
 color-modes = true
 popup-border = 'all'
 rulers = [100]
@@ -49,7 +48,6 @@ x = 'select_line_below'
 X = 'select_line_above'
 
 [keys.normal.space]
-F = 'file_picker_in_current_buffer_directory'
 l = ':set gutters []'
 L = ':set gutters ["diagnostics","spacer","line-numbers","spacer","diff"]'
 w = ':toggle soft-wrap.enable'
