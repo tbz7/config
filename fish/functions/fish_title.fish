@@ -9,5 +9,10 @@ function fish_title
         set command
     end
 
-    echo (string join ' – ' $host $command)
+    set -l title (string join ' – ' $host $command)
+    if test -n "$title"
+        echo $title
+    else
+        echo ' '
+    end
 end
