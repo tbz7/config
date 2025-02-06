@@ -19,7 +19,7 @@ if !has('ide')
   set softtabstop=2
   set viminfofile=~/.local/state/vim/viminfo
 
-  execute 'colorscheme ' .. ($VIM_COLORSCHEME != '' ? $VIM_COLORSCHEME : 'habamax')
+  colorscheme habamax
 
   let &t_SI = "\e[5 q"
   let &t_EI = "\e[2 q"

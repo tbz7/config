@@ -1,10 +1,18 @@
+theme = Kanagawa Wave
+
 macos-option-as-alt = left
 macos-titlebar-proxy-icon = hidden
 macos-titlebar-style = tabs
+mouse-hide-while-typing = true
+quick-terminal-position = bottom
 shell-integration = none
 term = xterm-256color
+unfocused-split-fill = #000000
+unfocused-split-opacity = 0.85
+window-height = 30
+window-width = 104
 
-keybind = global:cmd+grave_accent=toggle_quick_terminal
+keybind = global:cmd+\=toggle_quick_terminal
 
 keybind = alt+-=new_split:down
 keybind = alt+\=new_split:right
