@@ -1,4 +1,16 @@
---color hl:1,hl+:1,bg+:0,info:8,border:0,prompt:4,pointer:4,marker:2,spinner:8,header:-1
+--color bg+:black
+--color border:bright-black
+--color fg+:-1:bold
+--color header:white:bold
+--color hl+:bright-red:bold
+--color hl:bright-red
+--color info:cyan
+--color label:white:bold
+--color marker:green
+--color pointer:blue
+--color prompt:bright-blue
+--color spinner:bright-cyan
+
 --cycle
 --height 40%
 --multi

@@ -3,5 +3,5 @@
 id_ed25519
 id_rsa
 
-node_modules
-venv
+__pycache__/
+venv/

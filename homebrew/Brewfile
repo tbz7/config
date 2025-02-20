@@ -4,8 +4,8 @@ tap 'tom/homebrew', 'https://git.koholi.net/tom/homebrew.git'
 
 brew 'bash-language-server'
 brew 'fd'
-brew 'fish-lsp'
 brew 'fish-shell/fish-beta-4/fish'
+brew 'fish-lsp'
 brew 'fzf'
 brew 'helix'
 brew 'jj'
@@ -27,17 +27,17 @@ if OS.mac?
   tap 'artginzburg/tap'
   tap 'homebrew/services'
 
-  brew 'coreutils', link: false
+  brew 'coreutils'
   brew 'diffutils'
   brew 'dos2unix'
   brew 'file', link: true
-  brew 'findutils', link: false
-  brew 'gnu-sed', link: false
-  brew 'gnu-tar', link: false
-  brew 'grep', link: false
+  brew 'findutils'
+  brew 'gnu-sed'
+  brew 'gnu-tar'
+  brew 'grep'
   brew 'gzip'
   brew 'htop'
-  brew 'man-db', link: false
+  brew 'man-db'
   brew 'moreutils'
   brew 'mtr'
   brew 'p7zip'
@@ -65,13 +65,12 @@ if OS.mac?
   cask 'android-platform-tools'
   cask 'audacity'
   cask 'firefox'
-  cask 'font-jetbrains-mono-nerd-font'
   cask 'ghostty'
   cask 'gog-galaxy'
   cask 'gramps'
   cask 'handbrake'
   cask 'iina'
-  cask 'istat-menus'
+  cask 'istat-menus@6'
   cask 'jdownloader'
   cask 'krita'
   cask 'makemkv'

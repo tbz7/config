@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
@@ -26,8 +26,10 @@ for f in * ssh/config; do
   fi
 
   mkdir -p "$(dirname "$dest")"
-  ln -sTfv "$PWD/$f" "$dest"
+  ln -snfv "$PWD/$f" "$dest"
 done
+
+mkdir -p ~/.local/state/{less,python,sqlite3,vim,wget}
 
 touch ~/.hushlogin
 

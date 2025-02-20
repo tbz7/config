@@ -10,8 +10,8 @@ set vi-cmd-mode-string "\1\e[2 q\2"
 set vi-ins-mode-string "\1\e[5 q\2"
 
 C-l: clear-screen
-C-p: previous-history
 C-n: next-history
+C-p: previous-history
 
 set keymap vi-insert
 RET: "\e\n"

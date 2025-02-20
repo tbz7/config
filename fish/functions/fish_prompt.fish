@@ -9,3 +9,5 @@ function fish_prompt
         (set_color $fish_color_host) (prompt_hostname) (set_color normal) : \
         (set_color $fish_color_cwd) (prompt_pwd) (set_color brblue) ' ❯ ' (set_color normal)
 end
+
+set -g fish_prompt_pwd_full_dirs 3

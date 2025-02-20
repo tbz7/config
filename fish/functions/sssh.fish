@@ -1,6 +1,6 @@
 function sssh -a host -a session
     if test -n "$session"
-        ssh $host-shpool-$session
+        ssh -t $host shpool attach -f $session
     else
         ssh $host
     end

@@ -44,16 +44,16 @@ vnoremap <silent> <Enter> <Esc>:noh<Enter>gv
 noremap :s/ :s/\v
 noremap :p/ :!perl -pe 's/'<Left>
 
-nnoremap <silent> <Space>l :set invnumber<Enter>
 nnoremap <silent> <Space>e :Explore .<Enter>
 nnoremap <silent> <Space>E :Explore<Enter>
+nnoremap <silent> <Space>l :set invnumber<Enter>
 nnoremap <silent> <Space>w :set invwrap<Enter>
 
 cnoremap w!! w !sudo tee > /dev/null %
 
+noremap <A--> <C-w>s
+noremap <A-\> <C-w>v
 noremap <A-h> <C-w>h
 noremap <A-j> <C-w>j
 noremap <A-k> <C-w>k
 noremap <A-l> <C-w>l
-noremap <A-\> <C-w>v
-noremap <A--> <C-w>s

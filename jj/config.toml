@@ -1,3 +1,5 @@
+'$schema' = 'https://jj-vcs.github.io/jj/latest/config-schema.json'
+
 [colors]
 'diff added token' = { underline = false }
 'diff removed token' = { underline = false }

@@ -19,13 +19,15 @@ set -g fish_color_option yellow
 set -g fish_color_param normal
 set -g fish_color_quote brgreen
 set -g fish_color_redirection cyan
-set -g fish_color_search_match --background=brblack
+set -g fish_color_search_match --background=black
 set -g fish_color_selection --background=brblack
 set -g fish_color_status red
 set -g fish_color_user yellow
 set -g fish_color_valid_path --underline
+set -g fish_cursor_insert line blink
+set -g fish_cursor_visual underscore
 set -g fish_pager_color_completion
 set -g fish_pager_color_description cyan
 set -g fish_pager_color_prefix --bold
 set -g fish_pager_color_progress cyan
-set -g fish_pager_color_selected_background --background=brblack
+set -g fish_pager_color_selected_background --background=black

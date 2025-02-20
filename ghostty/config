@@ -1,5 +1,6 @@
 theme = Kanagawa Wave
 
+font-feature = -calt
 macos-option-as-alt = left
 macos-titlebar-proxy-icon = hidden
 macos-titlebar-style = tabs
