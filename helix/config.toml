@@ -40,11 +40,12 @@ space = 'all'
 tab = 'all'
 
 [keys.normal]
-A-S = '@<A-s>s.+<ret>:sort<ret>'
+A-S = '@x<A-s>s.+<ret>:sort<ret>'
 x = 'select_line_below'
 X = 'select_line_above'
 
 [keys.select]
+A-S = '@x<A-s>s.+<ret>:sort<ret>'
 x = 'select_line_below'
 X = 'select_line_above'
 

@@ -1,13 +1,30 @@
 function fish_prompt
-    set -q fish_color_host
-    or set -l fish_color_host green
+    set -l s $status
 
-    set -q fish_color_cwd
-    or set -l fish_color_cwd blue
+    test -n "$SSH_TTY"
+    and echo -n (set_color brgreen)(prompt_hostname)(set_color normal)' '
 
-    echo -ns \
-        (set_color $fish_color_host) (prompt_hostname) (set_color normal) : \
-        (set_color $fish_color_cwd) (prompt_pwd) (set_color brblue) ' ❯ ' (set_color normal)
+    test -n "$SHPOOL_SESSION_NAME"
+    and echo -n (set_color cyan)"[$SHPOOL_SESSION_NAME]"(set_color normal)' '
+
+    echo -n (set_color blue)(prompt_pwd -D 3)(set_color normal)
+
+    fish_vcs_prompt ' %s'
+
+    echo
+
+    if test $s -ne 0
+        set_color brred
+    else
+        set_color brblue
+    end
+    echo ❯(set_color normal)' '
+
+    function __fish_prompt_blank_line --on-event fish_prompt
+        echo
+    end
 end
 
-set -g fish_prompt_pwd_full_dirs 3
+set -g __fish_git_prompt_color --dim
+set -g __fish_git_prompt_showdirtystate yes
+set -g __fish_git_prompt_showuntrackedfiles yes

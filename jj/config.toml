@@ -5,7 +5,6 @@
 'diff removed token' = { underline = false }
 
 [ui]
-default-command = 'st'
 diff-editor = ':builtin'
 
 [ui.movement]
