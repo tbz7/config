@@ -40,17 +40,15 @@ space = 'all'
 tab = 'all'
 
 [keys.normal]
-A-S = '@x<A-s>s.+<ret>:sort<ret>'
+A-S = '@<A-s>s.+<ret>:sort<ret>'
 x = 'select_line_below'
 X = 'select_line_above'
 
 [keys.select]
-A-S = '@x<A-s>s.+<ret>:sort<ret>'
+A-S = '@<A-s>s.+<ret>:sort<ret>'
 x = 'select_line_below'
 X = 'select_line_above'
 
 [keys.normal.space]
-l = ':set gutters []'
-L = ':set gutters ["diagnostics","spacer","line-numbers","spacer","diff"]'
+l = ':toggle gutters.layout [] ["diagnostics","spacer","line-numbers","spacer","diff"]'
 w = ':toggle soft-wrap.enable'
-W = '@<C-s>%<A-|>sudo tee "<C-r>%"<ret>:reload<ret><C-o>'

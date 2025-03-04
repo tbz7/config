@@ -1,9 +1,6 @@
 fish_add_path -g ~/.local/bin
-
-set -l hb /opt/homebrew /home/linuxbrew/.linuxbrew
-fish_add_path -ga $hb/bin
-fish_add_path -ga $hb/opt/{man-db,python}/libexec/bin
-fish_add_path -ga $hb/opt/{coreutils,findutils,gnu-sed,gnu-tar,grep}/libexec/gnubin
+fish_add_path -ga /opt/homebrew/bin /home/linuxbrew/.linuxbrew/bin
+fish_add_path -ga /opt/homebrew/opt/{coreutils,findutils,gnu-sed,gnu-tar,grep}/libexec/gnubin
 
 set -gx FZF_DEFAULT_OPTS_FILE ~/.config/fzf/fzfrc
 set -gx HOMEBREW_BUNDLE_FILE ~/.config/homebrew/Brewfile
@@ -24,3 +21,4 @@ set -gx --path LS_COLORS 'di=34' 'ex=91' 'ln=35' 'mi=7;31' 'or=7;31' 'ow=34;40' 
     '*.'{bak,class,DS_Store,lock,log,o,pyc,swp,tmp}'=90'
 set -gx MANPAGER less --use-color -Dd+b -DP+Wk
 set -gx MANROFFOPT -c
+set -gx SUDO_EDITOR (which $EDITOR)

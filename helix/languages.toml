@@ -15,7 +15,6 @@ language-servers = ['fish-lsp', 'scls']
 
 [[language]]
 name = 'git-config'
-scope = 'source.gitconfig'
 file-types = [
   { glob = '.gitmodules' },
   { glob = '.gitconfig' },
@@ -76,8 +75,3 @@ language-servers = ['typescript-language-server', 'scls']
 [[language]]
 name = 'xml'
 language-servers = ['scls']
-
-[[language]]
-name = 'yaml'
-language-servers = ['yaml-language-server', 'scls']
-auto-format = true

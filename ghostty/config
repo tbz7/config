@@ -1,17 +1,23 @@
 theme = Kanagawa Wave
 
 font-feature = -calt
+background-blur = 30
+background-opacity = 0.9
 macos-option-as-alt = left
 macos-titlebar-proxy-icon = hidden
 macos-titlebar-style = tabs
 mouse-hide-while-typing = true
+quick-terminal-autohide = false
 quick-terminal-position = bottom
+quick-terminal-screen = mouse
 shell-integration = none
 term = xterm-256color
 unfocused-split-fill = #000000
 unfocused-split-opacity = 0.85
 window-height = 30
-window-width = 104
+window-padding-color = extend
+window-padding-x = 6,3
+window-width = 107
 
 keybind = global:cmd+\=toggle_quick_terminal
 

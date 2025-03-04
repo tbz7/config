@@ -26,8 +26,11 @@ set -g fish_color_user yellow
 set -g fish_color_valid_path --underline
 set -g fish_cursor_insert line blink
 set -g fish_cursor_visual underscore
+set -g fish_greeting
 set -g fish_pager_color_completion
 set -g fish_pager_color_description cyan
 set -g fish_pager_color_prefix --bold
 set -g fish_pager_color_progress cyan
 set -g fish_pager_color_selected_background --background=black
+
+functions -e fish_mode_prompt

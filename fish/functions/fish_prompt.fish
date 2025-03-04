@@ -1,26 +1,21 @@
 function fish_prompt
-    set -l s $status
+    set -l parts
 
-    test -n "$SSH_TTY"
-    and echo -n (set_color brgreen)(prompt_hostname)(set_color normal)' '
+    set -q SSH_TTY
+    and set -a parts (set_color brgreen)(prompt_hostname)
 
-    test -n "$SHPOOL_SESSION_NAME"
-    and echo -n (set_color cyan)"[$SHPOOL_SESSION_NAME]"(set_color normal)' '
+    set -a parts (set_color cyan)'['$SHPOOL_SESSION_NAME']'
+    set -a parts (set_color blue)(prompt_pwd -D 3)
+    set -a parts (fish_vcs_prompt '%s')
 
-    echo -n (set_color blue)(prompt_pwd -D 3)(set_color normal)
+    string join (set_color normal)' ' $parts
 
-    fish_vcs_prompt ' %s'
+    echo (set_color brblue)'❯'(set_color normal)' '
 
-    echo
-
-    if test $s -ne 0
-        set_color brred
-    else
-        set_color brblue
-    end
-    echo ❯(set_color normal)' '
-
-    function __fish_prompt_blank_line --on-event fish_prompt
+    function __fish_prompt_before --on-event fish_prompt
+        if test $status -ne 0
+            echo -n (set_color brred)'✘'
+        end
         echo
     end
 end
