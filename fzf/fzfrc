@@ -15,3 +15,4 @@
 --height 40%
 --multi
 --reverse
+--walker-skip .git,.jj,node_modules

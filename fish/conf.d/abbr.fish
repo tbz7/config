@@ -21,7 +21,7 @@ abbr gl git log --oneline
 abbr gr git rebase
 
 abbr j jj status
-abbr jd jj describe
+abbr jd jj diff
 abbr je jj edit
 abbr jl jj log
 abbr jn jj next

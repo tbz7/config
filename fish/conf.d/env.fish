@@ -1,6 +1,5 @@
 fish_add_path -g ~/.local/bin
 fish_add_path -ga /opt/homebrew/bin /home/linuxbrew/.linuxbrew/bin
-fish_add_path -ga /opt/homebrew/opt/{coreutils,findutils,gnu-sed,gnu-tar,grep}/libexec/gnubin
 
 set -gx FZF_DEFAULT_OPTS_FILE ~/.config/fzf/fzfrc
 set -gx HOMEBREW_BUNDLE_FILE ~/.config/homebrew/Brewfile
