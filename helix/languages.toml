@@ -1,18 +1,3 @@
-[language-server.scls]
-command = 'simple-completion-language-server'
-
-[[language]]
-name = 'bash'
-language-servers = ['bash-language-server', 'scls']
-
-[[language]]
-name = 'css'
-language-servers = ['vscode-css-language-server', 'scls']
-
-[[language]]
-name = 'fish'
-language-servers = ['fish-lsp', 'scls']
-
 [[language]]
 name = 'git-config'
 file-types = [
@@ -21,31 +6,11 @@ file-types = [
   { glob = '.git/config' },
   { glob = 'git/config' },
 ]
-language-servers = ['scls']
-
-[[language]]
-name = 'html'
-language-servers = ['vscode-html-language-server', 'scls']
-
-[[language]]
-name = 'ini'
-language-servers = ['scls']
-
-[[language]]
-name = 'jjdescription'
-language-servers = ['scls']
 
 [[language]]
 name = 'json'
-language-servers = ['vscode-json-language-server']
-
-[[language]]
-name = 'markdown'
-language-servers = ['vscode-markdown-language-server', 'scls']
-
-[[language]]
-name = 'sql'
-language-servers = ['scls']
+formatter = { command = 'jq' }
+auto-format = true
 
 [[language]]
 name = 'sshclientconfig'
@@ -55,23 +20,7 @@ file-types = [
   { glob = 'ssh_config' },
   { glob = 'ssh_config.d/*.conf' },
 ]
-language-servers = ['scls']
 
 [[language]]
 name = 'toml'
-language-servers = ['taplo', 'scls']
 auto-format = true
-
-[[language]]
-name = 'txt'
-scope = 'source.txt'
-file-types = ['txt']
-language-servers = ['scls']
-
-[[language]]
-name = 'typescript'
-language-servers = ['typescript-language-server', 'scls']
-
-[[language]]
-name = 'xml'
-language-servers = ['scls']

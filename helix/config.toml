@@ -5,13 +5,17 @@ color-modes = true
 popup-border = 'all'
 rulers = [100]
 text-width = 100
+# trim-final-newlines = true
+# trim-trailing-whitespace = true
 
 [editor.cursor-shape]
 insert = 'bar'
 select = 'underline'
 
 [editor.indent-guides]
+character = '▏'
 render = true
+skip-levels = 1
 
 [editor.lsp]
 display-inlay-hints = true
@@ -36,7 +40,6 @@ right = [
 ]
 
 [editor.whitespace.render]
-space = 'all'
 tab = 'all'
 
 [keys.normal]

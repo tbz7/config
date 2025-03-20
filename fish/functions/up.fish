@@ -14,7 +14,7 @@ function up
     end
 
     if set -q _flag_all
-        if command -sq brew
+        if command -sq brew && set -q HOMEBREW_BUNDLE_FILE
             brew bundle install
             and brew bundle cleanup
         end

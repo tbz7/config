@@ -1,8 +1,8 @@
 theme = Kanagawa Wave
 
-font-feature = -calt
 background-blur = 30
 background-opacity = 0.9
+font-feature = -calt
 macos-option-as-alt = left
 macos-titlebar-proxy-icon = hidden
 macos-titlebar-style = tabs
@@ -12,8 +12,6 @@ quick-terminal-position = bottom
 quick-terminal-screen = mouse
 shell-integration = none
 term = xterm-256color
-unfocused-split-fill = #000000
-unfocused-split-opacity = 0.85
 window-height = 30
 window-padding-color = extend
 window-padding-x = 6,3

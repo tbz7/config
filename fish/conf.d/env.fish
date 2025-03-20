@@ -1,8 +1,6 @@
 fish_add_path -g ~/.local/bin
-fish_add_path -ga /opt/homebrew/bin /home/linuxbrew/.linuxbrew/bin
 
 set -gx FZF_DEFAULT_OPTS_FILE ~/.config/fzf/fzfrc
-set -gx HOMEBREW_BUNDLE_FILE ~/.config/homebrew/Brewfile
 set -gx INPUTRC ~/.config/readline/inputrc
 set -gx JJ_CONFIG ~/.config/jj/config.toml
 set -gx RIPGREP_CONFIG_PATH ~/.config/rg/rgrc
