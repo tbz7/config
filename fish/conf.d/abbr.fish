@@ -24,6 +24,5 @@ abbr j jj status
 abbr jd jj diff
 abbr je jj edit
 abbr jl jj log
-abbr jn jj next
-abbr jp jj prev
+abbr jn jj new
 abbr jr jj rebase

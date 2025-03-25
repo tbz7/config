@@ -19,7 +19,7 @@ function up
             and brew bundle cleanup
         end
 
-        if command -sq apt-get && ! set -q TERMUX_VERSION
+        if command -sq apt-get && not set -q TERMUX_VERSION
             sudo apt-get update
             and sudo apt-get upgrade
             and sudo apt-get autoremove
